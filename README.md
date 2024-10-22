@@ -1,3 +1,3 @@
-# WEB-DEVELOPMNET PROJECT LOUNA
+# Web-Development Project Louna
 
 ### Ilhaam Abukar, Kaapo Kautto, Henriette Lehtonen
