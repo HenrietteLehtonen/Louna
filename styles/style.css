@@ -3,6 +3,50 @@
   padding: 0;
 }
 
+:root {
+  --black: #1d1d1d;
+  --green: #9dce98;
+}
+
+/* NAV */
+
+.nav-bar {
+  position: absolute;
+  height: 80px;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.74);
+  color: white;
+  font-size: 20px;
+  z-index: 1;
+}
+#nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 24px;
+}
+.logo {
+  padding-right: 120px;
+}
+
+#burger-menu {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+}
+
+.hero {
+  height: 32vh;
+  /* background-color: #9dce98; */
+  position: relative;
+  margin-bottom: 40px;
+  background-image: url(/hero.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 320px) {
   /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
 }

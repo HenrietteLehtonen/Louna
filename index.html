@@ -3,20 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <script
+      src="https://kit.fontawesome.com/2a4b915664.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Louna Project</title>
   </head>
   <body>
     <header>
       <nav class="nav-bar">
-        <ul class="top-menu">
-          <li>Ostoskori</li>
-          <li>Kirjaudu</li>
-          <li>Burgermenu</li>
-        </ul>
+        <div id="nav-container">
+          <div class="logo">LOGO</div>
+          <div id="shopping-bag">
+            <i class="fa-solid fa-bag-shopping" style="color: #ffffff;"></i></i>
+          </div>
+          <div id="log-in"><i class="fa-regular fa-user" style="color: #ffffff;"></i></div>
+          <button id="burger-menu">
+            <i class="fa-solid fa-bars" style="color: #ffffff"></i>
+          </button>
+        </div>
       </nav>
 
       <section>
-        <div class="hero">hero kuva</div>
+        <div class="hero"></div>
       </section>
     </header>
 
@@ -44,6 +54,21 @@
       </div>
     </main>
 
-    <footer></footer>
+    <footer>
+      <div class="footer-container">
+        <p>
+          Ravintola Louna<br />
+          Ravintola Tie 45 <br />
+          01234 Helsinki
+        </p>
+      </div>
+      <div class="footer-container">
+        <p>
+          Auki arkisin klo:<br />
+          10-15:00<br />
+          010 55 7654
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
