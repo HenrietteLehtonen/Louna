@@ -47,6 +47,22 @@
   background-repeat: no-repeat;
 }
 
+footer {
+  height: 80px;
+  width: 100vw;
+  background-color: #1d1d1d;
+  color: white;
+  position: fixed;
+  bottom: 0;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 24px;
+}
+
 @media (min-width: 320px) {
   /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
 }
