@@ -47,6 +47,23 @@
   background-repeat: no-repeat;
 }
 
+/* MAIN */
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  padding: 20px 24px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+}
+
 footer {
   height: 80px;
   width: 100vw;
