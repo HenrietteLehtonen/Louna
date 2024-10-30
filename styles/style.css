@@ -64,6 +64,10 @@
   gap: 20px;
 }
 
+.day-button {
+  width: 100px;
+}
+
 footer {
   height: 80px;
   width: 100vw;
