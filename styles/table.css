@@ -5,20 +5,24 @@ table {
 }
 
 table th {
-  background-color: antiquewhite;
   text-align: center;
-  font-size: 1.3em;
+  font-size: 1.5em;
   font-family: "Alumni Italic";
-  width: 100%; /* Otsikkosolu täyttää koko taulukon leveyden */
+  width: 100%;
+  padding-bottom: 20px;
 }
 
 table td {
-  padding: 8px;
+  padding: 20px 20px;
   text-align: left;
+  font-size: 1.5em;
 }
 
 table button {
-  background-color: blue;
+  background-color: var(--green);
+  border: none;
+  width: 2em;
+  height: 1.5em;
   border-radius: 8px;
   color: white;
 }
