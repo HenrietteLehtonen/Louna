@@ -5,7 +5,9 @@
 
 :root {
   --black: #1d1d1d;
+  --gray: #ced4da;
   --green: #9dce98;
+  --white: #fff;
 }
 
 /* NAV */
@@ -15,7 +17,7 @@
   height: 80px;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.74);
-  color: white;
+  color: var(--white);
   font-size: 20px;
   z-index: 1;
 }
@@ -55,6 +57,7 @@
   align-items: center;
   gap: 50px;
   padding: 20px 24px;
+  border: black solid 2px;
 }
 
 .info-container {
@@ -64,9 +67,32 @@
   gap: 20px;
 }
 
-.day-button {
-  width: 100px;
+.day-btn {
+  height: 40px;
+  width: 60px;
+  border: #9dce98 1px solid;
+  background-color: var(--white);
+  border-radius: 20px;
+  font-size: 1em;
 }
+
+.day-btn:active,
+.day-btn:focus {
+  background-color: var(--green);
+  color: var(--white);
+}
+
+.button-container,
+.menu-container {
+  border: var(--gray) solid 1px;
+  width: 80vw;
+  text-align: center;
+}
+
+.menu-container {
+  padding: 10px 0;
+}
+/* FOOTER */
 
 footer {
   height: 80px;
