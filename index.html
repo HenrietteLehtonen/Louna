@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/table.css" />
     <script src="./main.js"></script>
+    <script src="/menu.js" defer></script>
     <script
       src="https://kit.fontawesome.com/2a4b915664.js"
       crossorigin="anonymous"
@@ -22,7 +24,7 @@
     <header>
       <nav class="nav-bar">
         <div id="nav-container">
-          <div class="logo">LOGO</div>
+          <img src="/kuvat/logo.png" class="logo" alt="" />
           <div id="shopping-bag">
             <i class="fa-solid fa-bag-shopping" style="color: #ffffff"></i>
           </div>
@@ -70,6 +72,11 @@
             lounasvalikoimastamme!
           </p>
           <h2>LOUNAS KELLO 10 - 14:30</h2>
+          <p>
+            <span>Lounaan hinnoittelu:</span><br />
+            Opiskelijat 2,95€<br />
+            Muut 8,95€
+          </p>
         </div>
 
         <!-- 
@@ -81,11 +88,11 @@
         -->
 
         <div class="button-container">
-          <button class="day-btn">MA</button>
-          <button class="day-btn">TI</button>
-          <button class="day-btn">KE</button>
-          <button class="day-btn">TO</button>
-          <button class="day-btn">PE</button>
+          <button class="day-btn" data-day="Maanantai">MA</button>
+          <button class="day-btn" data-day="Tiistai">TI</button>
+          <button class="day-btn" data-day="Keskiviikko">KE</button>
+          <button class="day-btn" data-day="Torstai">TO</button>
+          <button class="day-btn" data-day="Perjantai">PE</button>
         </div>
 
         <!-- 
@@ -97,8 +104,9 @@
         -->
 
         <div class="menu-container">
-          <h2>Maanantai</h2>
-          <p>Lihapullat ja perunamuusi</p>
+          <table id="kohde">
+            <!-- ruokalista tulee tähän -->
+          </table>
         </div>
       </div>
     </main>

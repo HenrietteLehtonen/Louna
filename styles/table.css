@@ -1,0 +1,24 @@
+table {
+  width: 80vw; /* Taulukko on 80% näkymän leveydestä */
+  border-collapse: collapse;
+  margin: 0 auto; /* Keskittää taulukon sivulle */
+}
+
+table th {
+  background-color: antiquewhite;
+  text-align: center;
+  font-size: 1.3em;
+  font-family: "Alumni Italic";
+  width: 100%; /* Otsikkosolu täyttää koko taulukon leveyden */
+}
+
+table td {
+  padding: 8px;
+  text-align: left;
+}
+
+table button {
+  background-color: blue;
+  border-radius: 8px;
+  color: white;
+}
