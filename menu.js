@@ -105,17 +105,23 @@ buttons.forEach((button) => {
               ${lista.annokset.annos1.allergeenit}</p>
             </td>
             <td>${lista.annokset.annos1.hinta.opiskelija}€ / ${lista.annokset.annos1.hinta.muu} €</td>
-            <td><button>+</button></td>
+            <td><button class="add-btn">+</button></td>
           </tr>
           <tr>
             <td>
               ${lista.annokset.annos2.nimi}<br>
               ${lista.annokset.annos2.allergeenit}</td>
               <td>${lista.annokset.annos2.hinta.opiskelija}€ / ${lista.annokset.annos2.hinta.muu} €</td>
-              <td><button>+</button></td>
+              <td><button class="add-btn">+</button></td>
           </tr>
         `;
       kohde.insertAdjacentHTML("beforeend", html);
+
+      const addToCartButton = document.querySelector(".add-btn");
+
+      addToCartButton.addEventListener("click", function () {
+        alert("Tuote lisätty ostoskoriin.");
+      });
     }
   });
 });
