@@ -8,7 +8,7 @@
       src="https://kit.fontawesome.com/2a4b915664.js"
       crossorigin="anonymous"
     ></script>
-    <script src="main.js" defer></script>
+    <script src="nav.js" defer></script>
     <title>Louna Project</title>
   </head>
   <body>
@@ -19,17 +19,18 @@
     width: 40%;
     min-width: 300px;
     max-width: 600px;
-    background-color: white;">
+    background-color: white;" class="menu-hold">
     
-    <button>Test button</button>
+
     <button>Test button2</button>
+    <input type="submit" value="Log in">
 
       <!-- Lisää dataa js tiedostosta -->
 
     </dialog>
 
     <header>
-      <nav class="nav-bar">
+      <nav class="nav-bar" tabindex="0" >
         <div id="nav-container">
           <div class="logo">LOGO</div>
           <div id="shopping-bag">
@@ -39,6 +40,11 @@
           <button id="burger-menu">
             <i class="fa-solid fa-bars" style="color: #ffffff"></i>
           </button>
+        </div>
+        <div tabindex="0" id="burger-menu-content" style="display: none;" class="menu-hold">
+          <a href="#menu" >Etusivu</a>
+          <a href="#menu">Yhteystiedo</a>
+          <a href="#menu">Kirjaudu</a>
         </div>
       </nav>
 
