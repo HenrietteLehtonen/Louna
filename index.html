@@ -15,29 +15,30 @@
     <title>Louna Project</title>
   </head>
   <body>
-    
     <!-- 
     *******************************
 
              Dialog / Modal
+             Muuta div muotoon tai jokin muu ratkaisu
 
     *******************************  
     -->
 
-    <dialog style="  
-    margin: auto;
-    height: 500px;
-    width: 40%;
-    min-width: 300px;
-    max-width: 600px;
-    background-color: white;" class="menu-hold">
-    
-
-    <button>Test button2</button>
-    <input type="submit" value="Log in">
+    <dialog
+      style="
+        margin: auto;
+        height: 500px;
+        width: 40%;
+        min-width: 300px;
+        max-width: 600px;
+        background-color: white;
+      "
+      class="menu-hold"
+    >
+      <button>Test button2</button>
+      <input type="submit" value="Log in" />
 
       <!-- Lisää dataa js tiedostosta -->
-
     </dialog>
 
     <!-- 
@@ -47,9 +48,9 @@
 
     *******************************  
     -->
-    
+
     <header>
-      <nav class="nav-bar" tabindex="0" >
+      <nav class="nav-bar" tabindex="0">
         <div id="nav-container">
           <img src="/kuvat/logo.png" class="logo" alt="" />
           <div id="shopping-bag">
@@ -62,8 +63,13 @@
             <i class="fa-solid fa-bars" style="color: #ffffff"></i>
           </button>
         </div>
-        <div tabindex="0" id="burger-menu-content" style="display: none;" class="menu-hold">
-          <a href="#menu" >Etusivu</a>
+        <div
+          tabindex="0"
+          id="burger-menu-content"
+          style="display: none"
+          class="menu-hold"
+        >
+          <a href="#menu">Etusivu</a>
           <a href="#menu">Yhteystiedo</a>
           <a href="#menu">Kirjaudu</a>
         </div>
