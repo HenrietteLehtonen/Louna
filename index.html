@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/table.css" />
-    <script src="./main.js"></script>
+    <link rel="stylesheet" href="./styles/ostoskori.css" />
+    <script src="js/ostoskori.js" defer></script>
     <script src="/menu.js" defer></script>
     <script
       src="https://kit.fontawesome.com/2a4b915664.js"
@@ -26,7 +27,25 @@
         <div id="nav-container">
           <img src="/kuvat/logo.png" class="logo" alt="" />
           <div id="shopping-bag">
+            
             <i class="fa-solid fa-bag-shopping" style="color: #ffffff"></i>
+            
+            
+            <!-- OSTOSKORIN OSIO
+            *******************************  -->
+
+            <dialog id="cart-dialog">
+              <h3>Ostoskori</h3>
+              <ul id="cart-items"></ul>
+              <p id="cart-total"></p>
+              
+            </dialog>
+
+            <!--OSTOSKORIN OSIO
+            
+            *******************************  -->
+            
+
           </div>
           <div id="log-in">
             <i class="fa-regular fa-user" style="color: #ffffff"></i>
@@ -44,7 +63,6 @@
 
       *****************
       -->
-
       <section>
         <div class="hero"></div>
       </section>
@@ -102,6 +120,7 @@
 
           *****************
         -->
+          
 
         <div class="menu-container">
           <table id="kohde">
@@ -110,7 +129,7 @@
         </div>
       </div>
     </main>
-
+      
     <div class="empty"></div>
 
     <!-- 
