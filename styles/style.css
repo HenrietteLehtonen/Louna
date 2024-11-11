@@ -1,11 +1,44 @@
+@font-face {
+  font-family: "Alumni Sans";
+  src: url(/fonts/Alumni_Sans/static/AlumniSans-Light.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Alumni Italic";
+  src: url(/fonts/Alumni_Sans/static/AlumniSans-LightItalic.ttf)
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Alumni Bold";
+  src: url(/fonts/Alumni_Sans/static/AlumniSans-Medium.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Archivo Black";
+  src: url(/fonts/Archivo_Black/ArchivoBlack-Regular.ttf) format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;
+  font-family: "Alumni Sans";
 }
 
 :root {
   --black: #1d1d1d;
+  --gray: #ced4da;
   --green: #9dce98;
+  --white: #fff;
+}
+
+h2 {
+  font-family: "Archivo Black";
+  font-size: 1.3em;
+}
+
+h3 {
+  font-family: "Alumni Italic";
 }
 
 /* NAV */
@@ -15,7 +48,7 @@
   padding: 10px;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.74);
-  color: white;
+  color: var(--white);
   font-size: 20px;
   z-index: 1;
 }
@@ -29,6 +62,7 @@
 }
 .logo {
   padding-right: 120px;
+  height: 60px;
 }
 
 #burger-menu {
@@ -46,12 +80,78 @@
   height: 32vh;
   /* background-color: #9dce98; */
   position: relative;
-  margin-bottom: 40px;
-  background-image: url(/hero.png);
+  background-image: url(/kuvat/hero.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* MAIN */
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px 20px 24px;
+  /* border: black solid 2px; */
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+}
+.info-container > p {
+  font-size: 1.2em;
+}
+
+.info-container h2 {
+  margin-top: 20px;
+}
+
+.info-container span {
+  font-family: "Alumni Bold";
+  font-size: 1.1em;
+}
+/* 
+------ NAPIT  */
+
+.button-container {
+  display: flex;
+  width: 80vw;
+  justify-content: space-between;
+}
+.day-btn {
+  margin: 0 6px;
+  height: 40px;
+  width: 55px;
+  border: #9dce98 1px solid;
+  background-color: var(--white);
+  border-radius: 20px;
+  font-size: 1.2em;
+}
+
+.day-btn:active,
+.day-btn:focus {
+  background-color: var(--green);
+  color: var(--white);
+}
+
+/* MENU */
+
+/* .button-container, */
+.menu-container {
+  border: var(--gray) solid 1px;
+  width: 80vw;
+  text-align: center;
+}
+
+.menu-container {
+  padding: 10px 0;
+}
+/* FOOTER */
 
 footer {
   height: 80px;
@@ -67,6 +167,10 @@ footer {
   align-items: center;
   height: 80px;
   padding: 0 24px;
+}
+
+.empty {
+  height: 200px;
 }
 
 @media (min-width: 320px) {
