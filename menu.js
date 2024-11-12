@@ -103,8 +103,8 @@ const showMenu = () => {
           </tr>
           <tr>
             <td>
-              <p>${lista.annokset.annos1.nimi}<br>
-              ${lista.annokset.annos1.allergeenit}</p>
+              ${lista.annokset.annos1.nimi}<br>
+              ${lista.annokset.annos1.allergeenit}
             </td>
             <td>${lista.annokset.annos1.hinta.opiskelija}€ / ${lista.annokset.annos1.hinta.muu} €</td>
             <td><button class="add-btn">+</button></td>
