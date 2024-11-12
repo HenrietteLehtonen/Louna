@@ -45,13 +45,14 @@ h3 {
 
 .nav-bar {
   position: absolute;
-  height: 80px;
+  padding: 10px;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.74);
   color: var(--white);
   font-size: 20px;
   z-index: 1;
 }
+
 #nav-container {
   display: flex;
   justify-content: space-between;
@@ -68,6 +69,11 @@ h3 {
   border: none;
   background-color: transparent;
   font-size: 20px;
+}
+
+#burger-menu-content {
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero {

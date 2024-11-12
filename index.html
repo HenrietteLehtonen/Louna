@@ -12,9 +12,36 @@
       src="https://kit.fontawesome.com/2a4b915664.js"
       crossorigin="anonymous"
     ></script>
+    <script src="nav.js" defer></script>
     <title>Louna Project</title>
   </head>
   <body>
+    <!-- 
+    *******************************
+
+             Dialog / Modal
+             Muuta div muotoon tai jokin muu ratkaisu
+
+    *******************************  
+    -->
+
+    <dialog
+      style="
+        margin: auto;
+        height: 500px;
+        width: 40%;
+        min-width: 300px;
+        max-width: 600px;
+        background-color: white;
+      "
+      class="menu-hold"
+    >
+      <button>Test button2</button>
+      <input type="submit" value="Log in" />
+
+      <!-- Lisää dataa js tiedostosta -->
+    </dialog>
+
     <!-- 
     *******************************
 
@@ -22,15 +49,14 @@
 
     *******************************  
     -->
+
     <header>
-      <nav class="nav-bar">
+      <nav class="nav-bar" tabindex="0">
         <div id="nav-container">
           <img src="/kuvat/logo.png" class="logo" alt="" />
           <div id="shopping-bag">
-            
             <i class="fa-solid fa-bag-shopping" style="color: #ffffff"></i>
-            
-            
+
             <!-- OSTOSKORIN OSIO
             *******************************  -->
 
@@ -38,21 +64,28 @@
               <h3>Ostoskori</h3>
               <ul id="cart-items"></ul>
               <p id="cart-total"></p>
-              
             </dialog>
 
             <!--OSTOSKORIN OSIO
             
             *******************************  -->
-            
-
           </div>
           <div id="log-in">
             <i class="fa-regular fa-user" style="color: #ffffff"></i>
           </div>
-          <button id="burger-menu">
+          <button id="burger-menu" class="menu-hold">
             <i class="fa-solid fa-bars" style="color: #ffffff"></i>
           </button>
+        </div>
+        <div
+          tabindex="0"
+          id="burger-menu-content"
+          style="display: none"
+          class="menu-hold"
+        >
+          <a href="#menu">Etusivu</a>
+          <a href="#menu">Yhteystiedo</a>
+          <a href="#menu">Kirjaudu</a>
         </div>
       </nav>
 
@@ -120,7 +153,6 @@
 
           *****************
         -->
-          
 
         <div class="menu-container">
           <table id="kohde">
@@ -129,7 +161,7 @@
         </div>
       </div>
     </main>
-      
+
     <div class="empty"></div>
 
     <!-- 
