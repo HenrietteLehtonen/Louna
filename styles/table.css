@@ -28,3 +28,10 @@ table button {
   color: white;
   filter: drop-shadow(0px 4px 3px #88888a);
 }
+
+@media (min-width: 801px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  table {
+    max-width: 600px;
+  }
+}
