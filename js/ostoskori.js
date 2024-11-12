@@ -159,7 +159,7 @@ document.addEventListener("click", (event) => {
 
   if (event.target.classList.contains("add-btn")) {
     const ruokaNimi = event.target.parentElement.parentElement
-      .querySelector("p")
+      .querySelector("p") // HUOM EI TOIMI EINÄÄ !
       .textContent.split("\n")[0];
     const hintaText =
       event.target.parentElement.previousElementSibling.textContent;
