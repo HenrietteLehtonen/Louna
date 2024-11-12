@@ -1,0 +1,196 @@
+
+// console.log("Hello menu-hallinta.js");
+// // TESTAUSTA
+
+// let jsonData = [
+//   {
+//     name: "Saurabh",
+//     age: "20",
+//     city: "Prayagraj",
+//   },
+//   {
+//     name: "Vipin",
+//     age: 23,
+//     city: "Lucknow",
+//   },
+//   {
+//     name: "Saksham",
+//     age: 21,
+//     city: "Noida",
+//   },
+// ];
+
+// // FUNKTIO JOLLA TEHDÄÄN TAULUKKO
+
+// const muutaTaulukoksi = () => {
+//   // haetaan kohde mihin taulukko halutaan:
+//   const kohde = document.querySelector("#kohde");
+
+//   // tehdään taulukko mihin data listään
+//   const table = document.createElement("table");
+
+//   // haetaan taulukon otsikolle keyt datasta
+//   const otsikot = Object.keys(jsonData[0]);
+
+//   // tehään theade otsikko rivi
+//   const thead = document.createElement("thead");
+//   const tr = document.createElement("tr");
+
+//   // 1. OTSIKKO RIVI
+//   // haetaan otsikot ja lisätään niihin nimet
+//   otsikot.forEach((item) => {
+//     const th = document.createElement("th");
+//     th.innerText = item; // lisätään taulukon key th elementtiin
+//     tr.appendChild(th); // lisätään th elementti tr
+
+//     /*
+//   <table>
+//     <thead>
+//     <tr>
+//         <th>
+//     </tr>
+//     </thead>
+//   <table>
+//     */
+//   });
+//   thead.appendChild(tr);
+//   /*
+//     <thead>
+//         <tr>
+//             <th></th>
+//         </tr>
+//     </thead>
+// */
+//   table.appendChild(thead);
+//   /*
+//     <table>
+//         <thead>
+//             <tr>
+//                 <th></th>
+//             </tr>
+//         </thead>
+//     </table>    */
+
+//   // 2. SISÄLTÖ RIVIT
+//   jsonData.forEach((item) => {
+//     // jokaiselle valuelle oma rivi
+//     const tr = document.createElement("tr");
+
+//     // haetaan valuet
+//     const vals = Object.values(item);
+
+//     // 3. luodaan data tr sisään
+//     vals.forEach((data) => {
+//       const td = document.createElement("td");
+//       td.innerText = data;
+//       tr.appendChild(td); // data tr sisään
+//     });
+//     table.appendChild(tr);
+//   });
+//   kohde.appendChild(table);
+// };
+
+// muutaTaulukoksi();
+
+
+ FOR EACH TAULUKKO
+      <table>
+        <thead>
+          <tr>
+            <th>Annos</th>
+            <th>Allergeenit</th>
+            <th>Hinta</th>
+            <th>Poista</th>
+          </tr>
+        </thead>
+        <tbody id="abc">
+          <!---->
+        </tbody>
+      </table>
+
+      FOR OF + ELEMENTTIEN TEKO TAULUKKO
+      <table>
+        <thead>
+          <tr>
+            <th>Annos</th>
+            <th>Allergeenit</th>
+            <th>Hinta</th>
+            <th>Poista</th>
+          </tr>
+        </thead>
+        <tbody id="x">
+          <!---->
+        </tbody>
+      </table>
+
+
+// // FOR OF TAULUKKO
+
+// const foTaulukko = () => {
+//   const paikka = document.querySelector("#testi");
+
+//   for (const menu of lista) {
+//     console.log(annos);
+//     let html = `
+//         <tr>
+//           <td>${menu.annos}</td>
+//           <td>${menu.allergeenit}</td>
+//           <td>${menu.hinta}</td>
+//           <td><button>x</button></td>
+//         </tr>
+//   `;
+//     paikka.insertAdjacentHTML("beforeend", html);
+//   }
+// };
+// foTaulukko();
+
+// ///  FFOR EACH TAULUKKO
+// const taulukko = () => {
+//   // haetaan kohde mihin taulukko halutaan:
+//   const kohde = document.querySelector("#abc");
+
+//   // 2. SISÄLTÖ RIVIT
+//   lista.forEach((item) => {
+//     // jokaiselle valuelle oma rivi
+//     const tr = document.createElement("tr");
+
+//     // haetaan valuet
+//     const vals = Object.values(item);
+
+//     // 3. luodaan data tr sisään
+//     vals.forEach((data) => {
+//       const td = document.createElement("td");
+//       td.innerText = data;
+//       tr.appendChild(td); // data tr sisään
+//     });
+//     kohde.appendChild(tr);
+//   });
+// };
+// taulukko();
+
+// /// FOR OF + create element
+// const luoAnnosTaulukko = () => {
+//   const kohde = document.querySelector("#tbody-kohde");
+
+//   for (const item of lista) {
+//     // rivit
+//     const tr = document.createElement("tr");
+
+//     // napit riveille
+//     const btn = document.createElement("button");
+//     btn.setAttribute("class", "del-btn");
+//     btn.innerText = "x";
+
+//     // Käytetään Object.values(item) ja for...of
+//     for (const data of Object.values(item)) {
+//       const td = document.createElement("td");
+
+//       td.innerText = Array.isArray(data) ? data.join(", ") : data; // tsekkaa onks data taulukko
+//       tr.appendChild(td);
+//       tr.appendChild(btn);
+//     }
+//     // Lisää rivi taulukkoon
+//     kohde.appendChild(tr);
+//   }
+// };
+// luoAnnosTaulukko();
