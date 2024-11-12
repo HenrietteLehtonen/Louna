@@ -1,93 +1,127 @@
-console.log("Hello menu-hallinta.js");
+"use strict";
 
-// TESTAUSTA
+// NAPPI LISÄÄ ANNOS
 
-let jsonData = [
+const addAnnos = document.querySelector("#addBtn");
+addAnnos.addEventListener("click", function () {
+  console.log("Lisää annos nappia painettu");
+  document.querySelector("#hidden").removeAttribute("id");
+});
+
+// POISTA KAIKKI ANNOKSET
+
+const delAll = document.querySelector("#deleteAllBtn");
+delAll.addEventListener("click", function () {
+  console.log("Poista kaikki");
+  lista.splice(0, lista.length);
+  kohde.innerHTML = "";
+  console.log(lista);
+});
+
+const lista = [
   {
-    name: "Saurabh",
-    age: "20",
-    city: "Prayagraj",
+    id: 1,
+    annos: "Lihapullat ja muusi",
+    allergeenit: ["V", "L", "G"],
+    hinta: 5,
   },
   {
-    name: "Vipin",
-    age: 23,
-    city: "Lucknow",
-  },
-  {
-    name: "Saksham",
-    age: 21,
-    city: "Noida",
+    id: 2,
+    annos: "Lohisoppa",
+    allergeenit: ["G", "M"],
+    hinta: 3,
   },
 ];
+console.log(lista);
 
-// FUNKTIO JOLLA TEHDÄÄN TAULUKKO
+const kohde = document.querySelector("#tbody-kohde");
 
-const muutaTaulukoksi = () => {
-  // haetaan kohde mihin taulukko halutaan:
-  const kohde = document.querySelector("#kohde");
+// // TAULUKON LUONTI
 
-  // tehdään taulukko mihin data listään
-  const table = document.createElement("table");
-
-  // haetaan taulukon otsikolle keyt datasta
-  const otsikot = Object.keys(jsonData[0]);
-
-  // tehään theade otsikko rivi
-  const thead = document.createElement("thead");
-  const tr = document.createElement("tr");
-
-  // 1. OTSIKKO RIVI
-  // haetaan otsikot ja lisätään niihin nimet
-  otsikot.forEach((item) => {
-    const th = document.createElement("th");
-    th.innerText = item; // lisätään taulukon key th elementtiin
-    tr.appendChild(th); // lisätään th elementti tr
-
-    /*
-  <table>
-    <thead>
-    <tr>
-        <th>   
-    </tr>
-    </thead>
-  <table>
-    */
-  });
-  thead.appendChild(tr);
-  /*
-    <thead>
-        <tr>
-            <th></th>
+const buildHTML = (menu) => {
+  return `
+        <tr id="tr-${menu.id}">
+          <td>${menu.annos}</td>
+          <td>${menu.allergeenit}</td>
+          <td>${menu.hinta}</td>
+          <td><button id="del-${menu.id}" class="del-btn">x</button></td>
         </tr>
-    </thead>
-*/
-  table.appendChild(thead);
-  /*
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-            </tr>
-        </thead>
-    </table>    */
-
-  // 2. SISÄLTÖ RIVIT
-  jsonData.forEach((item) => {
-    // jokaiselle valuelle oma rivi
-    const tr = document.createElement("tr");
-
-    // haetaan valuet
-    const vals = Object.values(item);
-
-    // 3. luodaan data tr sisään
-    vals.forEach((data) => {
-      const td = document.createElement("td");
-      td.innerText = data;
-      tr.appendChild(td); // data tr sisään
-    });
-    table.appendChild(tr);
-  });
-  kohde.appendChild(table);
+  `;
 };
 
-muutaTaulukoksi();
+// TIETYN ANNOKSEN POISTAMINEN
+
+const deletebuttonlistener = (menu) => {
+  const del = document.querySelector(`#del-${menu.id}`);
+  del.addEventListener("click", function () {
+    const annosIndex = lista.findIndex(function (deleteItem) {
+      return deleteItem.id === menu.id;
+    });
+    lista.splice(annosIndex, 1);
+    kohde.removeChild(document.querySelector(`#tr-${menu.id}`));
+    console.log("Poistettu: ", +`${menu.id}`);
+  });
+};
+
+// Jokaiselle annnokselle oma rivi
+const teeRivi = () => {
+  for (const menu of lista) {
+    console.log(menu.id);
+    console.log(menu.annos);
+
+    let html = buildHTML(menu);
+    kohde.insertAdjacentHTML("beforeend", html);
+
+    deletebuttonlistener(menu);
+  }
+};
+
+// ANNOKSEN LISÄÄMINEN
+const save = document.querySelector("#save-btn");
+save.addEventListener("click", function () {
+  // Jos lista on tyhjä, aloita id 1, muuten jatka seuraavalla numerolla
+  let id;
+  if (lista.length > 0) {
+    id = lista[lista.length - 1].id + 1;
+  } else {
+    id = 1;
+  }
+
+  // allergeeni taulukko
+  const selectedAllergens = Array.from(
+    document.querySelectorAll(".checkbox:checked")
+  ).map((checkbox) => checkbox.id);
+
+  let menu = {
+    id: id,
+    annos: document.querySelector("#annos").value,
+    allergeenit: selectedAllergens,
+    hinta: document.querySelector("#price").value,
+  };
+
+  let html = buildHTML(menu);
+  kohde.insertAdjacentHTML("beforeend", html);
+
+  lista.push(menu);
+  console.log(menu.id);
+  console.log(menu.annos);
+  deletebuttonlistener(menu);
+
+  // tyhjennetään formi
+  // TYHJENNÄ FORM
+  document.querySelector("#annos").value = "";
+  document.querySelector("#price").value = "";
+  document
+    .querySelectorAll(".checkbox")
+    .forEach((checkbox) => (checkbox.checked = false));
+});
+
+// PERUUTA
+const peruuta = document.querySelector("#peruuta");
+peruuta.addEventListener("click", function () {
+  console.log("Peruuta nappia painettu");
+  document
+    .querySelector(".container-ruokavalinta")
+    .setAttribute("id", "hidden");
+});
+teeRivi();
