@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/hallinta.css" />
+    <script src="./menu-hallinta.js" defer></script>
+    <title>Louna hallinta</title>
+  </head>
+  <body>
+    <!-- 
+    *******************************
+
+            NAV
+
+    *******************************  
+    -->
+    <nav class="nav-bar">
+      <div id="nav-container">
+        <img src="./kuvat/logo.png" class="logo" alt="" />
+        <ul>
+          <li id="index"><a href="index.html">ETUSIVU</a></li>
+          <li id="hallinta"><a href="hallinta.html">HALLINTA</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 
+    *******************************
+
+            MAIN
+
+    *******************************  
+    -->
+
+    <main class="main">
+      <div class="container">
+        <div class="container otsikko">
+          <h1>Ruokalista</h1>
+          <h2>Ruokalistan hallinta</h2>
+        </div>
+
+        <!-- 
+    *******************************
+
+           Ruokalistan hallinta
+
+    *******************************  
+    -->
+        <div class="container ruoka-hallinta">
+          <button class="btn" id="addBtn">Lisää annos</button>
+          <button class="btn" id="deleteAllBtn">Poista kaikki</button>
+
+          <!-- FORMI  -->
+
+          <div class="container-ruokavalinta" id="hidden">
+            <form>
+              <div class="annos-container">
+                <label for="annos" class="label-otsikko">Annoksen nimi:</label
+                ><br />
+                <input type="text" id="annos" name="annos" /><br />
+              </div>
+              <h2>Allergeenit:</h2>
+              <div class="checkbox-container">
+                <div class="allerg">
+                  <label for="G">G</label>
+                  <input class="checkbox" type="checkbox" name="G" id="G" />
+                </div>
+
+                <div class="allerg">
+                  <label for="VL">VL</label>
+                  <input class="checkbox" type="checkbox" name="VL" id="VL" />
+                </div>
+
+                <div class="allerg">
+                  <label for="L">L</label>
+                  <input class="checkbox" type="checkbox" name="L" id="L" />
+                </div>
+
+                <div class="allerg">
+                  <label for="M">M</label>
+                  <input class="checkbox" type="checkbox" name="M" id="M" />
+                </div>
+
+                <div class="allerg">
+                  <label for="K">K</label>
+                  <input class="checkbox" type="checkbox" name="K" id="K" />
+                </div>
+
+                <div class="allerg">
+                  <label for="SO">SO</label>
+                  <input class="checkbox" type="checkbox" name="SO" id="SO" />
+                </div>
+
+                <div class="allerg">
+                  <label for="VEG">VEG</label>
+                  <input class="checkbox" type="checkbox" name="VEG" id="VEG" />
+                </div>
+              </div>
+              <div class="annos-container price-container">
+                <label for="price" class="label-otsikko">Hinta:</label><br />
+                <input class="price" type="text" name="price" id="price" />
+              </div>
+            </form>
+            <button class="form-btn" id="save-btn">Lisää</button>
+            <button class="form-btn" id="peruuta">Peruuta</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container annokset-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Annos</th>
+              <th>Allergeenit</th>
+              <th>Hinta</th>
+              <th>Poista</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-kohde">
+            <!---->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 
+    *******************************
+
+            Tilausten hallinta
+
+    *******************************  
+    -->
+      <div class="container tilaukset">
+        <h1>Tilaukset</h1>
+        <h2>Tilausten hallinta</h2>
+        <p>RUOKALISTA</p>
+        <p>TILAUKSET</p>
+      </div>
+    </main>
+  </body>
+</html>
