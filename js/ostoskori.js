@@ -158,6 +158,8 @@ document.addEventListener("click", (event) => {
   console.log(event.target.parentElement.parentElement);
 
   if (event.target.classList.contains("add-btn")) {
+    /* ! Muuta tominnalisuutta jotta data otetaan mokdatasta/tietokannasta
+    tällä hetkälla data hankitaan html tiedoston <p> elementistä ! */
     const ruokaNimi = event.target.parentElement.parentElement
       .querySelector("p")
       .textContent.split("\n")[0];
