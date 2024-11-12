@@ -4,6 +4,7 @@ let ostoskori = JSON.parse(localStorage.getItem("ostoskori")) || [];
 // Tuotteen lisääminen ostoskoriin
 function lisaaOstoskoriin(ruoka) {
   const existingProduct = ostoskori.find((item) => item.nimi === ruoka.nimi);
+
   if (existingProduct) {
     existingProduct.maara += 1;
   } else {
@@ -14,8 +15,11 @@ function lisaaOstoskoriin(ruoka) {
 
 // Ostoskorin päivitys ja tallennus
 function paivitaOstoskori() {
+  /* voi siirtäää funktion ulkopuolelle */
   const cartItems = document.getElementById("cart-items");
   const cartTotal = document.getElementById("cart-total");
+  /* voi siirtäää funktion ulkopuolelle */
+
   if (!cartItems || !cartTotal) return;
 
   cartItems.innerHTML = "";
@@ -45,7 +49,8 @@ function paivitaOstoskori() {
   cartTotal.textContent = `Kokonaishinta: ${total.toFixed(2)} €`;
   localStorage.setItem("ostoskori", JSON.stringify(ostoskori));
 
-  document.querySelectorAll(".increase-btn").forEach((button) => {
+  // poista myöhemmin
+  /*   document.querySelectorAll(".increase-btn").forEach((button) => {
     button.addEventListener("click", (event) => {
       const index = event.target.getAttribute("data-index");
       ostoskori[index].maara += 1;
@@ -71,7 +76,25 @@ function paivitaOstoskori() {
       ostoskori.splice(index, 1);
       paivitaOstoskori();
     });
-  });
+  }); */
+
+  const inc = (index) => {
+    ostoskori[index].maara += 1;
+  };
+  const dec = (index) => {
+    if (ostoskori[index].maara > 1) {
+      ostoskori[index].maara -= 1;
+    } else {
+      ostoskori.splice(index, 1);
+    }
+  };
+  const rem = (index) => {
+    ostoskori.splice(index, 1);
+  };
+
+  napienToiminnallisuus(".increase-btn", inc);
+  napienToiminnallisuus(".decrease-btn", dec);
+  napienToiminnallisuus(".remove-btn", rem);
 
   if (ostoskori.length > 0) {
     const confirmButton = document.createElement("button");
@@ -86,12 +109,23 @@ function paivitaOstoskori() {
     cartItems.appendChild(confirmButton);
   }
 }
+// uusi Functio nappien toiminnalle
+function napienToiminnallisuus(query, keskiFunktio) {
+  document.querySelectorAll(query).forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const index = event.target.getAttribute("data-index");
+      keskiFunktio(index);
+      paivitaOstoskori();
+    });
+  });
+}
 
-// Alustus sivun latautuessa
 document.addEventListener("DOMContentLoaded", () => {
   paivitaOstoskori();
-
   const cartDialog = document.getElementById("cart-dialog");
+  const openCartButton = document.getElementById("shopping-bag");
+
+  // Alustus sivun latautuessa
   if (cartDialog) {
     const closeCartButton = document.createElement("button");
     closeCartButton.textContent = "Sulje";
@@ -106,13 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.error("Ostoskorin dialogia ei löytynyt!");
   }
-});
 
-// Ostoskorin avaaminen
-document.addEventListener("DOMContentLoaded", () => {
-  const cartDialog = document.getElementById("cart-dialog");
-  const openCartButton = document.getElementById("shopping-bag");
-
+  // Ostoskorin avaaminen
   if (openCartButton) {
     openCartButton.addEventListener("click", () => {
       if (cartDialog && !cartDialog.open) {
@@ -126,6 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Tuotteen lisääminen ostoskoriin
 document.addEventListener("click", (event) => {
+  console.log(event.target.parentElement.parentElement);
+
   if (event.target.classList.contains("add-btn")) {
     const ruokaNimi = event.target.parentElement.parentElement
       .querySelector("p")
@@ -149,6 +180,5 @@ document.addEventListener("click", (event) => {
     };
 
     lisaaOstoskoriin(ruoka);
-    alert("Tuote lisätty ostoskoriin.");
   }
 });
