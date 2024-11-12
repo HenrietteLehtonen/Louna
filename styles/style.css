@@ -76,6 +76,12 @@ h3 {
   align-items: center;
 }
 
+.burger-menu-optin {
+  color: #fff;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
 .hero {
   height: 32vh;
   /* background-color: #9dce98; */

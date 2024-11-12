@@ -124,7 +124,7 @@ const showMenu = () => {
 
         addToCartButton.forEach((button) => {
           button.addEventListener("click", function () {
-            alert("Tuote lisätty ostoskoriin.");
+            console.log("debug");
           });
         });
       }
