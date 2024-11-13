@@ -13,6 +13,20 @@ function lisaaOstoskoriin(ruoka) {
   paivitaOstoskori();
 }
 
+const inc = (index) => {
+  ostoskori[index].maara += 1;
+};
+const dec = (index) => {
+  if (ostoskori[index].maara > 1) {
+    ostoskori[index].maara -= 1;
+  } else {
+    ostoskori.splice(index, 1);
+  }
+};
+const rem = (index) => {
+  ostoskori.splice(index, 1);
+};
+
 // Ostoskorin päivitys ja tallennus
 function paivitaOstoskori() {
   /* voi siirtäää funktion ulkopuolelle */
@@ -77,20 +91,6 @@ function paivitaOstoskori() {
       paivitaOstoskori();
     });
   }); */
-
-  const inc = (index) => {
-    ostoskori[index].maara += 1;
-  };
-  const dec = (index) => {
-    if (ostoskori[index].maara > 1) {
-      ostoskori[index].maara -= 1;
-    } else {
-      ostoskori.splice(index, 1);
-    }
-  };
-  const rem = (index) => {
-    ostoskori.splice(index, 1);
-  };
 
   napienToiminnallisuus(".increase-btn", inc);
   napienToiminnallisuus(".decrease-btn", dec);
