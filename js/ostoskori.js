@@ -1,9 +1,9 @@
 // Alustus ja datan haku
-let ostoskori = JSON.parse(localStorage.getItem('ostoskori')) || [];
+let ostoskori = JSON.parse(localStorage.getItem("ostoskori")) || [];
 
 // Tuotteen lisääminen ostoskoriin
 function lisaaOstoskoriin(ruoka) {
-  const existingProduct = ostoskori.find(item => item.nimi === ruoka.nimi);
+  const existingProduct = ostoskori.find((item) => item.nimi === ruoka.nimi);
   if (existingProduct) {
     existingProduct.maara += 1;
   } else {
@@ -43,9 +43,9 @@ function paivitaOstoskori() {
   });
 
   cartTotal.textContent = `Kokonaishinta: ${total.toFixed(2)} €`;
-  localStorage.setItem('ostoskori', JSON.stringify(ostoskori));
+  localStorage.setItem("ostoskori", JSON.stringify(ostoskori));
 
-  document.querySelectorAll(".increase-btn").forEach(button => {
+  document.querySelectorAll(".increase-btn").forEach((button) => {
     button.addEventListener("click", (event) => {
       const index = event.target.getAttribute("data-index");
       ostoskori[index].maara += 1;
@@ -53,7 +53,7 @@ function paivitaOstoskori() {
     });
   });
 
-  document.querySelectorAll(".decrease-btn").forEach(button => {
+  document.querySelectorAll(".decrease-btn").forEach((button) => {
     button.addEventListener("click", (event) => {
       const index = event.target.getAttribute("data-index");
       if (ostoskori[index].maara > 1) {
@@ -65,7 +65,7 @@ function paivitaOstoskori() {
     });
   });
 
-  document.querySelectorAll(".remove-btn").forEach(button => {
+  document.querySelectorAll(".remove-btn").forEach((button) => {
     button.addEventListener("click", (event) => {
       const index = event.target.getAttribute("data-index");
       ostoskori.splice(index, 1);
@@ -135,8 +135,10 @@ document.addEventListener("click", (event) => {
     console.log("Ruoka Nimi: ", ruokaNimi); // Logs the food name
     console.log("Hinta: ", hintaText); // Logs the price information
 
-    const parsedHintaText = hintaText.split('/')[0].trim();
-    const hinta = parseFloat(parsedHintaText.replace(/[^0-9,.]/g, '').replace(',', '.'));
+    const parsedHintaText = hintaText.split("/")[0].trim();
+    const hinta = parseFloat(
+      parsedHintaText.replace(/[^0-9,.]/g, "").replace(",", ".")
+    );
 
     if (isNaN(hinta)) {
       console.error("Virheellinen hinta-arvo:", parsedHintaText);
