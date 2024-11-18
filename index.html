@@ -27,19 +27,29 @@
         <div id="nav-container">
           <img src="/kuvat/logo.png" class="logo" alt="" />
           <div id="shopping-bag">
-            
-            <i class="fa-solid fa-bag-shopping" style="color: #ffffff"></i>
+          
+            <i class="fa-solid fa-bag-shopping" style="color: #ffffff" id="open-modal-btn"></i>
             
             
             <!-- OSTOSKORIN OSIO
             *******************************  -->
+            <!-- Dialog / Modal -->
+          <div id="custom-modal" class="modal hidden">
+            <div class="modal-content">
+    
+          <button class="close-btn" id="close-cart">Sulje</button>
+            <h3>Ostoskori</h3>
 
-            <dialog id="cart-dialog">
-              <h3>Ostoskori</h3>
-              <ul id="cart-items"></ul>
-              <p id="cart-total"></p>
+              <ul id="cart-items">
+              </ul>
+
+                <p id="cart-total"></p>
               
-            </dialog>
+                </div>
+                </div>
+
+
+            
 
             <!--OSTOSKORIN OSIO
             

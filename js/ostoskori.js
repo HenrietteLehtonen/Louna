@@ -73,17 +73,17 @@ function paivitaOstoskori() {
     });
   });
 
-  if (ostoskori.length > 0) {
+  if (ostoskori.length > 0 && !document.querySelector(".confirm-btn")) {
     const confirmButton = document.createElement("button");
     confirmButton.textContent = "Vahvista ostos";
     confirmButton.classList.add("confirm-btn");
-
+  
     confirmButton.addEventListener("click", () => {
       localStorage.setItem("vahvistetutTilaukset", JSON.stringify(ostoskori));
       window.location.href = "tilaustiedot.html";
     });
-
-    cartItems.appendChild(confirmButton);
+  
+    cartItems.parentElement.appendChild(confirmButton)
   }
 }
 
@@ -91,44 +91,49 @@ function paivitaOstoskori() {
 document.addEventListener("DOMContentLoaded", () => {
   paivitaOstoskori();
 
-  const cartDialog = document.getElementById("cart-dialog");
-  if (cartDialog) {
-    const closeCartButton = document.createElement("button");
-    closeCartButton.textContent = "Sulje";
-    closeCartButton.classList.add("close-btn");
-    cartDialog.appendChild(closeCartButton);
-
-    closeCartButton.addEventListener("click", () => {
-      if (cartDialog.open) {
-        cartDialog.close();
-      }
-    });
+  const customModal = document.getElementById("custom-modal");
+  if (customModal) {
+    const closeCartButton = document.getElementById("close-cart");
+    if (closeCartButton) {
+      closeCartButton.addEventListener("click", () => {
+        customModal.classList.add("hidden");
+      });
+    } else {
+      console.error("Sulje-nappia ei löytynyt!");
+    }
   } else {
-    console.error("Ostoskorin dialogia ei löytynyt!");
+    console.error("Ostoskorin modaalia ei löytynyt!");
   }
 });
 
 // Ostoskorin avaaminen
 document.addEventListener("DOMContentLoaded", () => {
-  const cartDialog = document.getElementById("cart-dialog");
-  const openCartButton = document.getElementById("shopping-bag");
+  const customModal = document.getElementById("custom-modal");
+  const openCartButton = document.getElementById("open-modal-btn"); // Vaihdettu avaamaan oikea painike
 
   if (openCartButton) {
     openCartButton.addEventListener("click", () => {
-      if (cartDialog && !cartDialog.open) {
-        cartDialog.showModal();
-      }
+      customModal.classList.remove("hidden");
     });
   } else {
-    console.error("Ostoskorin avauspainiketta ei löytynyt!");
+    console.error("Avauspainiketta ei löytynyt!");
   }
 });
 
 // Tuotteen lisääminen ostoskoriin
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("add-btn")) {
-    const ruokaNimi = event.target.parentElement.parentElement.querySelector("p").textContent.split("\n")[0];
-    const hintaText = event.target.parentElement.previousElementSibling.textContent;
+    // Find the <tr> element that contains the clicked button
+    const row = event.target.closest("tr");
+
+    // Get the text content of the first <td> (which contains the food name and allergens)
+    const ruokaNimi = row.querySelector("td").childNodes[0].textContent.trim(); // Get text from the first child node
+
+    // Get the price text from the second <td> in the same row
+    const hintaText = row.querySelectorAll("td")[1].textContent;
+
+    console.log("Ruoka Nimi: ", ruokaNimi); // Logs the food name
+    console.log("Hinta: ", hintaText); // Logs the price information
 
     const parsedHintaText = hintaText.split('/')[0].trim();
     const hinta = parseFloat(parsedHintaText.replace(/[^0-9,.]/g, '').replace(',', '.'));
