@@ -151,12 +151,12 @@ TILAUSTEN HALLINTA
 
 // TILAUS MOCKDATA
 
-const tilaus = [
+const tilaukset = [
   {
     tilaus_id: 1,
     tilausnro: 852,
     tilattu_aika: 10,
-    nouto_aika: 12,
+    nouto_aika: "11:30",
     tilauksen_tila: "Odottaa noutoa",
   },
   {
@@ -168,6 +168,54 @@ const tilaus = [
   },
 ];
 
-// TAULUKKO
+const tilaustaulukko = document.querySelector("#tbody-kohde-tilaukset"); // mihin lisätään
 
-const buildTilaustaulukko = () => {};
+// TILAUKSIEN TAULUKOLLE RIVIT RAKENNUS
+
+const buildTilaustaulukko = (tilaus) => {
+  return `
+  <tr id="tilaus-${tilaus.tilaus_id}">
+    <td>${tilaus.tilausnro}</td>
+    <td>${tilaus.tilattu_aika}</td>
+    <td>${tilaus.tilauksen_tila}</td>
+    <td>${tilaus.nouto_aika}</td>
+    <td><button id="poista-${tilaus.tilaus_id}" class="del-btn">x</button></td>
+  </tr>
+  `;
+};
+
+// TILAUKSEN POISTAMISEN FUNKTIO
+const poistaTilausFunktio = (tilaus) => {
+  const poistaTilausBTN = document.querySelector(`#poista-${tilaus.tilaus_id}`);
+
+  poistaTilausBTN.addEventListener("click", function () {
+    console.log(`Poistetaan tilaus ${tilaus.tilaus_id}`);
+
+    // etitään poistettavan tilauksen indeksi -> tilaus id
+    const tilausIndex = tilaukset.findIndex(
+      (item) => item.tilaus_id === tilaus.tilaus_id
+    );
+
+    // poista tilaus taulukosta
+    tilaukset.splice(tilausIndex, 1);
+
+    // poista rivi html taulukosta
+    const rivi = document.querySelector(`#tilaus-${tilaus.tilaus_id}`);
+    tilaustaulukko.removeChild(rivi);
+  });
+};
+
+// LISÄTÄÄN OMAT RIVIT TILAUKSILLE
+
+const teeRivitTilauksille = () => {
+  // käydään tilaukset taulukko läpi
+  for (const tilaus of tilaukset) {
+    // lisätään joka riville oma tilaus
+    let taulukkoHTML = buildTilaustaulukko(tilaus);
+    tilaustaulukko.insertAdjacentHTML("beforeend", taulukkoHTML);
+    // Lisätään riville tilauksen poisto
+    poistaTilausFunktio(tilaus);
+  }
+};
+
+teeRivitTilauksille();

@@ -229,3 +229,8 @@ td {
 .del-btn:hover {
   background-color: var(--gray);
 }
+
+/* TILAUSTENHALLINTA */
+.tilaukset {
+  margin-top: 50px;
+}
