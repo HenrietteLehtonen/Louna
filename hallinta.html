@@ -58,7 +58,7 @@
               <div class="annos-container">
                 <label for="annos" class="label-otsikko">Annoksen nimi:</label
                 ><br />
-                <input type="text" id="annos" name="annos" /><br />
+                <input type="text" id="annos" name="annos" required /><br />
               </div>
               <h2>Allergeenit:</h2>
               <div class="checkbox-container">
@@ -96,10 +96,20 @@
                   <label for="VEG">VEG</label>
                   <input class="checkbox" type="checkbox" name="VEG" id="VEG" />
                 </div>
+                <div class="allerg">
+                  <label for="EI">Ei Allergeeneja</label>
+                  <input class="checkbox" type="checkbox" name="-" id="EI" />
+                </div>
               </div>
               <div class="annos-container price-container">
                 <label for="price" class="label-otsikko">Hinta:</label><br />
-                <input class="price" type="text" name="price" id="price" />
+                <input
+                  class="price"
+                  type="text"
+                  name="price"
+                  id="price"
+                  required
+                />
               </div>
             </form>
             <button class="form-btn" id="save-btn">Lisää</button>

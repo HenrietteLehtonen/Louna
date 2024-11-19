@@ -90,30 +90,41 @@ save.addEventListener("click", function () {
   // allergeeni taulukko
   const selectedAllergens = Array.from(
     document.querySelectorAll(".checkbox:checked")
-  ).map((checkbox) => checkbox.id);
+  ).map((checkbox) => checkbox.name);
+
+  // muutetaan hinta numeroksi
+  const hintaNumeroksi = Number(document.querySelector("#price").value);
 
   let menu = {
     id: id,
     annos: document.querySelector("#annos").value,
     allergeenit: selectedAllergens,
-    hinta: document.querySelector("#price").value,
+    hinta: hintaNumeroksi,
   };
 
-  let html = buildHTML(menu);
-  kohde.insertAdjacentHTML("beforeend", html);
+  // tsekataan onko valuet tyhjjiä, jos ei huomautetaan !
+  if (menu.annos === "" || menu.hinta < 1) {
+    alert("Täytä kentät");
+  } else {
+    let html = buildHTML(menu);
+    kohde.insertAdjacentHTML("beforeend", html);
 
-  lista.push(menu);
-  console.log(menu.id);
-  console.log(menu.annos);
-  deletebuttonlistener(menu);
+    lista.push(menu);
+    console.log(menu.id);
+    console.log(menu.annos);
+    console.log(typeof menu.hinta);
+    console.log(annos.value);
+    console.log(Object.values(menu));
+    deletebuttonlistener(menu);
 
-  // tyhjennetään formi
-  // TYHJENNÄ FORM
-  document.querySelector("#annos").value = "";
-  document.querySelector("#price").value = "";
-  document
-    .querySelectorAll(".checkbox")
-    .forEach((checkbox) => (checkbox.checked = false));
+    // tyhjennetään formi annoksen lisäämisen jälkeen
+    // TYHJENNÄ FORM
+    document.querySelector("#annos").value = "";
+    document.querySelector("#price").value = "";
+    document
+      .querySelectorAll(".checkbox")
+      .forEach((checkbox) => (checkbox.checked = false));
+  }
 });
 
 // PERUUTA
@@ -125,3 +136,5 @@ peruuta.addEventListener("click", function () {
     .setAttribute("id", "hidden");
 });
 teeRivi();
+
+/// Input Type Reset

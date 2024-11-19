@@ -8,11 +8,13 @@ const ruokaLista = [
         nimi: "peruna",
         hinta: { opiskelija: 2.5, muu: 3.0 },
         allergeenit: [""],
+        id: 1,
       },
       annos2: {
         nimi: "makkara",
         hinta: { opiskelija: 3.0, muu: 4.0 },
         allergeenit: ["G", "S"],
+        id: 2,
       },
     },
   },
@@ -23,11 +25,13 @@ const ruokaLista = [
         nimi: "pasta",
         hinta: { opiskelija: 4.0, muu: 5.0 },
         allergeenit: ["G", "E"],
+        id: 3,
       },
       annos2: {
         nimi: "kana",
         hinta: { opiskelija: 5.0, muu: 6.0 },
         allergeenit: [""],
+        id: 4,
       },
     },
   },
@@ -38,11 +42,13 @@ const ruokaLista = [
         nimi: "kalakeitto",
         hinta: { opiskelija: 6.5, muu: 7.5 },
         allergeenit: ["K", "M"],
+        id: 5,
       },
       annos2: {
         nimi: "leipä",
         hinta: { opiskelija: 1.5, muu: 2.0 },
         allergeenit: ["G", "M"],
+        id: 6,
       },
     },
   },
@@ -53,11 +59,13 @@ const ruokaLista = [
         nimi: "lasagne",
         hinta: { opiskelija: 7.0, muu: 8.0 },
         allergeenit: ["G", "M", "S"],
+        id: 7,
       },
       annos2: {
         nimi: "salaatti",
         hinta: { opiskelija: 3.5, muu: 4.0 },
         allergeenit: [""],
+        id: 8,
       },
     },
   },
@@ -68,11 +76,13 @@ const ruokaLista = [
         nimi: "pizza",
         hinta: { opiskelija: 2.0, muu: 8.0 },
         allergeenit: ["G", "M"],
+        id: 9,
       },
       annos2: {
         nimi: "tacos",
         hinta: { opiskelija: 5.5, muu: 6.0 },
         allergeenit: ["M", "S"],
+        id: 10,
       },
     },
   },
@@ -103,8 +113,8 @@ const showMenu = () => {
           </tr>
           <tr>
             <td>
-              <p>${lista.annokset.annos1.nimi}<br>
-              ${lista.annokset.annos1.allergeenit}</p>
+              ${lista.annokset.annos1.nimi}<br>
+              ${lista.annokset.annos1.allergeenit}
             </td>
             <td>${lista.annokset.annos1.hinta.opiskelija}€ / ${lista.annokset.annos1.hinta.muu} €</td>
             <td><button class="add-btn">+</button></td>
