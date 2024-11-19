@@ -106,6 +106,7 @@ const showMenu = () => {
       const day = this.getAttribute("data-day"); // this -> napin attribuutti
       const lista = ruokaLista.find((lista) => lista.day === day); // etitään ruokalistan päivä
 
+      // RUOKALISTA TAULUKON LUONTI
       if (lista) {
         const html = `
           <tr>

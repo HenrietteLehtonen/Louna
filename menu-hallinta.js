@@ -48,6 +48,7 @@ const buildHTML = (menu) => {
         </tr>
   `;
 };
+/*************************** */
 
 // TIETYN ANNOKSEN POISTAMINEN
 
@@ -62,19 +63,21 @@ const deletebuttonlistener = (menu) => {
     console.log("Poistettu: ", +`${menu.id}`);
   });
 };
+/*************************** */
 
-// Jokaiselle annnokselle oma rivi
+// JOKAISELLE ANNOKSELLE OMA RIVI
 const teeRivi = () => {
   for (const menu of lista) {
     console.log(menu.id);
     console.log(menu.annos);
 
-    let html = buildHTML(menu);
-    kohde.insertAdjacentHTML("beforeend", html);
+    let html = buildHTML(menu); // kutsutaan taulukon luontia
+    kohde.insertAdjacentHTML("beforeend", html); // lisätään taulukko kohteeseen
 
-    deletebuttonlistener(menu);
+    deletebuttonlistener(menu); // lisätään deletebutton listener riveille
   }
 };
+/*************************** */
 
 // ANNOKSEN LISÄÄMINEN
 const save = document.querySelector("#save-btn");
@@ -87,7 +90,7 @@ save.addEventListener("click", function () {
     id = 1;
   }
 
-  // allergeeni taulukko
+  // allergeenit taulukoksi
   const selectedAllergens = Array.from(
     document.querySelectorAll(".checkbox:checked")
   ).map((checkbox) => checkbox.name);
@@ -95,6 +98,7 @@ save.addEventListener("click", function () {
   // muutetaan hinta numeroksi
   const hintaNumeroksi = Number(document.querySelector("#price").value);
 
+  // alustetaan menu objektiksi
   let menu = {
     id: id,
     annos: document.querySelector("#annos").value,
@@ -102,7 +106,7 @@ save.addEventListener("click", function () {
     hinta: hintaNumeroksi,
   };
 
-  // tsekataan onko valuet tyhjjiä, jos ei huomautetaan !
+  // tsekataan onko valuet tyhjjiä annoksen lisäämisessä, jos on huomautetaan !
   if (menu.annos === "" || menu.hinta < 1) {
     alert("Täytä kentät");
   } else {
@@ -138,3 +142,32 @@ peruuta.addEventListener("click", function () {
 teeRivi();
 
 /// Input Type Reset
+
+/*
+
+TILAUSTEN HALLINTA
+
+*/
+
+// TILAUS MOCKDATA
+
+const tilaus = [
+  {
+    tilaus_id: 1,
+    tilausnro: 852,
+    tilattu_aika: 10,
+    nouto_aika: 12,
+    tilauksen_tila: "Odottaa noutoa",
+  },
+  {
+    tilaus_id: 2,
+    tilausnro: 548500,
+    tilattu_aika: 11,
+    nouto_aika: 12,
+    tilauksen_tila: "Työn alla",
+  },
+];
+
+// TAULUKKO
+
+const buildTilaustaulukko = () => {};
