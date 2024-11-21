@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/hallinta.css" />
     <script src="./menu-hallinta.js" defer></script>
+    <script src="./tilausten-hallinta.js" defer></script>
     <title>Louna hallinta</title>
   </head>
   <body>
@@ -52,14 +53,30 @@
           <button class="btn" id="deleteAllBtn">Poista kaikki</button>
 
           <!-- FORMI  -->
-
+          <!-- <div class="container-ruokavalinta"> -->
           <div class="container-ruokavalinta" id="hidden">
             <form>
+              <!-- Päivän valinta -->
+              <div class="chooseDay-container">
+                <label for="päivä-valitsin" class="label-otsikko"
+                  >Valitse päivä:</label
+                >
+                <select name="päivä-valitsin" id="päivä-valitsin">
+                  <option value="Maanantai">Maanantai</option>
+                  <option value="Tiistai">Tiistai</option>
+                  <option value="Keskiviikko">Keskiviikko</option>
+                  <option value="Torstai">Torstai</option>
+                  <option value="Perjantai">Perjantai</option>
+                </select>
+              </div>
+              <!-- Annoksen nimi -->
+
               <div class="annos-container">
                 <label for="annos" class="label-otsikko">Annoksen nimi:</label
                 ><br />
                 <input type="text" id="annos" name="annos" required /><br />
               </div>
+              <!-- Allergeenit -->
               <h2>Allergeenit:</h2>
               <div class="checkbox-container">
                 <div class="allerg">
@@ -101,6 +118,7 @@
                   <input class="checkbox" type="checkbox" name="-" id="EI" />
                 </div>
               </div>
+              <!-- Hinta -->
               <div class="annos-container price-container">
                 <label for="price" class="label-otsikko">Hinta:</label><br />
                 <input
@@ -118,10 +136,13 @@
         </div>
       </div>
 
+      <!-- Annoksien taulukko -->
+
       <div class="container annokset-container">
         <table>
           <thead>
             <tr>
+              <th>Päivä</th>
               <th>Annos</th>
               <th>Allergeenit</th>
               <th>Hinta</th>
@@ -129,7 +150,7 @@
             </tr>
           </thead>
           <tbody id="tbody-kohde">
-            <!---->
+            <!-- Tänne rakentuu taulukko -->
           </tbody>
         </table>
       </div>
@@ -146,6 +167,36 @@
           <h1>Tilaukset</h1>
           <h2>Tilausten hallinta</h2>
         </div>
+
+        <!-- etsi tilaus -->
+        <div class="container tilaus">
+          <h2>Muokkaa tilausta</h2>
+          <div class="container">
+            <label for="etsi-tilaus">Etsi tilaus:</label>
+            <input
+              type="search"
+              name="etsi-tilaus"
+              id="etsi-tilaus"
+              placeholder="Etsi tilausnumerolla"
+            />
+            <button id="etsi-tilaus-btn">Etsi</button>
+          </div>
+          <p id="p-kohde">Tilausnumero :</p>
+          <br />
+          <label for="tilauksen-tila">Tilauksen tila:</label>
+          <select name="tilauksen-tila" id="tilauksen-tila">
+            <option value="Vastaanotettu">Vastaanotettu</option>
+            <option value="Työn alla">Työn alla</option>
+            <option value="Odottaa noutoa">Odottaa noutoa</option>
+            <option value="Noudettu">Noudettu</option>
+            <option value="Peruutettu">Peruutettu</option>
+          </select>
+          <label for="nouto-aika">Noutoaika:</label>
+          <input type="text" name="nouto-aika" />
+          <button id="update">Päivitä</button>
+          <button>Peruuta</button>
+        </div>
+        <!-- tilaukset taulukko -->
         <div class="container annokset-container">
           <table>
             <thead>

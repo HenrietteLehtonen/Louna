@@ -1,5 +1,7 @@
 "use strict";
 
+const kohde = document.querySelector("#tbody-kohde");
+
 // NAPPI LISÄÄ ANNOS
 
 const addAnnos = document.querySelector("#addBtn");
@@ -14,35 +16,67 @@ const delAll = document.querySelector("#deleteAllBtn");
 delAll.addEventListener("click", function () {
   console.log("Poista kaikki");
   lista.splice(0, lista.length);
-  kohde.innerHTML = "";
-  console.log(lista);
+  // Poista kaikki annosrivit
+  const annosRivit = document.querySelectorAll("tr.annos-rivi");
+  annosRivit.forEach((rivi) => rivi.remove());
+  console.log("Kaikki annoksett poistettu");
 });
 
 const lista = [
   {
+    day: "Maanantai",
     id: 1,
     annos: "Lihapullat ja muusi",
     allergeenit: ["V", "L", "G"],
     hinta: 5,
   },
   {
+    day: "Maanantai",
     id: 2,
     annos: "Lohisoppa",
     allergeenit: ["G", "M"],
     hinta: 3,
   },
+  {
+    day: "Tiistai",
+    id: 3,
+    annos: "Fish & Chips",
+    allergeenit: ["VL", "M", "SO"],
+    hinta: 3,
+  },
 ];
 console.log(lista);
 
-const kohde = document.querySelector("#tbody-kohde");
+// VIIKONPÄIVÄT TAULUKKOA VARTEN
+const viikonpäivät = [
+  "Maanantai",
+  "Tiistai",
+  "Keskiviikko",
+  "Torstai",
+  "Perjantai",
+];
+
+// tehdään viikonpäivät valmiiksi
+const teeViikonpäivät = () => {
+  for (const päivä of viikonpäivät) {
+    const päiväRivi = document.createElement("tr");
+    päiväRivi.classList.add("päivä-rivi");
+    päiväRivi.setAttribute("data-päivä", päivä);
+    päiväRivi.innerHTML = `
+      <td colspan="1">${päivä}</td>
+    `;
+    kohde.appendChild(päiväRivi);
+  }
+};
 
 // // TAULUKON LUONTI
 
 const buildHTML = (menu) => {
   return `
-        <tr id="tr-${menu.id}">
+        <tr id="tr-${menu.id}" class="annos-rivi" data-päivä="${menu.day}">
+        <td></td>
           <td>${menu.annos}</td>
-          <td>${menu.allergeenit}</td>
+          <td>${menu.allergeenit.join(", ")}</td>
           <td>${menu.hinta}</td>
           <td><button id="del-${menu.id}" class="del-btn">x</button></td>
         </tr>
@@ -72,7 +106,12 @@ const teeRivi = () => {
     console.log(menu.annos);
 
     let html = buildHTML(menu); // kutsutaan taulukon luontia
-    kohde.insertAdjacentHTML("beforeend", html); // lisätään taulukko kohteeseen
+
+    // haetaan oikea päivä rivi mihin lisätään
+    const päiväRivi = document.querySelector(
+      `.päivä-rivi[data-päivä="${menu.day}"]`
+    );
+    päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
 
     deletebuttonlistener(menu); // lisätään deletebutton listener riveille
   }
@@ -80,6 +119,8 @@ const teeRivi = () => {
 /*************************** */
 
 // ANNOKSEN LISÄÄMINEN
+//
+
 const save = document.querySelector("#save-btn");
 save.addEventListener("click", function () {
   // Jos lista on tyhjä, aloita id 1, muuten jatka seuraavalla numerolla
@@ -100,6 +141,7 @@ save.addEventListener("click", function () {
 
   // alustetaan menu objektiksi
   let menu = {
+    day: document.querySelector("#päivä-valitsin").value,
     id: id,
     annos: document.querySelector("#annos").value,
     allergeenit: selectedAllergens,
@@ -111,10 +153,13 @@ save.addEventListener("click", function () {
     alert("Täytä kentät");
   } else {
     let html = buildHTML(menu);
-    kohde.insertAdjacentHTML("beforeend", html);
+    const päiväRivi = document.querySelector(
+      `.päivä-rivi[data-päivä="${menu.day}"]`
+    );
+    päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
 
     lista.push(menu);
-    console.log(menu.id);
+    console.log(menu.day);
     console.log(menu.annos);
     console.log(typeof menu.hinta);
     console.log(annos.value);
@@ -139,83 +184,5 @@ peruuta.addEventListener("click", function () {
     .querySelector(".container-ruokavalinta")
     .setAttribute("id", "hidden");
 });
+teeViikonpäivät();
 teeRivi();
-
-/// Input Type Reset
-
-/*
-
-TILAUSTEN HALLINTA
-
-*/
-
-// TILAUS MOCKDATA
-
-const tilaukset = [
-  {
-    tilaus_id: 1,
-    tilausnro: 852,
-    tilattu_aika: 10,
-    nouto_aika: "11:30",
-    tilauksen_tila: "Odottaa noutoa",
-  },
-  {
-    tilaus_id: 2,
-    tilausnro: 548500,
-    tilattu_aika: 11,
-    nouto_aika: 12,
-    tilauksen_tila: "Työn alla",
-  },
-];
-
-const tilaustaulukko = document.querySelector("#tbody-kohde-tilaukset"); // mihin lisätään
-
-// TILAUKSIEN TAULUKOLLE RIVIT RAKENNUS
-
-const buildTilaustaulukko = (tilaus) => {
-  return `
-  <tr id="tilaus-${tilaus.tilaus_id}">
-    <td>${tilaus.tilausnro}</td>
-    <td>${tilaus.tilattu_aika}</td>
-    <td>${tilaus.tilauksen_tila}</td>
-    <td>${tilaus.nouto_aika}</td>
-    <td><button id="poista-${tilaus.tilaus_id}" class="del-btn">x</button></td>
-  </tr>
-  `;
-};
-
-// TILAUKSEN POISTAMISEN FUNKTIO
-const poistaTilausFunktio = (tilaus) => {
-  const poistaTilausBTN = document.querySelector(`#poista-${tilaus.tilaus_id}`);
-
-  poistaTilausBTN.addEventListener("click", function () {
-    console.log(`Poistetaan tilaus ${tilaus.tilaus_id}`);
-
-    // etitään poistettavan tilauksen indeksi -> tilaus id
-    const tilausIndex = tilaukset.findIndex(
-      (item) => item.tilaus_id === tilaus.tilaus_id
-    );
-
-    // poista tilaus taulukosta
-    tilaukset.splice(tilausIndex, 1);
-
-    // poista rivi html taulukosta
-    const rivi = document.querySelector(`#tilaus-${tilaus.tilaus_id}`);
-    tilaustaulukko.removeChild(rivi);
-  });
-};
-
-// LISÄTÄÄN OMAT RIVIT TILAUKSILLE
-
-const teeRivitTilauksille = () => {
-  // käydään tilaukset taulukko läpi
-  for (const tilaus of tilaukset) {
-    // lisätään joka riville oma tilaus
-    let taulukkoHTML = buildTilaustaulukko(tilaus);
-    tilaustaulukko.insertAdjacentHTML("beforeend", taulukkoHTML);
-    // Lisätään riville tilauksen poisto
-    poistaTilausFunktio(tilaus);
-  }
-};
-
-teeRivitTilauksille();
