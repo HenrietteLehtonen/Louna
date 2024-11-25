@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./styles/hallinta.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="container otsikko">
+          <h1>Ruokalista</h1>
+          <h2>Ruokalistan hallinta</h2>
+        </div>
+
+        <!-- 
+          *******************************
+      
+                 Ruokalistan hallinta
+      
+          *******************************  
+          -->
+        <div class="container ruoka-hallinta">
+          <button class="btn" id="addBtn">Lisää annos</button>
+          <button class="btn" id="deleteAllBtn">Poista kaikki</button>
+
+          <!-- FORMI  -->
+          <!-- <div class="container-ruokavalinta"> -->
+          <div class="container-ruokavalinta" id="hidden">
+            <form>
+              <!-- Päivän valinta -->
+              <div class="chooseDay-container">
+                <label for="päivä-valitsin" class="label-otsikko"
+                  >Valitse päivä:</label
+                >
+                <select name="päivä-valitsin" id="päivä-valitsin">
+                  <option value="Maanantai">Maanantai</option>
+                  <option value="Tiistai">Tiistai</option>
+                  <option value="Keskiviikko">Keskiviikko</option>
+                  <option value="Torstai">Torstai</option>
+                  <option value="Perjantai">Perjantai</option>
+                </select>
+              </div>
+              <!-- Annoksen nimi -->
+
+              <div class="annos-container">
+                <label for="annos" class="label-otsikko">Annoksen nimi:</label
+                ><br />
+                <input type="text" id="annos" name="annos" required /><br />
+              </div>
+              <!-- Allergeenit -->
+              <h2>Allergeenit:</h2>
+              <div class="checkbox-container">
+                <div class="allerg">
+                  <label for="G">G</label>
+                  <input class="checkbox" type="checkbox" name="G" id="G" />
+                </div>
+
+                <div class="allerg">
+                  <label for="VL">VL</label>
+                  <input class="checkbox" type="checkbox" name="VL" id="VL" />
+                </div>
+
+                <div class="allerg">
+                  <label for="L">L</label>
+                  <input class="checkbox" type="checkbox" name="L" id="L" />
+                </div>
+
+                <div class="allerg">
+                  <label for="M">M</label>
+                  <input class="checkbox" type="checkbox" name="M" id="M" />
+                </div>
+
+                <div class="allerg">
+                  <label for="K">K</label>
+                  <input class="checkbox" type="checkbox" name="K" id="K" />
+                </div>
+
+                <div class="allerg">
+                  <label for="SO">SO</label>
+                  <input class="checkbox" type="checkbox" name="SO" id="SO" />
+                </div>
+
+                <div class="allerg">
+                  <label for="VEG">VEG</label>
+                  <input class="checkbox" type="checkbox" name="VEG" id="VEG" />
+                </div>
+                <div class="allerg">
+                  <label for="EI">Ei Allergeeneja</label>
+                  <input class="checkbox" type="checkbox" name="-" id="EI" />
+                </div>
+              </div>
+              <!-- Hinta -->
+              <div class="annos-container price-container">
+                <label for="price" class="label-otsikko">Hinta:</label><br />
+                <input
+                  class="price"
+                  type="text"
+                  name="price"
+                  id="price"
+                  required
+                />
+              </div>
+            </form>
+            <button class="form-btn" id="save-btn">Lisää</button>
+            <button class="form-btn" id="peruuta">Peruuta</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annoksien taulukko -->
+
+      <div class="container annokset-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Päivä</th>
+              <th>Annos</th>
+              <th>Allergeenit</th>
+              <th>Hinta</th>
+              <th>Poista</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-kohde">
+            <!-- Tänne rakentuu taulukko -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="button-container">
+        <button class="day-btn" data-day="Maanantai">MA</button>
+        <button class="day-btn" data-day="Tiistai">TI</button>
+        <button class="day-btn" data-day="Keskiviikko">KE</button>
+        <button class="day-btn" data-day="Torstai">TO</button>
+        <button class="day-btn" data-day="Perjantai">PE</button>
+      </div>
+
+      <div class="annokset-container container">
+        <h1>testitaulukko</h1>
+        <table id="table-kohde">
+          <thead>
+            <tr colspan="3"></tr>
+          </thead>
+          <tbody>
+            <!-- tänne -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script>
+      "use strict";
+      const lista = [
+        {
+          day: "Maanantai",
+          id: 1,
+          annos: "Lihapullat ja muusi",
+          allergeenit: ["V", "L", "G"],
+          hinta: 5,
+        },
+        {
+          day: "Maanantai",
+          id: 2,
+          annos: "Lohisoppa",
+          allergeenit: ["G", "M"],
+          hinta: 3,
+        },
+        {
+          day: "Tiistai",
+          id: 3,
+          annos: "Fish & Chips",
+          allergeenit: ["VL", "M", "SO"],
+          hinta: 3,
+        },
+      ];
+      console.log(lista);
+
+      const kohde = document.querySelector("#tbody-kohde");
+      const kohde2 = document.querySelector("#table-kohde");
+
+      // testilista
+
+      const teeTaulukko = () => {
+        for (const päivänRuuat of lista) {
+          const html = `
+                 <tr>
+                    <th colspan=3>${päivänRuuat.day}</th>
+                </tr>
+                <tr>
+                    <td>
+                    ${päivänRuuat.annos}<br>
+                    ${päivänRuuat.allergeenit}
+                    </td>
+                    <td> ${päivänRuuat.hinta}</td>
+                    </tr>
+                `;
+          kohde2.insertAdjacentHTML("beforeend", html);
+        }
+      };
+
+      const showMenu = () => {
+        // haetaan napit
+
+        const dayButtons = document.querySelectorAll(".day-btn");
+
+        // napeille event listener
+
+        dayButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // tyhjennetään taulukko
+            kohde2.innerHTML = "";
+
+            // päivä napille
+            const day = this.getAttribute("data-day"); // this -> napin attribuutti
+            // Lisää päivän nimi taulukon alkuun
+            const paivaRivi = `
+                <tr>
+                <th colspan="3" style="text-align: left;">${day}</th>
+                </tr>
+            `;
+            kohde2.insertAdjacentHTML("beforeend", paivaRivi);
+            // Suodatetaan ruokalista valitun päivän mukaan
+            const päivänRuuat = lista.filter((ruoka) => ruoka.day === day);
+
+            päivänRuuat.forEach((ruoka) => {
+              const html = `
+                <tr>
+                    <td>${ruoka.annos}<br>${ruoka.allergeenit.join(", ")}</td>
+                    <td>${ruoka.hinta} €</td>
+                    <td><button>+</button></td>
+                </tr>
+                `;
+              kohde2.insertAdjacentHTML("beforeend", html);
+            });
+          });
+        });
+      };
+      showMenu();
+
+      // NAPPI LISÄÄ ANNOS
+
+      const addAnnos = document.querySelector("#addBtn");
+      addAnnos.addEventListener("click", function () {
+        console.log("Lisää annos nappia painettu");
+        document.querySelector("#hidden").removeAttribute("id");
+      });
+
+      // POISTA KAIKKI ANNOKSET
+
+      const delAll = document.querySelector("#deleteAllBtn");
+      delAll.addEventListener("click", function () {
+        console.log("Poista kaikki");
+        lista.splice(0, lista.length);
+        // Poista kaikki annosrivit
+        const annosRivit = document.querySelectorAll("tr.annos-rivi");
+        annosRivit.forEach((rivi) => rivi.remove());
+        console.log("Kaikki annoksett poistettu");
+      });
+
+      // VIIKONPÄIVÄT TAULUKKOA VARTEN
+      const viikonpäivät = [
+        "Maanantai",
+        "Tiistai",
+        "Keskiviikko",
+        "Torstai",
+        "Perjantai",
+      ];
+
+      // tehdään viikonpäivät valmiiksi
+      const teeViikonpäivät = () => {
+        for (const päivä of viikonpäivät) {
+          const päiväRivi = document.createElement("tr");
+          päiväRivi.classList.add("päivä-rivi");
+          päiväRivi.setAttribute("data-päivä", päivä);
+          päiväRivi.innerHTML = `
+          <td colspan="1">${päivä}</td>
+        `;
+          kohde.appendChild(päiväRivi);
+        }
+      };
+
+      // // TAULUKON LUONTI
+
+      const buildHTML = (menu) => {
+        return `
+            <tr id="tr-${menu.id}" class="annos-rivi" data-päivä="${menu.day}">
+            <td></td>
+              <td>${menu.annos}</td>
+              <td>${menu.allergeenit.join(", ")}</td>
+              <td>${menu.hinta}</td>
+              <td><button id="del-${menu.id}" class="del-btn">x</button></td>
+            </tr>
+      `;
+      };
+      /*************************** */
+
+      // TIETYN ANNOKSEN POISTAMINEN
+
+      const deletebuttonlistener = (menu) => {
+        const del = document.querySelector(`#del-${menu.id}`);
+        del.addEventListener("click", function () {
+          const annosIndex = lista.findIndex(function (deleteItem) {
+            return deleteItem.id === menu.id;
+          });
+          lista.splice(annosIndex, 1);
+          kohde.removeChild(document.querySelector(`#tr-${menu.id}`));
+          console.log("Poistettu: ", +`${menu.id}`);
+        });
+      };
+      /*************************** */
+
+      // JOKAISELLE ANNOKSELLE OMA RIVI
+      const teeRivi = () => {
+        for (const menu of lista) {
+          console.log(menu.id);
+          console.log(menu.annos);
+
+          let html = buildHTML(menu); // kutsutaan taulukon luontia
+
+          // haetaan oikea päivä rivi mihin lisätään
+          const päiväRivi = document.querySelector(
+            `.päivä-rivi[data-päivä="${menu.day}"]`
+          );
+          päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
+
+          deletebuttonlistener(menu); // lisätään deletebutton listener riveille
+        }
+      };
+      /*************************** */
+
+      // ANNOKSEN LISÄÄMINEN
+      //
+
+      const save = document.querySelector("#save-btn");
+      save.addEventListener("click", function () {
+        // Jos lista on tyhjä, aloita id 1, muuten jatka seuraavalla numerolla
+        let id;
+        if (lista.length > 0) {
+          id = lista[lista.length - 1].id + 1;
+        } else {
+          id = 1;
+        }
+
+        // allergeenit taulukoksi
+        const selectedAllergens = Array.from(
+          document.querySelectorAll(".checkbox:checked")
+        ).map((checkbox) => checkbox.name);
+
+        // muutetaan hinta numeroksi
+        const hintaNumeroksi = Number(document.querySelector("#price").value);
+
+        // alustetaan menu objektiksi
+        let menu = {
+          day: document.querySelector("#päivä-valitsin").value,
+          id: id,
+          annos: document.querySelector("#annos").value,
+          allergeenit: selectedAllergens,
+          hinta: hintaNumeroksi,
+        };
+
+        // tsekataan onko valuet tyhjjiä annoksen lisäämisessä, jos on huomautetaan !
+        if (menu.annos === "" || menu.hinta < 1) {
+          alert("Täytä kentät");
+        } else {
+          let html = buildHTML(menu);
+          const päiväRivi = document.querySelector(
+            `.päivä-rivi[data-päivä="${menu.day}"]`
+          );
+          päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
+
+          // myös toiseen taulukkoon
+          const kohde2 = document.querySelector("#table-kohde");
+          kohde2.insertAdjacentHTML("beforeend", html);
+
+          lista.push(menu);
+          console.log(menu.day);
+          console.log(menu.annos);
+          console.log(typeof menu.hinta);
+          console.log(annos.value);
+          console.log(Object.values(menu));
+          deletebuttonlistener(menu);
+
+          // tyhjennetään formi annoksen lisäämisen jälkeen
+          // TYHJENNÄ FORM
+          document.querySelector("#annos").value = "";
+          document.querySelector("#price").value = "";
+          document
+            .querySelectorAll(".checkbox")
+            .forEach((checkbox) => (checkbox.checked = false));
+        }
+      });
+
+      // PERUUTA
+      const peruuta = document.querySelector("#peruuta");
+      peruuta.addEventListener("click", function () {
+        console.log("Peruuta nappia painettu");
+        document
+          .querySelector(".container-ruokavalinta")
+          .setAttribute("id", "hidden");
+      });
+      teeViikonpäivät();
+      teeRivi();
+    </script>
+  </body>
+</html>

@@ -1,5 +1,7 @@
 "use strict";
 
+const kohde = document.querySelector("#tbody-kohde");
+
 // NAPPI LISÄÄ ANNOS
 
 const addAnnos = document.querySelector("#addBtn");
@@ -14,40 +16,73 @@ const delAll = document.querySelector("#deleteAllBtn");
 delAll.addEventListener("click", function () {
   console.log("Poista kaikki");
   lista.splice(0, lista.length);
-  kohde.innerHTML = "";
-  console.log(lista);
+  // Poista kaikki annosrivit
+  const annosRivit = document.querySelectorAll("tr.annos-rivi");
+  annosRivit.forEach((rivi) => rivi.remove());
+  console.log("Kaikki annoksett poistettu");
 });
 
 const lista = [
   {
+    day: "Maanantai",
     id: 1,
     annos: "Lihapullat ja muusi",
     allergeenit: ["V", "L", "G"],
     hinta: 5,
   },
   {
+    day: "Maanantai",
     id: 2,
     annos: "Lohisoppa",
     allergeenit: ["G", "M"],
     hinta: 3,
   },
+  {
+    day: "Tiistai",
+    id: 3,
+    annos: "Fish & Chips",
+    allergeenit: ["VL", "M", "SO"],
+    hinta: 3,
+  },
 ];
 console.log(lista);
 
-const kohde = document.querySelector("#tbody-kohde");
+// VIIKONPÄIVÄT TAULUKKOA VARTEN
+const viikonpäivät = [
+  "Maanantai",
+  "Tiistai",
+  "Keskiviikko",
+  "Torstai",
+  "Perjantai",
+];
+
+// tehdään viikonpäivät valmiiksi
+const teeViikonpäivät = () => {
+  for (const päivä of viikonpäivät) {
+    const päiväRivi = document.createElement("tr");
+    päiväRivi.classList.add("päivä-rivi");
+    päiväRivi.setAttribute("data-päivä", päivä);
+    päiväRivi.innerHTML = `
+      <td colspan="1">${päivä}</td>
+    `;
+    kohde.appendChild(päiväRivi);
+  }
+};
 
 // // TAULUKON LUONTI
 
 const buildHTML = (menu) => {
   return `
-        <tr id="tr-${menu.id}">
+        <tr id="tr-${menu.id}" class="annos-rivi" data-päivä="${menu.day}">
+        <td></td>
           <td>${menu.annos}</td>
-          <td>${menu.allergeenit}</td>
+          <td>${menu.allergeenit.join(", ")}</td>
           <td>${menu.hinta}</td>
           <td><button id="del-${menu.id}" class="del-btn">x</button></td>
         </tr>
   `;
 };
+/*************************** */
 
 // TIETYN ANNOKSEN POISTAMINEN
 
@@ -59,24 +94,33 @@ const deletebuttonlistener = (menu) => {
     });
     lista.splice(annosIndex, 1);
     kohde.removeChild(document.querySelector(`#tr-${menu.id}`));
-    console.log("Poistettu: ", +`${menu.id}`);
+    console.log(`Poistettu: ${menu.id}`);
   });
 };
+/*************************** */
 
-// Jokaiselle annnokselle oma rivi
+// JOKAISELLE ANNOKSELLE OMA RIVI
 const teeRivi = () => {
   for (const menu of lista) {
     console.log(menu.id);
     console.log(menu.annos);
 
-    let html = buildHTML(menu);
-    kohde.insertAdjacentHTML("beforeend", html);
+    let html = buildHTML(menu); // kutsutaan taulukon luontia
 
-    deletebuttonlistener(menu);
+    // haetaan oikea päivä rivi mihin lisätään
+    const päiväRivi = document.querySelector(
+      `.päivä-rivi[data-päivä="${menu.day}"]`
+    );
+    päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
+
+    deletebuttonlistener(menu); // lisätään deletebutton listener riveille
   }
 };
+/*************************** */
 
 // ANNOKSEN LISÄÄMINEN
+//
+
 const save = document.querySelector("#save-btn");
 save.addEventListener("click", function () {
   // Jos lista on tyhjä, aloita id 1, muuten jatka seuraavalla numerolla
@@ -87,33 +131,49 @@ save.addEventListener("click", function () {
     id = 1;
   }
 
-  // allergeeni taulukko
+  // allergeenit taulukoksi
   const selectedAllergens = Array.from(
     document.querySelectorAll(".checkbox:checked")
-  ).map((checkbox) => checkbox.id);
+  ).map((checkbox) => checkbox.name);
 
+  // muutetaan hinta numeroksi
+  const hintaNumeroksi = Number(document.querySelector("#price").value);
+
+  // alustetaan menu objektiksi
   let menu = {
+    day: document.querySelector("#päivä-valitsin").value,
     id: id,
     annos: document.querySelector("#annos").value,
     allergeenit: selectedAllergens,
-    hinta: document.querySelector("#price").value,
+    hinta: hintaNumeroksi,
   };
 
-  let html = buildHTML(menu);
-  kohde.insertAdjacentHTML("beforeend", html);
+  // tsekataan onko valuet tyhjjiä annoksen lisäämisessä, jos on huomautetaan !
+  if (menu.annos === "" || menu.hinta < 1) {
+    alert("Täytä kentät");
+  } else {
+    let html = buildHTML(menu);
+    const päiväRivi = document.querySelector(
+      `.päivä-rivi[data-päivä="${menu.day}"]`
+    );
+    päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
 
-  lista.push(menu);
-  console.log(menu.id);
-  console.log(menu.annos);
-  deletebuttonlistener(menu);
+    lista.push(menu);
+    console.log(menu.day);
+    console.log(menu.annos);
+    console.log(typeof menu.hinta);
+    console.log(annos.value);
+    console.log(Object.values(menu));
+    deletebuttonlistener(menu);
 
-  // tyhjennetään formi
-  // TYHJENNÄ FORM
-  document.querySelector("#annos").value = "";
-  document.querySelector("#price").value = "";
-  document
-    .querySelectorAll(".checkbox")
-    .forEach((checkbox) => (checkbox.checked = false));
+    // tyhjennetään formi annoksen lisäämisen jälkeen
+    // TYHJENNÄ FORM
+    document.querySelector("#annos").value = "";
+    document.querySelector("#price").value = "";
+    document
+      .querySelectorAll(".checkbox")
+      .forEach((checkbox) => (checkbox.checked = false));
+  }
 });
 
 // PERUUTA
@@ -124,4 +184,5 @@ peruuta.addEventListener("click", function () {
     .querySelector(".container-ruokavalinta")
     .setAttribute("id", "hidden");
 });
+teeViikonpäivät();
 teeRivi();
