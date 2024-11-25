@@ -10,75 +10,69 @@
   <body>
     <div class="container">
       <div class="row">
-        <!-- Vahvistetut tilaukset -->
-        <div class="column" id="order-summary-container">
+        <!-- Vasemmanpuoleinen alue: Tilaukset ja osoite -->
+        <div class="column left-column" id="order-summary-container">
           <h1>Vahvistetut tilaukset</h1>
           <div id="order-summary">
             <ul id="order-items">
+              <!-- Ostoskorin tuotteet lisätään tänne -->
             </ul>
             <div id="total-price">
-              <p>Kokonaishinta: </p> 
+              <p>Kokonaishinta: </p>
             </div>
             <button id="back-button" class="btn">Takaisin Etusivulle</button>
           </div>
+
+          <!-- Osoitetiedot -->
+          <div id="payment-form-container">
+            <form action="#">
+              <h3 class="title">Address</h3>
+              <div class="input-box">
+                <span>Full Name :</span>
+                <input type="text" placeholder="Matti Meikäläinen">
+              </div>
+              <div class="input-box">
+                <span>Address :</span>
+                <input type="text" placeholder="Room - Street - Locality">
+              </div>
+              <div class="input-box">
+                <span>City :</span>
+                <input type="text" placeholder="Kaupunki">
+              </div>
+              <div class="flex">
+                <div class="input-box">
+                  <span>Country :</span>
+                  <input type="text" placeholder="Maa">
+                </div>
+                <div class="input-box">
+                  <span>Zip Code:</span>
+                  <input type="number" placeholder="123 456">
+                </div>
+              </div>
+              <button type="submit" class="btn">Tallenna</button>
+            </form>
+          </div>
         </div>
 
-        <!-- Maksutiedot ja osoite -->
-        <div class="column" id="payment-form-container">
-          <form action="#">
-            <h3 class="title">Billing Address</h3>
-            <div class="input-box">
-              <span>Full Name :</span>
-              <input type="text" placeholder="Matti Meikäläinen">
-            </div>
-            <div class="input-box">
-              <span>Address :</span>
-              <input type="text" placeholder="Room - Street - Locality">
-            </div>
-            <div class="input-box">
-              <span>City :</span>
-              <input type="text" placeholder="Kaupunki">
-            </div>
-            <div class="flex">
-              <div class="input-box">
-                <span>Country :</span>
-                <input type="text" placeholder="Maa">
-              </div>
-              <div class="input-box">
-                <span>Zip Code:</span>
-                <input type="number" placeholder="123 456">
-              </div>
-            </div>
+        <!-- Oikeanpuoleinen alue: Kiitosviesti ja muut tiedot -->
+        <div class="column right-column">
+          <div class="thank-you-message">
+            <h2>Kiitos tilauksestasi!</h2>
+            <p>Arvostamme suuresti valintaasi ostaa tuotteemme. Tilauksesi on vastaanotettu ja käsitellään mahdollisimman nopeasti.</p>
 
-            <h3 class="title">Payment</h3>
-            <div class="input-box">
-              <span>Cards Accepted :</span>
-              <img src="kuvat/Payment-Icons.jpg" alt="Accepted cards">
-            </div>
-            <div class="input-box">
-              <span>Name On Card :</span>
-              <input type="text" placeholder="Mr. Matti Meikäläinen">
-            </div>
-            <div class="input-box">
-              <span>Credit Card Number :</span>
-              <input type="number" placeholder="1111 2222 3333 4444">
-            </div>
-            <div class="input-box">
-              <span>Exp. Month :</span>
-              <input type="text" placeholder="August">
-            </div>
-            <div class="flex">
-              <div class="input-box">
-                <span>Exp. Year :</span>
-                <input type="number" placeholder="2025">
-              </div>
-              <div class="input-box">
-                <span>CVV :</span>
-                <input type="number" placeholder="123">
-              </div>
-            </div>
-            <button type="submit" class="btn">Tallenna</button>
-          </form>
+            <h3>Tilaus käsittelyaika</h3>
+            <p>Tilauksesi toimitetaan viimeistään <strong>40 min tilausajasta</strong> tilauksesta.</p>
+
+            <h3>Ota yhteyttä</h3>
+            <p>Jos sinulla on kysyttävää tilauksestasi, ota rohkeasti yhteyttä asiakaspalveluumme:</p>
+            <ul>
+              <li>Puhelin: <a href="tel:+358123456789">+358 12 345 6789</a></li>
+              <li>Sähköposti: <a href="mailto:asiakaspalvelu@yritys.fi">asiakaspalvelu@yritys.fi</a></li>
+            </ul>
+
+            <h3>Erikoistarjouksia</h3>
+            <p>Muistathan tilata uutiskirjeemme saadaksesi ensimmäisenä tiedot erikoistarjouksista ja kampanjoista!</p>
+          </div>
         </div>
       </div>
     </div>

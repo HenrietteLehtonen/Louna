@@ -1,29 +1,32 @@
-// Sivun alustus ja elementtien haku
-document.addEventListener("DOMContentLoaded", () => {
-  const orderItemsElement = document.getElementById("order-items");
-  const totalPriceElement = document.getElementById("total-price");
-  const backButton = document.getElementById("back-button");
-  
-  // Vahvistettujen tilausten käsittely
-  const vahvistetutTilaukset = JSON.parse(localStorage.getItem("vahvistetutTilaukset"));
+document.addEventListener("DOMContentLoaded", function() {
+  // Haetaan ostoskorin tiedot localStoragesta
+  const ostoskori = JSON.parse(localStorage.getItem("ostoskori")) || [];
+  const orderItemsList = document.getElementById('order-items'); // Kohdistetaan tilauksen lista
 
-  if (vahvistetutTilaukset && vahvistetutTilaukset.length > 0) {
-    let totalPrice = 0;
-
-    vahvistetutTilaukset.forEach(item => {
-      const itemElement = document.createElement("li");
-      itemElement.textContent = `${item.nimi} - ${item.hinta.muu.toFixed(2)} € x ${item.maara} = ${(item.hinta.muu * item.maara).toFixed(2)} €`;
-      orderItemsElement.appendChild(itemElement);
-      totalPrice += item.hinta.muu * item.maara;
+  // Tarkistetaan, onko ostoskoriin tuotteita
+  if (ostoskori.length > 0) {
+    ostoskori.forEach(item => {
+      const listItem = document.createElement('li');
+      const itemPrice = parseFloat(item.hinta.muu).toFixed(2); // Lasketaan tuotteen hinta
+      listItem.textContent = `${item.nimi} - ${item.maara} x ${itemPrice} €`;
+      orderItemsList.appendChild(listItem);
     });
 
-    totalPriceElement.textContent = `KOKONAISHINTA: ${totalPrice.toFixed(2)} €`;
+    // Lasketaan kokonaishinta
+    const totalPrice = ostoskori.reduce((total, item) => total + (parseFloat(item.hinta.muu) * item.maara), 0);
+    const totalPriceElement = document.getElementById('total-price');
+    totalPriceElement.innerHTML = `<p>Kokonaishinta: ${totalPrice.toFixed(2)} €</p>`;
   } else {
-    orderItemsElement.innerHTML = "<p>Ei vahvistettuja tilauksia.</p>";
+    // Jos ostoskori on tyhjä, näytetään ilmoitus
+    orderItemsList.innerHTML = '<p>Ostoskorisi on tyhjä.</p>';
   }
 
-  // Takaisin-painikkeen toiminnallisuus
-  backButton.addEventListener("click", () => {
-    window.location.href = "index.html";
-  });
+  // Takaisin Etusivulle -painikkeen toiminto
+  const backButton = document.getElementById('back-button');
+  if (backButton) {
+    backButton.addEventListener('click', function() {
+      // Siirtyy etusivulle (index.html)
+      window.location.href = "index.html"; // Muokkaa linkki oikeaksi etusivuksesi
+    });
+  }
 });
