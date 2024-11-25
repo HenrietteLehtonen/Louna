@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Ostoskorin avaaminen
 document.addEventListener("DOMContentLoaded", () => {
   const customModal = document.getElementById("custom-modal");
-  const openCartButton = document.getElementById("open-modal-btn"); // Vaihdettu avaamaan oikea painike
+  const openCartButton = document.getElementById("open-modal-btn"); 
 
   if (openCartButton) {
     openCartButton.addEventListener("click", () => {
@@ -120,20 +120,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Tuotteen lisääminen ostoskoriin
+
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("add-btn")) {
-    // Find the <tr> element that contains the clicked button
+  
     const row = event.target.closest("tr");
 
-    // Get the text content of the first <td> (which contains the food name and allergens)
-    const ruokaNimi = row.querySelector("td").childNodes[0].textContent.trim(); // Get text from the first child node
+    
+    const ruokaNimi = row.querySelector("td").childNodes[0].textContent.trim(); 
 
-    // Get the price text from the second <td> in the same row
+ 
     const hintaText = row.querySelectorAll("td")[1].textContent;
 
-    console.log("Ruoka Nimi: ", ruokaNimi); // Logs the food name
-    console.log("Hinta: ", hintaText); // Logs the price information
+    console.log("Ruoka Nimi: ", ruokaNimi); 
+    console.log("Hinta: ", hintaText); 
 
     const parsedHintaText = hintaText.split("/")[0].trim();
     const hinta = parseFloat(
