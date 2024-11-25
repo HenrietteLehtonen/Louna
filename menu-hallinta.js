@@ -94,7 +94,7 @@ const deletebuttonlistener = (menu) => {
     });
     lista.splice(annosIndex, 1);
     kohde.removeChild(document.querySelector(`#tr-${menu.id}`));
-    console.log("Poistettu: ", +`${menu.id}`);
+    console.log(`Poistettu: ${menu.id}`);
   });
 };
 /*************************** */

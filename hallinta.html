@@ -169,9 +169,9 @@
         </div>
 
         <!-- etsi tilaus -->
-        <div class="container tilaus">
+        <div class="container tilaus-container">
           <h2>Muokkaa tilausta</h2>
-          <div class="container">
+          <div class="container etsi-tilaus">
             <label for="etsi-tilaus">Etsi tilaus:</label>
             <input
               type="search"
@@ -181,10 +181,10 @@
             />
             <button id="etsi-tilaus-btn">Etsi</button>
           </div>
-          <p id="p-kohde">Tilausnumero :</p>
-          <br />
+          <p id="tilausnumero-p-kohde">Tilausnumero:</p>
           <label for="tilauksen-tila">Tilauksen tila:</label>
           <select name="tilauksen-tila" id="tilauksen-tila">
+            <option value="Vastaanotettu"></option>
             <option value="Vastaanotettu">Vastaanotettu</option>
             <option value="Työn alla">Työn alla</option>
             <option value="Odottaa noutoa">Odottaa noutoa</option>
@@ -202,7 +202,7 @@
             <thead>
               <tr>
                 <th>Tilausnumero</th>
-                <th>Tilattu aika</th>
+                <th>Tilaus tehty klo</th>
                 <th>Tila</th>
                 <th>Noutoaika</th>
                 <th>Poista tilaus</th>
