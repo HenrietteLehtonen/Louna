@@ -135,8 +135,18 @@ ANNOKSEN LISÄYS  */
   display: none;
 }
 
-.annos-container {
+.annos-container,
+.chooseDay-container {
   margin: 30px auto;
+}
+
+.chooseDay-container {
+  display: flex;
+  flex-direction: column;
+}
+.chooseDay-container select {
+  width: 200px;
+  font-size: 20px;
 }
 
 .label-otsikko,
@@ -166,9 +176,6 @@ ANNOKSEN LISÄYS  */
   align-items: center;
 }
 
-label {
-  font-size: 20px;
-}
 input[type="checkbox"] {
   /* margin-top: 5px; */
 }
@@ -193,6 +200,7 @@ input[type="checkbox"] {
 /* 
 TAULUKKO 
 */
+
 .annokset-container table {
   /* margin: 20px; */
   border: red solid 1px;
@@ -218,6 +226,9 @@ th {
 td {
   text-align: center;
 }
+.päivä-rivi > td {
+  font-weight: bolder;
+}
 
 .del-btn {
   width: 100%;
@@ -228,4 +239,37 @@ td {
 }
 .del-btn:hover {
   background-color: var(--gray);
+}
+
+/* TILAUSTENHALLINTA */
+.tilaukset {
+  margin-top: 50px;
+}
+
+/* .tilaus-container {
+  font-size: 20px;
+} */
+.etsi-tilaus {
+  margin-bottom: 20px;
+}
+#tilausnumero-p-kohde {
+  font-size: 22px;
+}
+
+.tilaus-container label {
+  font-size: 22px;
+  padding: 10px 10px 10px 0px;
+}
+
+.tilaus-container input {
+  font-size: 18px;
+}
+.tilaus-container select {
+  font-size: 18px;
+  margin-right: 10px;
+}
+.tilaus-container button {
+  font-size: 18px;
+  margin: 0 10px;
+  padding: 0 10px;
 }
