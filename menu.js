@@ -93,11 +93,56 @@ const ruokaLista = [
 const today = new Date().getDay();
 console.log(today);
 
+const viikonpäivät = [
+  "Sunnuntai", // getDay() = 0
+  "Maanantai", // getDay() = 1
+  "Tiistai", // getDay() = 2
+  "Keskiviikko",
+  "Torstai",
+  "Perjantai",
+  "Lauantai",
+];
+
 /// NÄYTÄ PÄIVÄKOHTAINEN RUOKALISTA FUNKTIO
 
 const showMenu = () => {
-  // haetaan napit
+  // Näytetään päivän menu automaattisesti
 
+  const tämäpäivä = viikonpäivät[today];
+  console.log(tämäpäivä);
+
+  // lisätään funktio näyttämään tämän päivän menu automaattisesti
+  const näytäMenuAutomaattisesti = (day) => {
+    const lista = ruokaLista.find((lista) => lista.day === day); // etitään ruokalistan päivä
+
+    // RUOKALISTA TAULUKON LUONTI
+    if (lista) {
+      const html = `
+        <tr>
+          <th colspan=3>${lista.day}</th>
+        </tr>
+        <tr>
+          <td>
+            ${lista.annokset.annos1.nimi}<br>
+            ${lista.annokset.annos1.allergeenit}
+          </td>
+          <td>${lista.annokset.annos1.hinta.opiskelija}€ / ${lista.annokset.annos1.hinta.muu} €</td>
+          <td><button class="add-btn">+</button></td>
+        </tr>
+        <tr>
+          <td>
+            ${lista.annokset.annos2.nimi}<br>
+            ${lista.annokset.annos2.allergeenit}</td>
+            <td>${lista.annokset.annos2.hinta.opiskelija}€ / ${lista.annokset.annos2.hinta.muu} €</td>
+            <td><button class="add-btn">+</button></td>
+        </tr>
+      `;
+      kohde.insertAdjacentHTML("beforeend", html);
+    }
+  };
+  näytäMenuAutomaattisesti(tämäpäivä);
+
+  // haetaan napit
   const dayButtons = document.querySelectorAll(".day-btn");
 
   // napeille event listener
@@ -109,41 +154,16 @@ const showMenu = () => {
 
       // haetaan ruokalistat
       const day = this.getAttribute("data-day"); // this -> napin attribuutti
-      const lista = ruokaLista.find((lista) => lista.day === day); // etitään ruokalistan päivä
+      näytäMenuAutomaattisesti(day);
 
-      // RUOKALISTA TAULUKON LUONTI
-      if (lista) {
-        const html = `
-          <tr>
-            <th colspan=3>${lista.day}</th>
-          </tr>
-          <tr>
-            <td>
-              ${lista.annokset.annos1.nimi}<br>
-              ${lista.annokset.annos1.allergeenit}
-            </td>
-            <td>${lista.annokset.annos1.hinta.opiskelija}€ / ${lista.annokset.annos1.hinta.muu} €</td>
-            <td><button class="add-btn">+</button></td>
-          </tr>
-          <tr>
-            <td>
-              ${lista.annokset.annos2.nimi}<br>
-              ${lista.annokset.annos2.allergeenit}</td>
-              <td>${lista.annokset.annos2.hinta.opiskelija}€ / ${lista.annokset.annos2.hinta.muu} €</td>
-              <td><button class="add-btn">+</button></td>
-          </tr>
-        `;
-        kohde.insertAdjacentHTML("beforeend", html);
+      // ruokalistan napeille alert
+      const addToCartButton = document.querySelectorAll(".add-btn");
 
-        // ruokalistan napeille alert
-        const addToCartButton = document.querySelectorAll(".add-btn");
-
-        addToCartButton.forEach((button) => {
-          button.addEventListener("click", function () {
-            console.log("debug");
-          });
+      addToCartButton.forEach((button) => {
+        button.addEventListener("click", function () {
+          alert("Lisätty");
         });
-      }
+      });
     });
   });
 };

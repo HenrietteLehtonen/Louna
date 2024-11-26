@@ -100,13 +100,13 @@ function paivitaOstoskori() {
     const confirmButton = document.createElement("button");
     confirmButton.textContent = "Vahvista ostos";
     confirmButton.classList.add("confirm-btn");
-  
+
     confirmButton.addEventListener("click", () => {
       localStorage.setItem("vahvistetutTilaukset", JSON.stringify(ostoskori));
       window.location.href = "tilaustiedot.html";
     });
-  
-    cartItems.parentElement.appendChild(confirmButton)
+
+    cartItems.parentElement.appendChild(confirmButton);
   }
 }
 // uusi Functio nappien toiminnalle
@@ -133,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       console.error("Sulje-nappia ei löytynyt!");
     }
-
   } else {
     console.error("Ostoskorin modaalia ei löytynyt!");
   }
@@ -142,8 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Ostoskorin avaaminen
 document.addEventListener("DOMContentLoaded", () => {
   const customModal = document.getElementById("custom-modal");
-  const openCartButton = document.getElementById("open-modal-btn"); 
-
+  const openCartButton = document.getElementById("open-modal-btn");
 
   // Ostoskorin avaaminen
   if (openCartButton) {
@@ -155,33 +153,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
 document.addEventListener("click", (event) => {
   console.log(event.target.parentElement.parentElement);
 
   if (event.target.classList.contains("add-btn")) {
-<<<<<<< HEAD
-    /* ! Muuta tominnalisuutta jotta data otetaan mokdatasta/tietokannasta
-    tällä hetkälla data hankitaan html tiedoston <p> elementistä ! */
-    const ruokaNimi = event.target.parentElement.parentElement
-      .querySelector("p") // HUOM EI TOIMI EINÄÄ !
-      .textContent.split("\n")[0];
-    const hintaText =
-      event.target.parentElement.previousElementSibling.textContent;
-=======
-  
     const row = event.target.closest("tr");
 
-    
-    const ruokaNimi = row.querySelector("td").childNodes[0].textContent.trim(); 
+    const ruokaNimi = row.querySelector("td").childNodes[0].textContent.trim();
 
- 
     const hintaText = row.querySelectorAll("td")[1].textContent;
 
-    console.log("Ruoka Nimi: ", ruokaNimi); 
-    console.log("Hinta: ", hintaText); 
-
->>>>>>> 20f661a993a965a6ed1a70240829e65d3637a05b
+    console.log("Ruoka Nimi: ", ruokaNimi);
+    console.log("Hinta: ", hintaText);
 
     const parsedHintaText = hintaText.split("/")[0].trim();
     const hinta = parseFloat(
