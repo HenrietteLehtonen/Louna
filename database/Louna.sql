@@ -66,13 +66,13 @@ INSERT INTO Ruokalista (nimi, day_name)
     ('tacos', 'Perjantai');
 
 INSERT INTO Allergeenit (tunniste, allergeeni)
-    VALUES ('G', 'gluteenoton'),
-    ('VL', 'vähälaktoosinen'),
-    ('L', 'laktoositon'),
-    ('M', 'maidoton'),
-    ('K', 'ei_sisällä_kananmunaa'),
-    ('SO', 'en_tiedä'),
-    ('VEG', 'vegaaninen'),
+    VALUES ('G', 'Gluteeniton'),
+    ('VL', 'Vähälaktoosinen'),
+    ('L', 'Laktoositon'),
+    ('M', 'Maidoton'),
+    ('K', 'Ei kananmunaa'),
+    ('SO', 'Soijaton'),
+    ('VEG', 'Vegaaninen'),
     ('EI', 'ei_allergeeneja');
 
 INSERT INTO Annokset (nimi, allerg_id, hinta, lista_id) 
