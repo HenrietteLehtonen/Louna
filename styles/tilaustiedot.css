@@ -1,9 +1,17 @@
+/* Yleiset tyylit */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
+/* Säiliö ja rivit */
 .container {
   display: flex;
   justify-content: space-between;
-  gap: 20px; 
-  padding: 20px; 
+  gap: 20px;
+  padding: 20px;
 }
 
 .row {
@@ -12,6 +20,7 @@
   width: 100%;
 }
 
+/* Sarakkeet */
 .column {
   flex: 1;
   background: #fff;
@@ -21,6 +30,7 @@
   margin: 10px;
 }
 
+/* Tilauksen yhteenveto */
 #order-summary-container h1,
 #order-summary-container p {
   font-size: 20px;
@@ -45,6 +55,26 @@
   margin-top: 15px;
 }
 
+#back-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #8175d3;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  font-size: 17px;
+  color: #fff;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#back-button:hover {
+  background: #6a5acd;
+}
+
+/* Osoitetiedot */
 .input-box {
   margin-bottom: 15px;
 }
@@ -69,26 +99,37 @@
   gap: 15px;
 }
 
-
-/*Maksu- ja osoitetiedot*/
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+/* Kiitosviesti ja tilauksen tiedot */
+.thank-you-message {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: #1f242d;
-  padding: 25px;
+.thank-you-message h2 {
+  color: #4CAF50;
+  font-size: 24px;
 }
 
+.thank-you-message h3 {
+  font-size: 18px;
+  margin-top: 15px;
+  color: #333;
+}
 
+.thank-you-message p {
+  font-size: 16px;
+  color: #555;
+}
+
+.thank-you-message a {
+  color: #8175d3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Maksu- ja osoitetiedot */
 .container form {
   width: 600px;
   padding: 40px;
@@ -125,12 +166,6 @@ form .row {
   border-radius: 6px;
   font-size: 15px;
 }
-.input-box img {
-  height: 100px;
-  margin-top: 2px;
-  filter: drop-shadow(0 0 1px #000);
-}
-
 
 .column .flex {
   display: flex;
@@ -146,7 +181,6 @@ form .btn {
   width: 100%;
   padding: 12px;
   background: #8175d3;
-  background: #8175d3;
   border: none;
   outline: none;
   border-radius: 6px;
@@ -161,26 +195,7 @@ form .btn:hover {
   background: #6a5acd;
 }
 
-#back-button {
-  display: block;
-  width: 100%; 
-  padding: 12px;
-  background: #8175d3; 
-  border: none;
-  outline: none;
-  border-radius: 6px; 
-  font-size: 17px;
-  color: #fff; 
-  margin-top: 20px; 
-  cursor: pointer;
-  transition: 0.5s; 
-}
-
-#back-button:hover {
-  background: #6a5acd; 
-}
-
-
+/* Footer */
 footer {
   height: 80px;
   width: 100vw;
@@ -189,6 +204,7 @@ footer {
   position: fixed;
   bottom: 0;
 }
+
 .footer-container {
   display: flex;
   justify-content: space-between;
@@ -196,5 +212,3 @@ footer {
   height: 80px;
   padding: 0 24px;
 }
-
-
