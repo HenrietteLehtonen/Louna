@@ -88,6 +88,11 @@ const ruokaLista = [
   },
 ];
 
+// DATE OBJEKTI
+
+const today = new Date().getDay();
+console.log(today);
+
 /// NÄYTÄ PÄIVÄKOHTAINEN RUOKALISTA FUNKTIO
 
 const showMenu = () => {
