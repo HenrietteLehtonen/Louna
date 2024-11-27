@@ -1,22 +1,23 @@
 @font-face {
   font-family: "Alumni Sans";
-  src: url(/fonts/Alumni_Sans/static/AlumniSans-Light.ttf) format("truetype");
+  src: url(../fonts/Alumni_Sans/AlumniSans-VariableFont_wght.ttf)
+    format("truetype");
 }
 
 @font-face {
   font-family: "Alumni Italic";
-  src: url(/fonts/Alumni_Sans/static/AlumniSans-LightItalic.ttf)
+  src: url(../fonts/Alumni_Sans/static/AlumniSans-LightItalic.ttf)
     format("truetype");
 }
 
 @font-face {
   font-family: "Alumni Bold";
-  src: url(/fonts/Alumni_Sans/static/AlumniSans-Medium.ttf) format("truetype");
+  src: url(../fonts/Alumni_Sans/static/AlumniSans-Medium.ttf) format("truetype");
 }
 
 @font-face {
   font-family: "Archivo Black";
-  src: url(/fonts/Archivo_Black/ArchivoBlack-Regular.ttf) format("truetype");
+  src: url(../fonts/Archivo_Black/ArchivoBlack-Regular.ttf) format("truetype");
 }
 
 * {
@@ -86,7 +87,7 @@ h3 {
   height: 32vh;
   /* background-color: #9dce98; */
   position: relative;
-  background-image: url(/kuvat/hero.png);
+  background-image: url(../kuvat/hero.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
