@@ -1,4 +1,4 @@
-// KÄÄNNETTY TYESCRIPT
+// KÄÄNNETTY TYPESCRIPT
 
 import { Menu } from "./types/menu";
 
@@ -115,6 +115,55 @@ const viikonpäivät: string[] = [
   "Perjantai",
   "Lauantai",
 ];
+
+const logInNavBtn = document.querySelector("#log-in") as HTMLButtonElement;
+const modal = document.querySelector("dialog") as HTMLDialogElement;
+const burgerMenu = document.querySelector("#burger-menu") as HTMLButtonElement;
+const burgerMenuContent = document.querySelector(
+  "#burger-menu-content"
+) as HTMLElement;
+
+// Modal display handling
+logInNavBtn.addEventListener("click", () => {
+  modal.showModal();
+});
+
+modal.addEventListener("click", () => {
+  modal.close();
+});
+// });
+// modal.addEventListener("focusout", (evt) => {
+//   // Close modal when out of focus
+//   if (!evt.relatedTarget?.closest(".menu-hold")) {
+//     modal.close();
+//   }
+// });
+
+//Burgermenu display handling
+burgerMenu.addEventListener("click", () => {
+  //Expand nav from burger menu
+  if (burgerMenuContent.style.display === "none") {
+    burgerMenuContent.style.display = "flex";
+    burgerMenuContent.focus();
+  } else {
+    burgerMenuContent.style.display = "none";
+  }
+});
+
+// sulkee burgermenun myös muualta klikkauksella
+burgerMenuContent.addEventListener("focusout", (evt: FocusEvent) => {
+  const relatedTarget = evt.relatedTarget as HTMLElement | null;
+  if (!relatedTarget || !relatedTarget.closest(".menu-hold")) {
+    burgerMenuContent.style.display = "none";
+  }
+});
+
+/*********
+ *
+ *
+ *  RUOKALISTAN NÄYTTÄMINEN
+ *
+ */
 
 // Näytetään päivän ruokalista
 const showMenu = (): void => {

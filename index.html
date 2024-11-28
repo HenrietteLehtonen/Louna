@@ -5,28 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/table.css" />
+    <link rel="stylesheet" href="./styles/dialog.css" />
     <link rel="stylesheet" href="./styles/ostoskori.css" />
     <script src="js/ostoskori.js" defer></script>
-    <!-- <script src="./menu.js" defer></script> -->
+
     <script src="./dist/index.js" defer type="module"></script>
     <script
       src="https://kit.fontawesome.com/2a4b915664.js"
       crossorigin="anonymous"
     ></script>
-    <script src="nav.js" defer></script>
+    <!-- <script src="nav.js" defer></script> -->
     <title>Louna Project</title>
   </head>
   <body>
     <!-- 
     *******************************
-
+            
+             Kirjautuminen
              Dialog / Modal
              Muuta div muotoon tai jokin muu ratkaisu
 
     *******************************  
     -->
 
-    <dialog
+    <!-- <dialog
       style="
         margin: auto;
         height: 500px;
@@ -40,8 +42,7 @@
       <button>Test button2</button>
       <input type="submit" value="Log in" />
 
-      <!-- Lisää dataa js tiedostosta -->
-    </dialog>
+    </dialog> -->
 
     <!-- 
     *******************************
@@ -50,6 +51,52 @@
 
     *******************************  
     -->
+
+    <dialog class="dialog">
+      <div id="dialog-container">
+        <div class="close-modal-btn"><i class="fa-solid fa-xmark"></i></div>
+        <div id="dialog-logo"></div>
+        <h1>KIRJAUDU</h1>
+
+        <div class="form-container">
+          <form action="action_page.php" method="post">
+            <div class="input-kenttä">
+              <label for="username"></label>
+              <input
+                type="text"
+                placeholder="Sähköposti"
+                name="username"
+                required
+              />
+            </div>
+
+            <div class="input-kenttä">
+              <label for="psw"></label>
+              <input
+                type="password"
+                placeholder="Salasana"
+                name="psw"
+                class="salasana"
+                required
+              />
+
+              <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
+            </div>
+            <a href="http://">Unohtuiko salasana?</a>
+
+            <button type="submit" id="kirjaudu-btn" class="form-btn">
+              Kirjaudu sisään
+            </button>
+          </form>
+        </div>
+        <div id="uusi-käyttäjä">
+          <h2>Uusi käyttäjä?</h2>
+          <button class="form-btn register-btn" id="register">
+            Rekisteröidy
+          </button>
+        </div>
+      </div>
+    </dialog>
 
     <header>
       <nav class="nav-bar" tabindex="0">

@@ -1,0 +1,169 @@
+.close-modal-btn {
+  height: 10px;
+  border: #9dce98 2px solid;
+  border-radius: 16px;
+  padding: 10px 10px;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #707170;
+}
+
+#dialog-logo {
+  height: 100px;
+  width: 200px;
+  background-image: url(../kuvat/logo.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dialog {
+  margin: 200px auto;
+  height: 640px;
+  width: 50vw;
+  border: none;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.103));
+  z-index: 2;
+}
+/* 
+/* .dialog {
+  margin: 20px auto;
+  height: 600px;
+  width: 50vw;
+  border: none;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 8px rgb(202, 202, 202));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+#dialog-container {
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+form {
+  font-size: 1.2em;
+}
+
+.form-container {
+  width: 90%;
+  border-bottom: #9dce98 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-btn {
+  height: 40px;
+  border: #9dce98 2px solid;
+  border-radius: 20px;
+  background-color: #fff;
+  margin: 30px 0;
+  width: 100%;
+  font-size: 18px;
+}
+#kirjaudu-btn:hover {
+  background-color: #9dce98;
+}
+.input-kenttä {
+  margin: 12px 0;
+  position: relative;
+}
+.input-kenttä input {
+  width: 100%;
+  padding: 12px 6px;
+  border: #bec0be 2px solid;
+  border-radius: 8px;
+  outline: 0;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+.input-kenttä input:focus {
+  border: #9dce98 2px solid;
+}
+
+.show-psw {
+  border-radius: 20px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 18px;
+  color: #9dce98;
+}
+.show-psw:hover {
+  color: #707170;
+}
+
+#uusi-käyttäjä {
+  margin: 20px 0;
+  padding: 0;
+  width: 100%;
+  text-align: center; /* Keskitetään teksti */
+}
+#uusi-käyttäjä h2 {
+  margin: 10px 0 20px 0;
+}
+
+.register-btn {
+  margin-top: 0;
+  width: 70%;
+}
+.register-btn:hover {
+  background-color: #9dce98;
+}
+
+.kirjaudu {
+  position: relative;
+  overflow: hidden;
+}
+
+.rek {
+  margin-top: 50px;
+  height: 500px;
+
+  position: absolute;
+  padding-top: 0;
+  top: 700px;
+
+  /* top: 80px; */
+}
+
+.dialog-esiin-anim {
+  animation: dialog-esiin 3s ease-in-out forwards;
+}
+.dialog-piiloon {
+  animation: dialog-piiloon 3s ease-in-out forwards;
+}
+.rek h1 {
+  margin-top: 5px;
+}
+.rek-btn {
+  margin: 4px 0;
+  background-color: #707170;
+}
+.rek-container {
+  padding-bottom: 12px;
+}
+@keyframes dialog-esiin {
+  from {
+    top: 700px;
+  }
+  to {
+    top: 80px;
+  }
+}
+@keyframes dialog-piiloon {
+  from {
+    top: 80px;
+  }
+  to {
+    top: 700px;
+  }
+}
