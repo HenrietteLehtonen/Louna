@@ -118,6 +118,9 @@ const viikonpäivät: string[] = [
 
 const logInNavBtn = document.querySelector("#log-in") as HTMLButtonElement;
 const modal = document.querySelector("dialog") as HTMLDialogElement;
+const closeDialogBtn = document.querySelector(
+  ".close-modal-btn"
+) as HTMLElement;
 const burgerMenu = document.querySelector("#burger-menu") as HTMLButtonElement;
 const burgerMenuContent = document.querySelector(
   "#burger-menu-content"
@@ -128,7 +131,8 @@ logInNavBtn.addEventListener("click", () => {
   modal.showModal();
 });
 
-modal.addEventListener("click", () => {
+closeDialogBtn.addEventListener("click", () => {
+  console.log("klik");
   modal.close();
 });
 // });

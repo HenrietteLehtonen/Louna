@@ -103,9 +103,9 @@ const ruokaLista = [
 const today = new Date().getDay();
 console.log(today);
 const viikonpäivät = [
-    "Sunnuntai", // getDay() = 0
-    "Maanantai", // getDay() = 1
-    "Tiistai", // getDay() = 2 ...
+    "Sunnuntai",
+    "Maanantai",
+    "Tiistai",
     "Keskiviikko",
     "Torstai",
     "Perjantai",
@@ -113,13 +113,15 @@ const viikonpäivät = [
 ];
 const logInNavBtn = document.querySelector("#log-in");
 const modal = document.querySelector("dialog");
+const closeDialogBtn = document.querySelector(".close-modal-btn");
 const burgerMenu = document.querySelector("#burger-menu");
 const burgerMenuContent = document.querySelector("#burger-menu-content");
 // Modal display handling
 logInNavBtn.addEventListener("click", () => {
     modal.showModal();
 });
-modal.addEventListener("click", () => {
+closeDialogBtn.addEventListener("click", () => {
+    console.log("klik");
     modal.close();
 });
 // });
