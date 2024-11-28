@@ -219,3 +219,5 @@ const teeRivi = (): void => {
 
 teeViikonpäivät();
 teeRivi();
+
+console.log(":)");

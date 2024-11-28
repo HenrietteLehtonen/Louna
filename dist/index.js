@@ -103,9 +103,9 @@ const ruokaLista = [
 const today = new Date().getDay();
 console.log(today);
 const viikonpäivät = [
-    "Sunnuntai",
-    "Maanantai",
-    "Tiistai",
+    "Sunnuntai", // getDay() = 0
+    "Maanantai", // getDay() = 1
+    "Tiistai", // getDay() = 2 ...
     "Keskiviikko",
     "Torstai",
     "Perjantai",

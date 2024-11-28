@@ -183,4 +183,5 @@ const teeRivi = () => {
 };
 teeViikonpäivät();
 teeRivi();
+console.log(":)");
 export {};
