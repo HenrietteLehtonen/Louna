@@ -157,6 +157,25 @@ document.addEventListener("click", (event) => {
   console.log(event.target.parentElement.parentElement);
 
   if (event.target.classList.contains("add-btn")) {
+    /**
+     *  LISÄTTY TOASTER
+     *
+     */
+    function naytaToastViesti(viesti) {
+      const toast = document.createElement("div");
+      toast.classList.add("toast");
+      toast.textContent = viesti;
+
+      // Lisää toast elementti ruudulle
+      document.body.appendChild(toast);
+
+      // Poista toast 3 sekunnin kuluttua
+      setTimeout(() => {
+        toast.remove();
+      }, 3200);
+    }
+    naytaToastViesti(`Tuote lisättiin ostoskoriin!`);
+
     const row = event.target.closest("tr");
 
     const ruokaNimi = row.querySelector("td").childNodes[0].textContent.trim();

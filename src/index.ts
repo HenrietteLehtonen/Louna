@@ -116,8 +116,16 @@ const viikonpäivät: string[] = [
   "Lauantai",
 ];
 
+/******
+ *
+ *
+ *  DIALOGI
+ *
+ */
+
 const logInNavBtn = document.querySelector("#log-in") as HTMLButtonElement;
-const modal = document.querySelector("dialog") as HTMLDialogElement;
+const dialogi1 = document.querySelector(".dialog") as HTMLDialogElement;
+const registerDialog = document.querySelector(".rek") as HTMLDialogElement;
 const closeDialogBtn = document.querySelector(
   ".close-modal-btn"
 ) as HTMLElement;
@@ -127,14 +135,70 @@ const burgerMenuContent = document.querySelector(
 ) as HTMLElement;
 
 // Modal display handling
-logInNavBtn.addEventListener("click", () => {
-  modal.showModal();
+if (logInNavBtn) {
+  logInNavBtn.addEventListener("click", () => {
+    console.log("klik modal auki");
+    dialogi1.showModal();
+  });
+}
+
+if (closeDialogBtn) {
+  closeDialogBtn.addEventListener("click", () => {
+    console.log("klik modal kiinni");
+    dialogi1.close();
+  });
+}
+
+const eyeIcons = document.querySelectorAll<HTMLElement>(".show-psw");
+const salasanat = document.querySelectorAll<HTMLInputElement>(".salasana");
+
+// NÄYTÄ SALASANA!
+eyeIcons.forEach((eyeIcon, index) => {
+  eyeIcon.addEventListener("click", () => {
+    console.log("klik silmä");
+
+    const salasanakentta = salasanat[index];
+
+    if (salasanakentta) {
+      if (salasanakentta.type === "password") {
+        salasanakentta.type = "text";
+      } else {
+        salasanakentta.type = "password";
+      }
+    }
+  });
 });
 
-closeDialogBtn.addEventListener("click", () => {
-  console.log("klik");
-  modal.close();
-});
+// KIRJAUDU JA REKISTERÖIDY animaatio
+
+const registerBtn = document.querySelector("#register") as HTMLButtonElement;
+
+if (registerBtn) {
+  registerBtn.addEventListener("click", () => {
+    console.log("Rekisteröidy nappia klikattu");
+
+    registerDialog.classList.remove("dialog-piiloon");
+    registerDialog.classList.add("dialog-esiin-anim");
+
+    (document.querySelector("#sposti") as HTMLInputElement).value = "";
+    (document.querySelector("#salasana") as HTMLInputElement).value = "";
+  });
+}
+
+const kirjauduSisBtn = document.querySelector(
+  "#go-back-to-login"
+) as HTMLButtonElement;
+if (kirjauduSisBtn) {
+  kirjauduSisBtn.addEventListener("click", () => {
+    console.log("Kirjaudu sisään nappia klikattu");
+    registerDialog.classList.add("dialog-piiloon");
+    registerDialog.classList.remove("dialog-esiin-anim");
+    (document.querySelector("#rek-sposti") as HTMLInputElement).value = "";
+    (document.querySelector("#rek-salasana") as HTMLInputElement).value = "";
+    (document.querySelector("#rek-username") as HTMLInputElement).value = "";
+  });
+}
+
 // });
 // modal.addEventListener("focusout", (evt) => {
 //   // Close modal when out of focus

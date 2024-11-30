@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles/table.css" />
     <link rel="stylesheet" href="./styles/dialog.css" />
     <link rel="stylesheet" href="./styles/ostoskori.css" />
+    <link rel="stylesheet" href="./styles/toast.css" />
     <script src="js/ostoskori.js" defer></script>
 
     <script src="./dist/index.js" defer type="module"></script>
@@ -44,20 +45,23 @@
 
     </dialog> -->
 
-    <dialog class="dialog">
+    <dialog class="dialog kirjaudu">
       <div id="dialog-container">
-        <div class="close-modal-btn"><i class="fa-solid fa-xmark"></i></div>
+        <button class="close-modal-btn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
         <div id="dialog-logo"></div>
         <h1>KIRJAUDU</h1>
 
         <div class="form-container">
           <form action="action_page.php" method="post">
             <div class="input-kenttä">
-              <label for="username"></label>
+              <label for="sposti"></label>
               <input
                 type="text"
                 placeholder="Sähköposti"
-                name="username"
+                name="sposti"
+                id="sposti"
                 required
               />
             </div>
@@ -69,6 +73,7 @@
                 placeholder="Salasana"
                 name="psw"
                 class="salasana"
+                id="salasana"
                 required
               />
 
@@ -88,6 +93,61 @@
           </button>
         </div>
       </div>
+
+      <!-- REK DIALOGI -->
+      <dialog class="dialog rek" open>
+        <div id="dialog-container">
+          <h1>REKISTERÖIDY</h1>
+
+          <div class="form-container rek-container">
+            <form action="action_page.php" method="post">
+              <div class="input-kenttä">
+                <label for="username"></label>
+                <input
+                  type="text"
+                  placeholder="Nimi"
+                  name="username"
+                  id="rek-username"
+                  required
+                />
+              </div>
+              <div class="input-kenttä">
+                <label for="sposti"></label>
+                <input
+                  type="text"
+                  placeholder="Sähköposti"
+                  name="sposti"
+                  id="rek-sposti"
+                  required
+                />
+              </div>
+
+              <div class="input-kenttä">
+                <label for="psw"></label>
+                <input
+                  type="password"
+                  placeholder="Salasana"
+                  name="psw"
+                  id="rek-salasana"
+                  class="salasana"
+                  required
+                />
+
+                <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
+              </div>
+              <button type="submit" class="form-btn rek-btn">
+                Rekisteröidy
+              </button>
+            </form>
+          </div>
+          <div id="uusi-käyttäjä">
+            <h2>Tunnus jo olemassa?</h2>
+            <button class="form-btn register-btn" id="go-back-to-login">
+              Kirjaudu sisään
+            </button>
+          </div>
+        </div>
+      </dialog>
     </dialog>
 
     <!-- 
@@ -216,6 +276,10 @@
             <!-- ruokalista tulee tähän -->
           </table>
         </div>
+      </div>
+
+      <div id="toaster-container">
+        <!-- <div class="toast"></div> -->
       </div>
     </main>
 

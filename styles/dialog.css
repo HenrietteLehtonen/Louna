@@ -1,32 +1,50 @@
+button {
+  cursor: pointer;
+}
+body:has(.kirjaudu[open]) {
+  overflow: hidden;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(10px);
+  background-color: #00000071;
+}
 .close-modal-btn {
-  height: 10px;
-  border: #9dce98 2px solid;
-  border-radius: 16px;
   padding: 10px 10px;
+  margin-right: 24px;
+  margin-top: 10px;
+  height: 30px;
+  width: 40px;
+  border: #9dce98 2px solid;
+  background-color: var(--white);
+  border-radius: 16px;
   align-self: flex-end;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #707170;
 }
+.close-modal-btn:hover {
+  background-color: var(--green);
+  color: black;
+}
 
 #dialog-logo {
   height: 100px;
   width: 200px;
-  background-image: url(../kuvat/logo.png);
-  background-size: cover;
+  background-image: url(../kuvat/louna_txt.png);
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .dialog {
-  margin: 200px auto;
-  height: 640px;
+  margin: 140px auto;
+  height: 660px;
   width: 50vw;
   border: none;
   border-radius: 8px;
-  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.103));
-  z-index: 2;
+  /* filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.103)); */
 }
 /* 
 /* .dialog {
@@ -42,10 +60,11 @@
 } */
 
 #dialog-container {
-  padding: 20px 10px;
+  padding: 10px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
 }
 form {
   font-size: 1.2em;
@@ -67,6 +86,7 @@ form {
   margin: 30px 0;
   width: 100%;
   font-size: 18px;
+  transition: 0.5s;
 }
 #kirjaudu-btn:hover {
   background-color: #9dce98;
@@ -83,17 +103,27 @@ form {
   outline: 0;
   box-sizing: border-box;
   font-size: 1em;
+  transition: 0.2s;
 }
 
 .input-kenttä input:focus {
   border: #9dce98 2px solid;
 }
 
+form input:valid {
+  background-color: #b6ecb037;
+  border-color: #9dce98;
+}
+
+form input:invalid:hover {
+  border-color: #a84141;
+}
+
 .show-psw {
   border-radius: 20px;
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  bottom: 15px;
   font-size: 18px;
   color: #9dce98;
 }
@@ -108,7 +138,10 @@ form {
   text-align: center; /* Keskitetään teksti */
 }
 #uusi-käyttäjä h2 {
-  margin: 10px 0 20px 0;
+  margin-bottom: 20px;
+  font-family: "Alumni Sans";
+  font-weight: 500;
+  font-size: 1.5em;
 }
 
 .register-btn {
@@ -127,7 +160,7 @@ form {
 .rek {
   margin-top: 50px;
   height: 500px;
-
+  /* background-color: #6887652a; */
   position: absolute;
   padding-top: 0;
   top: 700px;
@@ -136,34 +169,43 @@ form {
 }
 
 .dialog-esiin-anim {
-  animation: dialog-esiin 3s ease-in-out forwards;
+  animation: dialog-esiin 2s ease-in-out forwards;
 }
 .dialog-piiloon {
-  animation: dialog-piiloon 3s ease-in-out forwards;
+  animation: dialog-piiloon 2s ease-in-out forwards;
 }
 .rek h1 {
   margin-top: 5px;
 }
 .rek-btn {
   margin: 4px 0;
-  background-color: #707170;
+  transition: 0.5s;
+}
+.rek-btn:hover {
+  background-color: #9dce98;
 }
 .rek-container {
   padding-bottom: 12px;
 }
+
 @keyframes dialog-esiin {
   from {
-    top: 700px;
+    top: 600px;
   }
   to {
-    top: 80px;
+    top: 100px;
   }
 }
 @keyframes dialog-piiloon {
   from {
-    top: 80px;
+    top: 100px;
   }
   to {
-    top: 700px;
+    top: 600px;
   }
+}
+
+dialog a {
+  color: #688765;
+  text-underline-offset: 5px;
 }

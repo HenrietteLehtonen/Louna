@@ -45,8 +45,7 @@ h3 {
 /* NAV */
 
 .nav-bar {
-  /* padding: 10px; tää pois, rikkoo navin leveyden */
-  width: 100vw;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.74);
   color: var(--white);
   font-size: 20px;
@@ -64,6 +63,11 @@ h3 {
 .logo {
   padding-right: 120px;
   height: 60px;
+}
+
+.fa-user:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 #burger-menu {
