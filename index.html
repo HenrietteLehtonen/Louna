@@ -16,7 +16,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- <script src="nav.js" defer></script> -->
-    <title>Louna Project</title>
+    <title>Ravintola Louna</title>
   </head>
   <body>
     <!-- 
@@ -58,7 +58,7 @@
             <div class="input-kenttä">
               <label for="sposti"></label>
               <input
-                type="text"
+                type="email"
                 placeholder="Sähköposti"
                 name="sposti"
                 id="sposti"
@@ -74,9 +74,10 @@
                 name="psw"
                 class="salasana"
                 id="salasana"
+                pattern="^(?=(.*[A-Za-z]){5,})(?=.*\d)[A-Za-z\d]{6,}$"
                 required
               />
-
+              <!-- Salasana väh 5 kirjainta ja 1 numero -->
               <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
             </div>
             <a href="http://">Unohtuiko salasana?</a>
@@ -114,7 +115,7 @@
               <div class="input-kenttä">
                 <label for="sposti"></label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Sähköposti"
                   name="sposti"
                   id="rek-sposti"
@@ -130,9 +131,10 @@
                   name="psw"
                   id="rek-salasana"
                   class="salasana"
+                  pattern="^(?=(.*[A-Za-z]){5,})(?=.*\d)[A-Za-z\d]{6,}$"
                   required
                 />
-
+                <!-- Salasana väh 5 kirjainta ja 1 numero -->
                 <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
               </div>
               <button type="submit" class="form-btn rek-btn">

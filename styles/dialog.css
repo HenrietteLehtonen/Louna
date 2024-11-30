@@ -115,7 +115,8 @@ form input:valid {
   border-color: #9dce98;
 }
 
-form input:invalid:hover {
+form input:invalid:hover,
+form input:invalid:focus {
   border-color: #a84141;
 }
 
