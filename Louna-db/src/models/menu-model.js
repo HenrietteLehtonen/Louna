@@ -4,13 +4,40 @@ import {querryPool} from '../../../utils/functions.js';
 
 // USE THIS
 const fetchMenuItems = async () => {
-  const sql = `SELECT *
-FROM annokset
-JOIN ruokalista USING (lista_id, nimi) 
-JOIN allergeenit USING (allerg_id)`;
+  const sql = `SELECT 
+    ru.day_name AS day, 
+    json_arrayagg(JSON_OBJECT('annos', JSON_OBJECT('nimi', an.nimi, 'hinta', an.hinta, 'allergeenit', al.tunniste, 'annos_id', an.annos_id))) as annokset 
+FROM ruokalista ru
+INNER JOIN annokset an ON ru.lista_id = an.lista_id
+INNER JOIN allergeenit al ON an.allerg_id = al.allerg_id
+GROUP BY ru.day_name
+ORDER BY ru.lista_id`;
   const [rows] = await querryPool(sql);
+  unstringify(rows);
+/*   tietyn data tietokannasta saa esim. komennolla 
+      rows[0].annokset[0].annos.hinta 
+      jossa rows[0] on päivä ja annokkset[0] on annos numero*/
   return rows;
 };
+
+function unstringify(obj) {
+  if (typeof obj === 'string') {
+    try {
+      return JSON.parse(obj);
+    } catch (e) {
+      void e
+      return obj;
+    }
+  }
+  if (typeof obj === 'object' && obj !== null) {
+    for (let i in obj) {
+      obj[i] = unstringify(obj[i]);
+    }
+  }
+  // Return the processed object
+  return obj;
+}
+
 
 
 

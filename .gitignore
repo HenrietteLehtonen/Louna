@@ -2,12 +2,10 @@ node_modules
 GIT-cheatsheat.txt
 .vscode
 muistiinpanoja.txt
+.env
 test.html
-<<<<<<< HEAD
 test-results
-=======
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
->>>>>>> testit-bak

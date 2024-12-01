@@ -28,7 +28,7 @@ app.get("/api", async (req, res) => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
-app.use("/api/annokset", menuRouter);
+app.use("/api/menu", menuRouter);
 // Default for all routes not handled by routers above
 app.use(notFoundHandler);
 // Add error handler middleware as the last middleware in the chain
