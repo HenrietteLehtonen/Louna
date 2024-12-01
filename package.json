@@ -2,12 +2,15 @@
   "name": "louna",
   "version": "1.0.0",
   "description": "Louna",
+  "type": "module",
   "main": "main.js",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc --watch",
-    "test": "playwright test"
+    "dev-ts": "tsc --watch",
+    "test-pw": "playwright test",
+    "dev": "nodemon Louna-db/src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -19,7 +22,17 @@
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.11.0",
+    "nodemon": "^3.1.7",
     "prettier": "3.3.3",
     "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.5",
+    "pug": "^3.0.3"
   }
 }
