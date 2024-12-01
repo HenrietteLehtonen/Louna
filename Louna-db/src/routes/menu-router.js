@@ -23,13 +23,13 @@ menuRouter
   .route('/')
   .get(getItems)
   .post(
-/*     authenticateToken, */
+    authenticateToken,
     postItem,
   );
 menuRouter
   .route('/:id')
   .get(getItemById)
   .put(authenticateToken, putItem)
-  .delete( DeleteItem);
+  .delete(authenticateToken, DeleteItem);
 
 export {menuRouter};
