@@ -54,7 +54,7 @@
         <h1>KIRJAUDU</h1>
 
         <div class="form-container">
-          <form action="action_page.php" method="post">
+          <form action="/action_page.php" method="post">
             <div class="input-kenttä">
               <label for="sposti"></label>
               <input
@@ -81,9 +81,15 @@
             </div>
             <a href="http://">Unohtuiko salasana?</a>
 
-            <button type="submit" id="kirjaudu-btn" class="form-btn">
+            <input
+              type="submit"
+              value="Kirjaudu sisään"
+              id="kirjaudu-btn"
+              class="form-btn"
+            />
+            <!-- <button type="submit" id="kirjaudu-btn" class="form-btn">
               Kirjaudu sisään
-            </button>
+            </button> -->
           </form>
         </div>
         <div id="uusi-käyttäjä">
@@ -135,9 +141,14 @@
 
                 <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
               </div>
-              <button type="submit" class="form-btn rek-btn">
+              <input
+                type="submit"
+                value="Rekisteröidy"
+                class="form-btn rek-btn"
+              />
+              <!-- <button type="submit" class="form-btn rek-btn">
                 Rekisteröidy
-              </button>
+              </button> -->
             </form>
           </div>
           <div id="uusi-käyttäjä">
