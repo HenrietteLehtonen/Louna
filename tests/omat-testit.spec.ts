@@ -61,10 +61,13 @@ test("nav", async ({ page }) => {
   await ostoskoriBtn.click();
   const ostoskorinSisältö = page.locator(".modal-content");
   await expect(ostoskorinSisältö).toBeVisible();
+  await page.getByRole("button", { name: "Sulje" }).click();
 
   //löytyykö kirjautuminen ja aukeaako klikatessa
   const logInBtn = page.locator("#log-in");
   await expect(logInBtn).toBeVisible();
-  await page.locator("#log-in i").click();
+  await logInBtn.click();
+  const kirjauduDialog = page.locator(".kirjaudu");
+  await expect(kirjauduDialog).toBeVisible();
   await page.locator("#register").click();
 });
