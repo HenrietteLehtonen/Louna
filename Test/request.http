@@ -16,7 +16,7 @@ POST http://localhost:3000/api/annokset
 Content-Type: application/json
 
 {
-  "nimi": "jotain",
+  "nimi": "Kalapullat",
   "allerg_id": 1,
   "hinta": 500,
   "day_name": "Monday"

@@ -199,6 +199,8 @@ if (kirjauduSisBtn) {
   });
 }
 
+// KIRJAUDU SISÄÄN
+
 // });
 // modal.addEventListener("focusout", (evt) => {
 //   // Close modal when out of focus

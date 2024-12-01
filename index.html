@@ -39,14 +39,14 @@
         <h1>KIRJAUDU</h1>
 
         <div class="form-container">
-          <form action="action_page.php" method="post">
+          <form action="http://localhost:3000/api/auth/login" method="POST">
             <div class="input-kenttä">
-              <label for="sposti"></label>
+              <label for="username"></label>
               <input
                 type="text"
-                placeholder="Sähköposti"
-                name="sposti"
-                id="sposti"
+                placeholder="Käyttäjä"
+                name="username"
+                id="username"
                 required
               />
             </div>
