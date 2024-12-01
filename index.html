@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/dialog.css" />
     <link rel="stylesheet" href="./styles/ostoskori.css" />
     <link rel="stylesheet" href="./styles/toast.css" />
+    <link rel="stylesheet" href="./styles/kirjautuminen.css" />
     <script src="js/ostoskori.js" defer></script>
 
     <script src="./dist/index.js" defer type="module"></script>
@@ -16,7 +17,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- <script src="nav.js" defer></script> -->
-    <title>Louna Project</title>
+    <title>Ravintola Louna</title>
   </head>
   <body>
     <!-- 
@@ -29,22 +30,6 @@
     *******************************  
     -->
 
-    <!-- <dialog
-      style="
-        margin: auto;
-        height: 500px;
-        width: 40%;
-        min-width: 300px;
-        max-width: 600px;
-        background-color: white;
-      "
-      class="menu-hold"
-    >
-      <button>Test button2</button>
-      <input type="submit" value="Log in" />
-
-    </dialog> -->
-
     <dialog class="dialog kirjaudu">
       <div id="dialog-container">
         <button class="close-modal-btn">
@@ -54,29 +39,38 @@
         <h1>KIRJAUDU</h1>
 
         <div class="form-container">
+<<<<<<< HEAD
           <form action="/action_page.php" method="post">
+=======
+          <form action="http://localhost:3000/api/auth/login" method="POST">
+>>>>>>> testit-bak
             <div class="input-kenttä">
-              <label for="sposti"></label>
+              <label for="username"></label>
               <input
                 type="text"
-                placeholder="Sähköposti"
-                name="sposti"
-                id="sposti"
+                placeholder="Käyttäjätunnus"
+                name="username"
+                id="username"
                 required
               />
             </div>
+            <!-- type="email"
+            placeholder="Sähköposti"
+            name="sposti"
+            id="sposti"
+            required -->
 
             <div class="input-kenttä">
               <label for="psw"></label>
               <input
                 type="password"
                 placeholder="Salasana"
-                name="psw"
+                name="password"
                 class="salasana"
                 id="salasana"
                 required
               />
-
+              <!-- Salasana väh 5 kirjainta ja 1 numero   pattern="^(?=(.*[A-Za-z]){5,})(?=.*\d)[A-Za-z\d]{6,}$"-->
               <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
             </div>
             <a href="http://">Unohtuiko salasana?</a>
@@ -120,7 +114,7 @@
               <div class="input-kenttä">
                 <label for="sposti"></label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Sähköposti"
                   name="sposti"
                   id="rek-sposti"
@@ -136,9 +130,10 @@
                   name="psw"
                   id="rek-salasana"
                   class="salasana"
+                  pattern="^(?=(.*[A-Za-z]){5,})(?=.*\d)[A-Za-z\d]{6,}$"
                   required
                 />
-
+                <!-- Salasana väh 5 kirjainta ja 1 numero -->
                 <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
               </div>
               <input

@@ -199,6 +199,9 @@ if (kirjauduSisBtn) {
   });
 }
 
+// ADMIN KIRJAUTUMINEN HALLINTAAN
+const kirjauduBtn = document.querySelector("#kirjaudu-btn");
+
 // });
 // modal.addEventListener("focusout", (evt) => {
 //   // Close modal when out of focus
