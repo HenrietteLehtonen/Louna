@@ -1,0 +1,221 @@
+button {
+  cursor: pointer;
+}
+body:has(.kirjaudu[open]) {
+  overflow: hidden;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(10px);
+  background-color: #00000071;
+}
+.close-modal-btn {
+  padding: 10px 10px;
+  margin-right: 24px;
+  margin-top: 10px;
+  height: 30px;
+  width: 40px;
+  border: #9dce98 2px solid;
+  background-color: var(--white);
+  border-radius: 16px;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #707170;
+}
+.close-modal-btn:hover {
+  background-color: var(--green);
+  color: black;
+}
+
+#dialog-logo {
+  height: 100px;
+  width: 200px;
+  background-image: url(../kuvat/louna_txt.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dialog {
+  margin: 140px auto;
+  height: 660px;
+  width: 50vw;
+  border: none;
+  border-radius: 8px;
+  /* filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.103)); */
+}
+/* 
+/* .dialog {
+  margin: 20px auto;
+  height: 600px;
+  width: 50vw;
+  border: none;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 8px rgb(202, 202, 202));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+#dialog-container {
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+form {
+  font-size: 1.2em;
+}
+
+.form-container {
+  width: 90%;
+  border-bottom: #9dce98 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.form-btn {
+  height: 40px;
+  border: #9dce98 2px solid;
+  border-radius: 20px;
+  background-color: #fff;
+  margin: 30px 0;
+  width: 100%;
+  font-size: 18px;
+  transition: 0.5s;
+}
+#kirjaudu-btn {
+  background-color: #fff;
+}
+#kirjaudu-btn:hover {
+  background-color: #9dce98;
+}
+.input-kenttä {
+  margin: 12px 0;
+  position: relative;
+}
+.input-kenttä input {
+  width: 100%;
+  padding: 12px 6px;
+  border: #bec0be 2px solid;
+  border-radius: 8px;
+  outline: 0;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: 0.2s;
+}
+
+.input-kenttä input:focus {
+  border: #9dce98 2px solid;
+}
+
+/* form input:valid {
+  background-color: #b6ecb037;
+  border-color: #9dce98;
+} */
+
+form input:valid:not([type="submit"]) {
+  background-color: #b6ecb037;
+  border-color: #9dce98;
+}
+
+form input:invalid:hover,
+form input:invalid:focus {
+  border-color: #a84141;
+}
+
+.show-psw {
+  border-radius: 20px;
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
+  font-size: 18px;
+  color: #9dce98;
+}
+.show-psw:hover {
+  color: #707170;
+}
+
+#uusi-käyttäjä {
+  margin: 20px 0;
+  padding: 0;
+  width: 100%;
+  text-align: center; /* Keskitetään teksti */
+  box-sizing: border-box;
+}
+#uusi-käyttäjä h2 {
+  margin-bottom: 20px;
+  font-family: "Alumni Sans";
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+.register-btn {
+  margin-top: 0;
+  width: 70%;
+}
+.register-btn:hover {
+  background-color: #9dce98;
+}
+
+.kirjaudu {
+  position: relative;
+  overflow: hidden;
+}
+
+.rek {
+  margin-top: 50px;
+  height: 500px;
+  /* background-color: #6887652a; */
+  position: absolute;
+  padding-top: 0;
+  top: 700px;
+
+  /* top: 80px; */
+}
+
+.dialog-esiin-anim {
+  animation: dialog-esiin 2s ease-in-out forwards;
+}
+.dialog-piiloon {
+  animation: dialog-piiloon 2s ease-in-out forwards;
+}
+.rek h1 {
+  margin-top: 5px;
+}
+.rek-btn {
+  margin: 4px 0;
+  transition: 0.5s;
+}
+.rek-btn:hover {
+  background-color: #9dce98;
+}
+.rek-container {
+  padding-bottom: 12px;
+}
+
+@keyframes dialog-esiin {
+  from {
+    top: 600px;
+  }
+  to {
+    top: 100px;
+  }
+}
+@keyframes dialog-piiloon {
+  from {
+    top: 100px;
+  }
+  to {
+    top: 600px;
+  }
+}
+
+dialog a {
+  color: #688765;
+  text-underline-offset: 5px;
+}

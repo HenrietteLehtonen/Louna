@@ -3,3 +3,9 @@ GIT-cheatsheat.txt
 .vscode
 muistiinpanoja.txt
 .env
+test.html
+test-results
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

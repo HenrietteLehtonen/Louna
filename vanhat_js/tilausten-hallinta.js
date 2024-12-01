@@ -36,7 +36,7 @@ const buildTilaustaulukko = (tilaus) => {
       <td>${tilaus.tilausnro}</td>
       <td>${tilaus.tilattu_aika}</td>
       <td id="tila-${tilaus.tilaus_id}" >${tilaus.tilauksen_tila}</td>
-      <td>${tilaus.nouto_aika}</td>
+      <td id="nouto-${tilaus.tilaus_id}">${tilaus.nouto_aika}</td>
       <td><button id="poista-${tilaus.tilaus_id}" class="del-btn">x</button></td>
     </tr>
     `;
@@ -85,13 +85,14 @@ const etsiTilausFunktio = () => {
     // etsi input arvo
     const tilausnumero = document.querySelector("#etsi-tilaus").value;
     console.log("Tilausnumero: " + tilausnumero);
-    // katotaan täsmääkö arrayn tilaukseen
+    // katotaan täsmääkö arrayn tilausnumero inputarvoon
     // Etsi tilaus nro arraysta
     const tilaus = tilaukset.find((t) => t.tilausnro == tilausnumero); // vertaillaan tilausnroa syötettyyn nro
     // alertataan jos tilais nro ei täsmää
 
     if (!tilaus) {
       alert("Tällä numerolla ei löytynyt tilausta");
+      return;
     } else {
       kohde.innerText = `Tilausnumero: ${tilausnumero} `;
 
@@ -99,23 +100,27 @@ const etsiTilausFunktio = () => {
       const päivitäTilausBTN = document.querySelector("#update");
       päivitäTilausBTN.addEventListener("click", function () {
         console.log("päivitä nappia painettu");
-        const tilausnumero = document.querySelector("#etsi-tilaus").value;
-        // Etsi tilaus nro arraysta
-        const tilaus = tilaukset.find((t) => t.tilausnro == tilausnumero);
-        // tilauksen vanha tila =
-        // console.log(`Tilauksen tila: ${tilaus.tilauksen_tila}`);
 
+        const tilausnumero = document.querySelector("#etsi-tilaus").value;
+        // Etsi tilaus nro arraysta ja vertaa tilausnro value
+        const tilaus = tilaukset.find((t) => t.tilausnro == tilausnumero);
+
+        //---------- tilauksen tila
         // haetaan tilauksen tila selectionin value
         const päivitettyTila = document.querySelector("#tilauksen-tila").value;
 
-        // päivitetään tilauksen tila taulukkoon
-        tilaukset[0].tilauksen_tila = päivitettyTila;
+        if (päivitettyTila !== "") {
+          // päivitetään tilauksen tila taulukkoon
+          tilaus.tilauksen_tila = päivitettyTila;
 
-        // päivitetään tilauksen tila taulukkoon
-        const päivitettäväTilaTD = document.querySelector(
-          `#tila-${tilaus.tilaus_id}`
-        );
-        päivitettäväTilaTD.innerText = päivitettyTila;
+          // päivitetään tilauksen tila html
+          const päivitettäväTilaTD = document.querySelector(
+            `#tila-${tilaus.tilaus_id}`
+          );
+          //
+
+          päivitettäväTilaTD.innerText = päivitettyTila;
+        }
         console.log(`Tilauksen uusi tila: ${päivitettyTila}`);
         console.log(tilaus);
 
@@ -123,6 +128,23 @@ const etsiTilausFunktio = () => {
         document.querySelector("#etsi-tilaus").value = "";
         kohde.innerText = "Tilausnumero:";
         document.querySelector("#tilauksen-tila").value = "";
+
+        //---------- noutoaika
+        const päivitettyNoutoaika = document.querySelector("#nouto-aika").value;
+        // jos noutoaika ei oo tyhjä
+        if (päivitettyNoutoaika !== "") {
+          // päivitetään taulukkoon
+          tilaus.nouto_aika = päivitettyNoutoaika;
+
+          // päivitetään html
+          const päivitettäväAika = document.querySelector(
+            `#nouto-${tilaus.tilaus_id}`
+          );
+
+          päivitettäväAika.innerText = päivitettyNoutoaika;
+          console.log(`Tilauksen uusi noutoaika: ${päivitettyNoutoaika}`);
+        }
+        console.log(tilaus);
       });
     }
   });

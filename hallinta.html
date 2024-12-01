@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/hallinta.css" />
-    <script src="./menu-hallinta.js" defer></script>
-    <script src="./tilausten-hallinta.js" defer></script>
+    <script src="./dist/menu-hallinta.js" defer type="module"></script>
+    <script src="./dist/tilausten-hallinta.js" type="module" defer></script>
     <title>Louna hallinta</title>
   </head>
   <body>
@@ -184,7 +184,7 @@
           <p id="tilausnumero-p-kohde">Tilausnumero:</p>
           <label for="tilauksen-tila">Tilauksen tila:</label>
           <select name="tilauksen-tila" id="tilauksen-tila">
-            <option value="Vastaanotettu"></option>
+            <option value=""></option>
             <option value="Vastaanotettu">Vastaanotettu</option>
             <option value="Työn alla">Työn alla</option>
             <option value="Odottaa noutoa">Odottaa noutoa</option>
@@ -192,9 +192,9 @@
             <option value="Peruutettu">Peruutettu</option>
           </select>
           <label for="nouto-aika">Noutoaika:</label>
-          <input type="text" name="nouto-aika" />
+          <input type="text" name="nouto-aika" id="nouto-aika" />
           <button id="update">Päivitä</button>
-          <button>Peruuta</button>
+          <button id="peruuta-btn">Peruuta</button>
         </div>
         <!-- tilaukset taulukko -->
         <div class="container annokset-container">
