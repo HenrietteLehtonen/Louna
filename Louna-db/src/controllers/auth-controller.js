@@ -8,7 +8,7 @@ import "dotenv/config";
 
 const postLogin = async (req, res, next) => {
   console.log("postLogin", req.body);
-  const { username: username, password } = req.body;
+  const { username: username, password } = req.body; // username:
   const user = await fetchUserByUsernameAndPassword(username, password);
   if (user) {
     const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET, {

@@ -113,7 +113,6 @@ form {
   border: #9dce98 2px solid;
 }
 
-<<<<<<< HEAD
 /* form input:valid {
   background-color: #b6ecb037;
   border-color: #9dce98;
@@ -121,10 +120,6 @@ form {
 
 form input:valid:not([type="submit"]) {
   background-color: #b6ecb037;
-=======
-form input:valid {
-  background-color: #b6ecb0b6;
->>>>>>> testit-bak
   border-color: #9dce98;
 }
 
