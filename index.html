@@ -39,30 +39,34 @@
         <h1>KIRJAUDU</h1>
 
         <div class="form-container">
-          <form action="action_page.php" method="post">
+          <form action="http://localhost:3000/api/auth/login" method="POST">
             <div class="input-kenttä">
-              <label for="sposti"></label>
+              <label for="username"></label>
               <input
-                type="email"
-                placeholder="Sähköposti"
-                name="sposti"
-                id="sposti"
+                type="text"
+                placeholder="Käyttäjätunnus"
+                name="username"
+                id="username"
                 required
               />
             </div>
+            <!-- type="email"
+            placeholder="Sähköposti"
+            name="sposti"
+            id="sposti"
+            required -->
 
             <div class="input-kenttä">
               <label for="psw"></label>
               <input
                 type="password"
                 placeholder="Salasana"
-                name="psw"
+                name="password"
                 class="salasana"
                 id="salasana"
-                pattern="^(?=(.*[A-Za-z]){5,})(?=.*\d)[A-Za-z\d]{6,}$"
                 required
               />
-              <!-- Salasana väh 5 kirjainta ja 1 numero -->
+              <!-- Salasana väh 5 kirjainta ja 1 numero   pattern="^(?=(.*[A-Za-z]){5,})(?=.*\d)[A-Za-z\d]{6,}$"-->
               <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
             </div>
             <a href="http://">Unohtuiko salasana?</a>
