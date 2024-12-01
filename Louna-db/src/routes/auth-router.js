@@ -1,20 +1,21 @@
-import express from 'express';
-import {getMe, postLogin} from '../controllers/auth-controller.js';
-import {authenticateToken} from '../middlewares/authentication.js';
-import {body} from 'express-validator';
-import {postUser} from '../controllers/user-controller.js';
+import express from "express";
+import { getMe, postLogin } from "../controllers/auth-controller.js";
+import { authenticateToken } from "../middlewares/authentication.js";
+import { body } from "express-validator";
+import { postUser } from "../controllers/user-controller.js";
 
 const authRouter = express.Router();
 
-authRouter.route('/login').post(postLogin);
-authRouter.route('/me').get(authenticateToken, getMe);
+authRouter.route("/login").post(postLogin);
+
+authRouter.route("/me").get(authenticateToken, getMe);
 authRouter
-  .route('/register')
+  .route("/register")
   .post(
-    body('username').trim().isAlphanumeric().isLength({min: 3, max: 20}),
-    body('password').isLength({min: 8}),
-    body('email').isEmail(),
-    postUser,
+    body("username").trim().isAlphanumeric().isLength({ min: 3, max: 20 }),
+    body("password").isLength({ min: 8 }),
+    body("email").isEmail(),
+    postUser
   );
 
 export default authRouter;

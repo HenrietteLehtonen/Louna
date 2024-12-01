@@ -132,3 +132,65 @@ test("Visual comparison - fp masking", async ({ page }) => {
     mask: [page.locator(".menu-container")],
   });
 });
+
+// Tarkista löytyykö kaikki inputit kirjautumis / rekisteröitymis formista
+test("Etsi input elementit kirjaudu", async ({ page }) => {
+  // Lataa sivu, jossa dialog on
+  await page.goto("http://localhost:5500");
+  const logInBtn = page.locator("#log-in");
+  await expect(logInBtn).toBeVisible();
+  await logInBtn.click();
+
+  const dialog = page.locator(".dialog.kirjaudu");
+  await expect(dialog).toBeVisible();
+
+  const form = dialog.locator("form#loginForm");
+  await expect(form).toBeVisible();
+
+  const usernameInput = form.locator("input#username");
+  await expect(usernameInput).toBeVisible();
+  await expect(usernameInput).toHaveAttribute("type", "text");
+  await expect(usernameInput).toHaveAttribute("required", "");
+
+  const passwordInput = form.locator("input#salasana");
+  await expect(passwordInput).toBeVisible();
+  await expect(passwordInput).toHaveAttribute("type", "password");
+  await expect(passwordInput).toHaveAttribute("required", "");
+
+  const submitButton = form.locator("input#kirjaudu-btn");
+  await expect(submitButton).toBeVisible();
+  await expect(submitButton).toHaveAttribute("type", "submit");
+  await expect(submitButton).toHaveValue("Kirjaudu sisään");
+});
+
+// KIRJAUTUMINEN
+
+test("Kirjaudu formista sisään", async ({ page }) => {
+  // Mene testattavalle sivulle
+  await page.goto("http://localhost:5500");
+  const logInBtn = page.locator("#log-in");
+  await expect(logInBtn).toBeVisible();
+  await logInBtn.click();
+
+  const dialog = page.locator(".dialog.kirjaudu");
+  await expect(dialog).toBeVisible();
+
+  const form = dialog.locator("form#loginForm");
+  await expect(form).toBeVisible();
+
+  // Täytä lomake
+  await page.fill("input#username", "test_user");
+  await page.fill("input#salasana", "testpassword");
+
+  // Ota API-pyynnöt kiinni
+  const [response] = await Promise.all([
+    page.waitForResponse("http://localhost:3000/api/auth/login"),
+    page.click("input#kirjaudu-btn"),
+  ]);
+  expect(response.status()).toBe(200);
+  const responseBody = await response.json();
+  console.log(responseBody);
+  expect(responseBody).toHaveProperty("username", "test_user");
+  expect(responseBody).toHaveProperty("token");
+  expect(responseBody).toHaveProperty("user_id");
+});
