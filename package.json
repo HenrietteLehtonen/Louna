@@ -7,15 +7,22 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
+<<<<<<< HEAD
     "dev-ts": "tsc --watch",
     "dev": "nodemon Louna-db/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+    "dev": "tsc --watch",
+    "test": "playwright test"
+>>>>>>> tests
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@playwright/test": "^1.49.0",
     "@types/express": "^5.0.0",
+    "@types/node": "^22.10.1",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.11.0",

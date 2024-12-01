@@ -3,3 +3,10 @@ GIT-cheatsheat.txt
 .vscode
 muistiinpanoja.txt
 test.html
+<<<<<<< HEAD
+=======
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+>>>>>>> tests
