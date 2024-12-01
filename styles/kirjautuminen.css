@@ -1,0 +1,17 @@
+#log-in-screen {
+  margin: auto;
+  height: 500px;
+  width: 40%;
+  min-width: 300px;
+  max-width: 600px;
+  background-color: white;
+}
+
+#log-in-screen-container {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
