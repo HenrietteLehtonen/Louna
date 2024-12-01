@@ -55,7 +55,7 @@ CREATE TABLE Tilausannos (
 
 INSERT INTO Ruokalista (nimi, day_name) 
     VALUES ('peruna', 'Maanantai'),
-    ('makkare', 'Maanantai'),
+    ('makkara', 'Maanantai'),
     ('pasta', 'Tiistai'),
     ('kana', 'Tiistai'),
     ('kalakeitto', 'Keskiviikko'),
@@ -66,18 +66,18 @@ INSERT INTO Ruokalista (nimi, day_name)
     ('tacos', 'Perjantai');
 
 INSERT INTO Allergeenit (tunniste, allergeeni)
-    VALUES ('G', 'Gluteeniton'),
-    ('VL', 'Vähälaktoosinen'),
-    ('L', 'Laktoositon'),
-    ('M', 'Maidoton'),
-    ('K', 'Ei kananmunaa'),
-    ('SO', 'Soijaton'),
-    ('VEG', 'Vegaaninen'),
+    VALUES ('G', 'gluteenoton'),
+    ('VL', 'vähälaktoosinen'),
+    ('L', 'laktoositon'),
+    ('M', 'maidoton'),
+    ('K', 'ei_sisällä_kananmunaa'),
+    ('SO', 'en_tiedä'),
+    ('VEG', 'vegaaninen'),
     ('EI', 'ei_allergeeneja');
 
 INSERT INTO Annokset (nimi, allerg_id, hinta, lista_id) 
   VALUES ('peruna', 1, 300, 1),
-  ('makkare',1, 400, 2),
+  ('makkara',1, 400, 2),
   ('pasta', 1, 500, 3),
   ('kana', 1, 600, 4),
   ('kalakeitto', 1, 750, 5),
