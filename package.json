@@ -27,6 +27,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
+    "apidoc": "^1.2.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-validator": "^7.2.0",
