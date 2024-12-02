@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/table.css" />
     <link rel="stylesheet" href="./styles/ostoskori.css" />
-    <script src="js/ostoskori.js" defer></script>
+    <script src="dist/ostoskori.js" defer></script>
     <script src="./menu.js" defer></script>
     <script
       src="https://kit.fontawesome.com/2a4b915664.js"
@@ -55,29 +55,25 @@
         <div id="nav-container">
           <img src="./kuvat/logo.png" class="logo" alt="" />
           <div id="shopping-bag">
-          
-            <i class="fa-solid fa-bag-shopping" style="color: #ffffff" id="open-modal-btn"></i>
-            
-            
+            <i
+              class="fa-solid fa-bag-shopping"
+              style="color: #ffffff"
+              id="open-modal-btn"
+            ></i>
+
             <!-- OSTOSKORIN OSIO
             *******************************  -->
             <!-- Dialog / Modal -->
-          <div id="custom-modal" class="modal hidden">
-            <div class="modal-content">
-    
-          <button class="close-btn" id="close-cart">Sulje</button>
-            <h3>Ostoskori</h3>
+            <div id="custom-modal" class="modal hidden">
+              <div class="modal-content">
+                <button class="close-btn" id="close-cart">Sulje</button>
+                <h3>Ostoskori</h3>
 
-              <ul id="cart-items">
-              </ul>
+                <ul id="cart-items"></ul>
 
                 <p id="cart-total"></p>
-              
-                </div>
-                </div>
-
-
-            
+              </div>
+            </div>
 
             <!--OSTOSKORIN OSIO
             

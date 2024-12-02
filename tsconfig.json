@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    // Määrittää TypeScriptin käännöksen tavoiteversion
+    "target": "es2016", // Tämä on jo määritelty
+
+    // Lisää seuraava lib-kirjasto, jos sitä ei ole jo määritetty
+    "lib": ["ES6", "DOM"], // Mahdollistaa nykyaikaiset ominaisuudet ja DOM-tyypit
+
+    // Määritä ulostulohakemisto
+    "outDir": "./dist", // Asettaa JavaScript-tiedostojen käännöskohteen
+
+    // Määritetään, että kaikki tiedostonimet ovat oikein käsiteltynä
+    "forceConsistentCasingInFileNames": true,
+
+    // Lisää seuraavat tiukemmat tarkistukset, jos niitä ei ole
+    "strict": true, // Ota käyttöön kaikki tiukat tarkistukset
+    "skipLibCheck": true, // Skippaa d.ts-tiedostojen tarkistus, jos ei tarvita
+
+    // Helpompi ES-moduulien yhteensopivuus
+    "esModuleInterop": true, // Mahdollistaa paremman tuen CommonJS-moduuleille
+    "moduleResolution": "node", // Moduulien resoluutio Node.js-tyylisesti
+    "module": "commonjs" // Moduulityyppi CommonJS
+  },
+  "include": [
+    "ts/**/*.ts" // Lisää kaikki TypeScript-tiedostot ts-hakemistosta
+  ],
+  "exclude": [
+    "node_modules" // Poissuljetaan node_modules-kansio
+  ]
+}
