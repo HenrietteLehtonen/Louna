@@ -1,11 +1,10 @@
 import { test, expect } from "@playwright/test";
 
 // TESTI - onko HTML <title> Ravintola Louna
-// test("test", async ({ page }) => {
-//   await page.goto("http://127.0.0.1:5500/");
-
-//   await expect(page).toHaveTitle(/Ravintola Louna/);
-// });
+test("test", async ({ page }) => {
+  await page.goto("http://127.0.0.1:5500/");
+  await expect(page).toHaveTitle(/Ravintola Louna/);
+});
 
 // Kokeile toimiiko MA,TI,KE.. napit ja näyttääkö sen päivän menun
 test("Viikonpäivä nappien testaus - näyttääkö päiväkohtausen menun", async ({
