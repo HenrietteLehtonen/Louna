@@ -1,5 +1,6 @@
 // KÄÄNNETTY TYPESCRIPT
 
+import { login } from "./functions/loginFunc.js";
 import { Menu } from "./types/menu";
 
 const ruokaLista: Menu[] = [
@@ -171,6 +172,8 @@ eyeIcons.forEach((eyeIcon, index) => {
 
 // KIRJAUDU JA REKISTERÖIDY animaatio
 
+
+
 const registerBtn = document.querySelector("#register") as HTMLButtonElement;
 
 if (registerBtn) {
@@ -202,6 +205,28 @@ if (kirjauduSisBtn) {
 // ADMIN KIRJAUTUMINEN HALLINTAAN
 const kirjauduBtn = document.querySelector("#kirjaudu-btn");
 
+const passwordInput = document.querySelector("#username") as HTMLInputElement;
+const usernameInput = document.querySelector("#salasana") as HTMLInputElement;
+const kirjautumisFormi = document.querySelector('#kirjautumis-formi') as HTMLFormElement
+
+
+if (kirjautumisFormi) {
+  kirjautumisFormi.addEventListener('submit', async (evt) => {
+    try {
+    evt.preventDefault();
+    const loginResult = await login(passwordInput, usernameInput);
+    console.log(loginResult)
+    localStorage.setItem('token', loginResult.token)
+
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  });
+}
+
+
+
+
 // });
 // modal.addEventListener("focusout", (evt) => {
 //   // Close modal when out of focus
@@ -209,6 +234,9 @@ const kirjauduBtn = document.querySelector("#kirjaudu-btn");
 //     modal.close();
 //   }
 // });
+
+
+
 
 //Burgermenu display handling
 burgerMenu.addEventListener("click", () => {

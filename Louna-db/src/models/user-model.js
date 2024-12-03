@@ -12,7 +12,7 @@ const fetchUsers = async () => {
 
 // ehkä
 const fetchUserById = async (id) => {
-  const sql = 'SELECT * FROM Users WHERE user_id = ?';
+  const sql = 'SELECT * FROM Käyttäjät WHERE user_id = ?';
   const [rows] = await querryPool(sql, [id]);
   return rows;
 };

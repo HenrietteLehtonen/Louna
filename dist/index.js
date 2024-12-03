@@ -1,4 +1,5 @@
 // KÄÄNNETTY TYPESCRIPT
+import { login } from "./functions/loginFunc.js";
 const ruokaLista = [
     {
         day: "Maanantai",
@@ -103,9 +104,9 @@ const ruokaLista = [
 const today = new Date().getDay();
 console.log(today);
 const viikonpäivät = [
-    "Sunnuntai",
-    "Maanantai",
-    "Tiistai",
+    "Sunnuntai", // getDay() = 0
+    "Maanantai", // getDay() = 1
+    "Tiistai", // getDay() = 2 ...
     "Keskiviikko",
     "Torstai",
     "Perjantai",
@@ -173,6 +174,24 @@ if (kirjauduSisBtn) {
         document.querySelector("#rek-sposti").value = "";
         document.querySelector("#rek-salasana").value = "";
         document.querySelector("#rek-username").value = "";
+    });
+}
+// ADMIN KIRJAUTUMINEN HALLINTAAN
+const kirjauduBtn = document.querySelector("#kirjaudu-btn");
+const passwordInput = document.querySelector("#username");
+const usernameInput = document.querySelector("#salasana");
+const kirjautumisFormi = document.querySelector('#kirjautumis-formi');
+if (kirjautumisFormi) {
+    kirjautumisFormi.addEventListener('submit', async (evt) => {
+        try {
+            evt.preventDefault();
+            const loginResult = await login(passwordInput, usernameInput);
+            console.log(loginResult);
+            localStorage.setItem('token', loginResult.token);
+        }
+        catch (error) {
+            console.log(error.message);
+        }
     });
 }
 // });
@@ -251,4 +270,3 @@ const showMenu = () => {
     });
 };
 showMenu();
-export {};
