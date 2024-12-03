@@ -289,3 +289,34 @@ const showMenu = (): void => {
 };
 
 showMenu();
+
+const lisää = document.querySelector("#lisää") as HTMLElement;
+
+const datatieto = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/menu");
+    const data = await res.json();
+    lisää.innerHTML = "";
+    data.forEach(
+      (item: {
+        day: string;
+        nimi: string;
+        allergeenit: string;
+        hinta: number;
+      }) => {
+        lisää.innerHTML += `
+        <ul>
+        <><h3>${item.day}</h3></li>
+          <li>${item.nimi}</li>
+          <li>${item.allergeenit}</li>
+          <li>${item.hinta}</li>
+        </ul>
+      `;
+      }
+    );
+  } catch (error) {
+    console.error("Virhe haettaessa dataa:", error);
+  }
+};
+
+datatieto();

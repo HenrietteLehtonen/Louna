@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("click", (event) => {
-  console.log(event.target.parentElement.parentElement);
+  // console.log(event.target.parentElement.parentElement);
 
   if (event.target.classList.contains("add-btn")) {
     /**
