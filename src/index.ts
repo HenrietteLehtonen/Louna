@@ -269,7 +269,7 @@ const datatieto = async (): Promise<void> => {
         valittuPäivä.annokset.forEach((annos) => {
           const annoksetTaulukko = `
             <tr>
-              <td>${annos.nimi}<br>${annos.allergeenit}</td>
+              <td class="annos-td">${annos.nimi}<br>${annos.allergeenit}</td>
               <td>${annos.hinta}</td>
               <td><button id="annos-${annos.annos_id}" class="add-btn">Tilaa</button></td>
             </tr>
