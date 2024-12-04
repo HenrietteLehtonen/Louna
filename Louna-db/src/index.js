@@ -7,6 +7,7 @@ import { fetchMenuItems } from "./models/menu-model.js";
 import { menuRouter } from "./routes/menu-router.js";
 import { userRouter } from "./routes/user-routes.js";
 import authRouter from "./routes/auth-router.js";
+import cors from "cors";
 import { notFoundHandler, errorHandler } from "./middlewares/error-handler.js";
 //
 const hostname = "127.0.0.1";

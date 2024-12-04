@@ -1,4 +1,6 @@
-const apiUrl = "http://127.0.0.1:3000/api";
+
+
+
 const fetchData = async (url, options = {}) => {
     const response = await fetch(url, options);
     if (!response.ok) {
@@ -7,4 +9,5 @@ const fetchData = async (url, options = {}) => {
     const json = response.json();
     return json;
 };
-export { fetchData, apiUrl };
+
+export { fetchData };

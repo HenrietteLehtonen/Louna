@@ -10,11 +10,16 @@ Content-Type: application/json
   "username": "admin",
   "password": "adminpassword"
 }
+###
+GET http://localhost:3000/api/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2xldmVsX2lkIjoxLCJpYXQiOjE3MzMyNDgyODgsImV4cCI6MTczMzMzNDY4OH0.4pxct15R5HTF0D93zejS65kBEhIZ4ePM-c_Ts70FhW0
+
+
 
 ###
 POST http://localhost:3000/api/menu
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE3MzMwNzMzNDMsImV4cCI6MTczMzE1OTc0M30.Z74UdzJKD7OPx8Hn4ngv6NefaJNKdNmNAjxlz7Q7QE4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE3MzMyNDcwMjIsImV4cCI6MTczMzMzMzQyMn0.8qNIs6XEFONhpp56fBu578yk2ADrSYjWnZbgIehVIGQ
 
 {
   "nimi": "jotain",

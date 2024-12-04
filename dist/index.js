@@ -1,5 +1,8 @@
 // KÄÄNNETTY TYPESCRIPT
-console.log("Tudfs");
+
+import { login } from "./functions/loginFunc.js";
+
+
 const ruokaLista = [
     {
         day: "Maanantai",
@@ -104,9 +107,9 @@ const ruokaLista = [
 const today = new Date().getDay();
 console.log(today);
 const viikonpäivät = [
-    "Sunnuntai",
-    "Maanantai",
-    "Tiistai",
+    "Sunnuntai", // getDay() = 0
+    "Maanantai", // getDay() = 1
+    "Tiistai", // getDay() = 2 ...
     "Keskiviikko",
     "Torstai",
     "Perjantai",
@@ -178,6 +181,25 @@ if (kirjauduSisBtn) {
 }
 // ADMIN KIRJAUTUMINEN HALLINTAAN
 const kirjauduBtn = document.querySelector("#kirjaudu-btn");
+<<<<<<< HEAD
+const passwordInput = document.querySelector("#username");
+const usernameInput = document.querySelector("#salasana");
+const kirjautumisFormi = document.querySelector('#kirjautumis-formi');
+if (kirjautumisFormi) {
+    kirjautumisFormi.addEventListener('submit', async (evt) => {
+        try {
+            evt.preventDefault();
+            const loginResult = await login(passwordInput, usernameInput);
+            console.log(loginResult);
+            localStorage.setItem('token', loginResult.token);
+        }
+        catch (error) {
+            console.log(error.message);
+        }
+    });
+}
+=======
+>>>>>>> dev-main
 // });
 // modal.addEventListener("focusout", (evt) => {
 //   // Close modal when out of focus
@@ -271,6 +293,9 @@ const datatieto = async () => {
         console.error("Virhe haettaessa dataa:", error);
     }
 };
+<<<<<<< HEAD
+showMenu();
+=======
 datatieto();
 export {};
 // // napit
@@ -294,3 +319,4 @@ export {};
 //   }
 // };
 // haetieto();
+>>>>>>> dev-main
