@@ -3,7 +3,7 @@ import {
   fetchMenuItems,
   addMenuItem,
   // fetchMediaItemById,
-  updateMediaItem,
+  fetchTilaus,
   removeItem,
   fetchPäivänRuokalista,
 } from "../models/menu-model.js";
@@ -16,22 +16,6 @@ const getItems = async (req, res) => {
     res.status(503).json({ error: 503, message: "DB error" });
   }
 };
-// KÄYTTÄÄ TÄTÄ
-// const getItemById = async (req, res) => {
-//   const id = parseInt(req.params.id);
-//   console.log("getItemById haloo", id);
-//   try {
-//     const item = await fetchMediaItemById(id);
-//     if (item) {
-//       res.json(item);
-//     } else {
-//       res.status(404).json({ message: "Item not found" });
-//     }
-//   } catch (error) {
-//     console.error("getItemById", error.message);
-//     res.status(503).json({ error: 503, message: error.message });
-//   }
-// };
 
 const postItem = async (req, res, next) => {
   const errors = validationResult(req);
@@ -56,39 +40,6 @@ const postItem = async (req, res, next) => {
   } catch (error) {
     return res
       .status(400)
-      .json({ message: "Something went wrong: " + error.message });
-  }
-};
-
-const putItem = async (req, res) => {
-  // destructure title and description property values from req.body
-  const { title, description } = req.body;
-  console.log(title, description);
-  const newDetails = {
-    title,
-    description,
-  };
-  try {
-    const itemsEdited = await updateMediaItem(
-      req.params.id,
-      req.user.user_id,
-      newDetails
-    );
-    // if no items were edited (id was not found in DB), return 404
-    if (itemsEdited === 0) {
-      return res.status(404).json({ message: "Item not found" });
-    } else if (itemsEdited === 1) {
-      return res
-        .status(200)
-        .json({ message: "Item updated", id: req.params.id });
-    } else {
-      return res
-        .status(401)
-        .json({ message: "Not item owner", id: req.params.id });
-    }
-  } catch (error) {
-    return res
-      .status(500)
       .json({ message: "Something went wrong: " + error.message });
   }
 };
@@ -129,11 +80,13 @@ const getPäivänRuokalista = async (req, res) => {
   }
 };
 
-export {
-  getItems,
-  postItem,
-  // getItemById,
-  putItem,
-  DeleteItem,
-  getPäivänRuokalista,
+const getTilaus = async (req, res) => {
+  try {
+    res.json(await fetchTilaus());
+  } catch (e) {
+    console.error("getItems", e.message);
+    res.status(503).json({ error: 503, message: "DB error" });
+  }
 };
+
+export { getItems, getTilaus, postItem, DeleteItem, getPäivänRuokalista };

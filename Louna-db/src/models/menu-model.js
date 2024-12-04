@@ -17,7 +17,7 @@ const fetchMenuItems = async () => {
     INNER JOIN annokset ON ruokalista.lista_id = annokset.lista_id
     INNER JOIN allergeenit ON annokset.allerg_id = allergeenit.allerg_id
     GROUP BY ruokalista.day_name
-    ORDER BY ruokalista.lista_id;`;
+    ORDER BY FIELD(ruokalista.day_name, 'Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai')`;
 
   const [rows] = await querryPool(sql);
   unstringify(rows);
@@ -54,16 +54,6 @@ function unstringify(obj) {
   // Return the processed object
   return obj;
 }
-
-// USE MAYBE
-const fetchMenuItemById = async (id) => {
-  const sql = `SELECT * FROM annokset an
-right JOIN ruokalista ru USING (lista_id) 
-JOIN allergeenit al USING (allerg_id)
-WHERE ru.lista_id = ?`;
-  const [rows] = await querryPool(sql, [id]);
-  return rows;
-};
 
 // USE THIS
 const addMenuItem = async (newItem) => {
@@ -147,9 +137,25 @@ const fetchPäivänRuokalista = async (päivä) => {
   }
 };
 
+const fetchTilaus = async () => {
+  const sql = `SELECT 
+  ti.tilas_id, 
+  ti.tila, 
+  ti.tilaus_aika, 
+  ADDTIME(ti.tilaus_aika, ti.nouto_aika) AS nouto_aika, 
+  json_arrayagg(an.nimi) AS nimet, 
+  json_arrayagg(ta.määrä) AS määrä FROM tilaukset ti
+INNER JOIN tilausannos ta ON ta.tilas_id = ti.tilas_id
+INNER JOIN annokset an ON ta.annos_id = an.annos_id
+`;
+  const [rows] = await querryPool(sql);
+  return rows;
+};
+
 export {
   fetchMenuItems,
   // fetchMenuItemById as fetchMediaItemById,
+  fetchTilaus,
   addMenuItem,
   updateMediaItem,
   removeMenuItem as removeItem,

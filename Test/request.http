@@ -1,6 +1,8 @@
 ###
 GET http://localhost:3000/api/menu
 
+###
+GET http://localhost:3000/api/menu/tilaus
 
 ###
 POST http://localhost:3000/api/auth/login
@@ -30,3 +32,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpY
 ###
 DELETE http://localhost:3000/api/menu/11
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE3MzMwNzMzNDMsImV4cCI6MTczMzE1OTc0M30.Z74UdzJKD7OPx8Hn4ngv6NefaJNKdNmNAjxlz7Q7QE4
+
+
