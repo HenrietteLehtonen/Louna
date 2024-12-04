@@ -13,9 +13,9 @@
   justify-content: space-between;
   gap: 20px;
   padding: 30px;
-  background-color: #f9f9f9; /* Vaalea taustaväri */
-  border-radius: 12px; /* Pyöristetyt kulmat */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Korostettu varjo */
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Sarakkeet */
