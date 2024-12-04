@@ -183,6 +183,14 @@ peruuta.addEventListener("click", function () {
   document
     .querySelector(".container-ruokavalinta")
     .setAttribute("id", "hidden");
+
+  // tyhjennetään formi
+
+  document.querySelector("#annos").value = "";
+  document.querySelector("#price").value = "";
+  document
+    .querySelectorAll(".checkbox")
+    .forEach((checkbox) => (checkbox.checked = false));
 });
 teeViikonpäivät();
 teeRivi();

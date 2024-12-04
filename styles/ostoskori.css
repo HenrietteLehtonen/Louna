@@ -87,8 +87,10 @@
 }
 
 /* Muut painikkeet */
-.increase-btn, .decrease-btn, .remove-btn {
-  background-color: #4CAF50;
+.increase-btn,
+.decrease-btn,
+.remove-btn {
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 5px 8px;
@@ -98,7 +100,8 @@
   font-size: 14px;
 }
 
-.increase-btn:hover, .decrease-btn:hover {
+.increase-btn:hover,
+.decrease-btn:hover {
   background-color: #45a049;
 }
 
@@ -113,7 +116,7 @@
 
 /* Vahvista-painike */
 .confirm-btn {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: #fff;
   border: none;
   padding: 10px 20px;

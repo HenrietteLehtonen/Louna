@@ -3,43 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Ravintola Louna kotisivut" />
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/table.css" />
+    <link rel="stylesheet" href="./styles/dialog.css" />
     <link rel="stylesheet" href="./styles/ostoskori.css" />
+
     <script src="dist/ostoskori.js" defer></script>
     <script src="./menu.js" defer></script>
+
+    <link rel="stylesheet" href="./styles/toast.css" />
+    <link rel="stylesheet" href="./styles/kirjautuminen.css" />
+
+    <script src="./dist/index.js" defer type="module"></script>
+
     <script
       src="https://kit.fontawesome.com/2a4b915664.js"
       crossorigin="anonymous"
     ></script>
-    <script src="nav.js" defer></script>
-    <title>Louna Project</title>
+    <!-- <script src="nav.js" defer></script> -->
+    <title>Ravintola Louna</title>
   </head>
   <body>
     <!-- 
     *******************************
-
+            
+             Kirjautuminen
              Dialog / Modal
              Muuta div muotoon tai jokin muu ratkaisu
 
     *******************************  
     -->
 
-    <dialog
-      style="
-        margin: auto;
-        height: 500px;
-        width: 40%;
-        min-width: 300px;
-        max-width: 600px;
-        background-color: white;
-      "
-      class="menu-hold"
-    >
-      <button>Test button2</button>
-      <input type="submit" value="Log in" />
+    <dialog class="dialog kirjaudu">
+      <div id="dialog-container">
+        <button class="close-modal-btn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div id="dialog-logo"></div>
+        <h1>KIRJAUDU</h1>
 
-      <!-- Lisää dataa js tiedostosta -->
+        <div class="form-container">
+          <form action="http://localhost:3000/api/auth/login" method="POST">
+            <div class="input-kenttä">
+              <label for="username"></label>
+              <input
+                type="text"
+                placeholder="Käyttäjätunnus"
+                name="username"
+                id="username"
+                required
+              />
+            </div>
+            <!-- type="email"
+            placeholder="Sähköposti"
+            name="sposti"
+            id="sposti"
+            required -->
+
+            <div class="input-kenttä">
+              <label for="psw"></label>
+              <input
+                type="password"
+                placeholder="Salasana"
+                name="password"
+                class="salasana"
+                id="salasana"
+                required
+              />
+              <!-- Salasana väh 5 kirjainta ja 1 numero   pattern="^(?=(.*[A-Za-z]){5,})(?=.*\d)[A-Za-z\d]{6,}$"-->
+              <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
+            </div>
+            <a href="http://">Unohtuiko salasana?</a>
+
+            <input
+              type="submit"
+              value="Kirjaudu sisään"
+              id="kirjaudu-btn"
+              class="form-btn"
+            />
+            <!-- <button type="submit" id="kirjaudu-btn" class="form-btn">
+              Kirjaudu sisään
+            </button> -->
+          </form>
+        </div>
+        <div id="uusi-käyttäjä">
+          <h2>Uusi käyttäjä?</h2>
+          <button class="form-btn register-btn" id="register">
+            Rekisteröidy
+          </button>
+        </div>
+      </div>
+
+      <!-- REK DIALOGI -->
+      <dialog class="dialog rek" open>
+        <div id="dialog-container">
+          <h1>REKISTERÖIDY</h1>
+
+          <div class="form-container rek-container">
+            <form action="action_page.php" method="post">
+              <div class="input-kenttä">
+                <label for="username"></label>
+                <input
+                  type="text"
+                  placeholder="Nimi"
+                  name="username"
+                  id="rek-username"
+                  required
+                />
+              </div>
+              <div class="input-kenttä">
+                <label for="sposti"></label>
+                <input
+                  type="email"
+                  placeholder="Sähköposti"
+                  name="sposti"
+                  id="rek-sposti"
+                  required
+                />
+              </div>
+
+              <div class="input-kenttä">
+                <label for="psw"></label>
+                <input
+                  type="password"
+                  placeholder="Salasana"
+                  name="psw"
+                  id="rek-salasana"
+                  class="salasana"
+                  pattern="^(?=(.*[A-Za-z]){5,})(?=.*\d)[A-Za-z\d]{6,}$"
+                  required
+                />
+                <!-- Salasana väh 5 kirjainta ja 1 numero -->
+                <div class="show-psw"><i class="fa-solid fa-eye"></i></div>
+              </div>
+              <input
+                type="submit"
+                value="Rekisteröidy"
+                class="form-btn rek-btn"
+              />
+              <!-- <button type="submit" class="form-btn rek-btn">
+                Rekisteröidy
+              </button> -->
+            </form>
+          </div>
+          <div id="uusi-käyttäjä">
+            <h2>Tunnus jo olemassa?</h2>
+            <button class="form-btn register-btn" id="go-back-to-login">
+              Kirjaudu sisään
+            </button>
+          </div>
+        </div>
+      </dialog>
     </dialog>
 
     <!-- 
@@ -168,6 +283,10 @@
             <!-- ruokalista tulee tähän -->
           </table>
         </div>
+      </div>
+
+      <div id="toaster-container">
+        <!-- <div class="toast"></div> -->
       </div>
     </main>
 

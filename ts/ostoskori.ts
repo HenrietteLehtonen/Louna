@@ -94,6 +94,7 @@ function paivitaOstoskori(): void {
     });
 
     cartItems.parentElement?.appendChild(confirmButton);
+
   }
 }
 
@@ -139,12 +140,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Ostoskorin avaaminen
 document.addEventListener("DOMContentLoaded", () => {
+
   const customModal = document.getElementById(
     "custom-modal"
   ) as HTMLElement | null;
   const openCartButton = document.getElementById(
     "open-modal-btn"
   ) as HTMLElement | null;
+
 
   if (openCartButton) {
     openCartButton.addEventListener("click", () => {
@@ -155,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Tuotteen lisääminen ostoskoriin
+
 document.addEventListener("click", (event) => {
   if ((event.target as HTMLElement).classList.contains("add-btn")) {
     const row = (event.target as HTMLElement).closest(
