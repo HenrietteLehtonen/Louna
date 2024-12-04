@@ -1,6 +1,5 @@
 // KÄÄNNETTY TYPESCRIPT
 
-import { validateLocaleAndSetLanguage } from "../node_modules/typescript/lib/typescript";
 import { Annokset, Menu, Ruokalista } from "./types/menu";
 import { fetchData, apiUrl } from "./utils/haeData.js";
 

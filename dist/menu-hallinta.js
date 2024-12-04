@@ -52,6 +52,7 @@ if (!delAll) {
     console.log("Poista kaikkia nappia ei löytynyt!");
 }
 delAll.addEventListener("click", function () {
+    // TODO: LISÄÄ POISTA KAIKKI BÄCKEND
     console.log("Poista kaikki");
     lista.splice(0, lista.length);
     // Poista kaikki annosrivit
@@ -59,19 +60,30 @@ delAll.addEventListener("click", function () {
     annosRivit.forEach((rivi) => rivi.remove());
     console.log("Kaikki annoksett poistettu");
 });
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE3MzMzMzEzNTMsImV4cCI6MTczMzQxNzc1M30.hsIQqKWIecHp2ABjPnl_OzGl1TypIGXd2GQB7TTikgo";
 // Poista yksittäinen annos
 const deletebuttonlistener = (menu) => {
     const del = document.querySelector(`#del-${menu.annos_id}`);
     if (!del) {
-        console.log("Poisa napia ei löytynyt!");
+        console.log("Poista napia ei löytynyt!");
     }
-    del.addEventListener("click", function () {
-        const annosIndex = lista.findIndex(function (deleteItem) {
-            return deleteItem.id === menu.annos_id;
-        });
-        lista.splice(annosIndex, 1);
-        kohde.removeChild(document.querySelector(`#tr-${menu.annos_id}`));
-        console.log(`Poistettu: ${menu.annos_id}`);
+    del.addEventListener("click", async () => {
+        try {
+            const options = {
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + token,
+                },
+            };
+            const result = await fetchData(apiUrl + `/menu/${menu.annos_id}`, options);
+            console.log(result);
+            // poista taulukosta
+            kohde.removeChild(document.querySelector(`#tr-${menu.annos_id}`));
+            console.log(`Poistettu: ${menu.annos_id}`);
+        }
+        catch (error) {
+            console.error("Ei onnistuttu poistamaan.");
+        }
     });
 };
 // Lisää annos
@@ -171,10 +183,10 @@ const haeData = async () => {
     try {
         const ruokalista = await fetchData(apiUrl + `/menu`);
         for (const päivä of ruokalista) {
-            console.log(päivä.annokset);
+            // console.log(päivä.annokset);
             const päivänAnnokset = päivä.annokset;
             päivänAnnokset.forEach((annos) => {
-                console.log(annos);
+                // console.log(annos);
                 let html = `
           <tr id="tr-${annos.annos_id}" class="annos-rivi" data-päivä="${päivä.day}">
           <td></td>
@@ -186,7 +198,6 @@ const haeData = async () => {
           `;
                 // iskee jokaiselle päivälle kokolistan
                 const päiväRiv = document.querySelector(`.päivä-rivi[data-päivä="${päivä.day}"]`);
-                console.log(päiväRiv);
                 päiväRiv.insertAdjacentHTML("afterend", html);
                 deletebuttonlistener(annos);
             });

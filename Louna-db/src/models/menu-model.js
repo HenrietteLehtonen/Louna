@@ -149,7 +149,7 @@ const fetchPäivänRuokalista = async (päivä) => {
 
 export {
   fetchMenuItems,
-  // fetchMenuItemById as fetchMediaItemById,
+  fetchMenuItemById as fetchMediaItemById,
   addMenuItem,
   updateMediaItem,
   removeMenuItem as removeItem,

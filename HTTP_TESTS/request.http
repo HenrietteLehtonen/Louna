@@ -29,5 +29,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpY
   "day_name": "Perjantai"
 }
 ###
-DELETE http://localhost:3000/api/menu/1
+DELETE http://localhost:3000/api/menu/11
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE3MzMzMzEzNTMsImV4cCI6MTczMzQxNzc1M30.hsIQqKWIecHp2ABjPnl_OzGl1TypIGXd2GQB7TTikgo
