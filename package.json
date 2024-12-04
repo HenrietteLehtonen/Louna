@@ -10,10 +10,19 @@
     "dev-ts": "tsc --watch",
     "test-pw": "playwright test",
     "dev": "nodemon Louna-db/src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "apidoc"
   },
   "author": "",
   "license": "ISC",
+  "apidoc": {
+    "title": "My API docs",
+    "url": "https://example.com/api/v1",
+    "order": [
+      "Authentication",
+      "User"
+    ]
+  },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
     "@playwright/test": "^1.49.0",
@@ -28,6 +37,7 @@
   },
   "dependencies": {
     "apidoc": "^1.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-validator": "^7.2.0",
