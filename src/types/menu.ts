@@ -1,3 +1,17 @@
+type Annokset = {
+  nimi: string;
+  allergeenit: string;
+  hinta: number;
+  annos_id: number;
+};
+
+type Ruokalista = {
+  day: string;
+  annokset: Annokset[];
+};
+
+/// MOCDATA
+
 type Menu = {
   day: string;
   id: number;
@@ -14,4 +28,4 @@ type Tilaukset = {
   tilauksen_tila: string;
 };
 
-export type { Menu, Tilaukset };
+export type { Menu, Tilaukset, Ruokalista, Annokset };

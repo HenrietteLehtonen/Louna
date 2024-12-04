@@ -1,4 +1,5 @@
 // KÄÄNNETTY TYPESCRIPT
+console.log("Tudfs");
 const ruokaLista = [
     {
         day: "Maanantai",
@@ -208,49 +209,88 @@ burgerMenuContent.addEventListener("focusout", (evt) => {
  *  RUOKALISTAN NÄYTTÄMINEN
  *
  */
-// Näytetään päivän ruokalista
-const showMenu = () => {
-    const dayButtons = document.querySelectorAll(".day-btn");
-    //const kohde = document.querySelector("#kohde") as HTMLElement;
-    const kohde = document.querySelector("#kohde");
-    const tämäpäivä = viikonpäivät[today];
-    // Näytetään tämän päivän menu
-    const näytäPäivänMenu = (day) => {
-        const päivänRuoka = ruokaLista.filter((ruoka) => ruoka.day === day);
+const kohde = document.querySelector("#kohde");
+const datatieto = async () => {
+    try {
+        const res = await fetch("http://localhost:3000/api/menu");
+        const ruokalista = await res.json();
         kohde.innerHTML = "";
-        // Lisää päivän otsikko
-        const päiväOtsikko = `
-      <tr>
-        <th colspan=3>${day}</th>
-      </tr>
-    `;
-        kohde.insertAdjacentHTML("beforeend", päiväOtsikko);
-        // Lisää ruokalistan annokset per päivä
-        päivänRuoka.forEach((ruoka) => {
-            const annoksetTaulukko = `
-        <tr>
-          <td class="annos-td">
-            ${ruoka.annos}<br>
-            ${ruoka.allergeenit.join(", ")}
-          </td>
-          <td>${ruoka.hinta}€ </td>
-          <td><button class="add-btn">+</button></td>
-        </tr>
-      `;
-            kohde.insertAdjacentHTML("beforeend", annoksetTaulukko);
-        });
-    };
-    // Näytetään tämän päivän menu automaattisesti
-    näytäPäivänMenu(tämäpäivä);
-    // Napeista näyttämään muut päivät
-    dayButtons.forEach((button) => {
-        button.addEventListener("click", function () {
-            const day = this.getAttribute("data-day");
-            if (day) {
-                näytäPäivänMenu(day);
+        console.log(ruokalista);
+        // today = date funktiosta tsekkaamaan tämä päivä
+        const tämäpäivä = viikonpäivät[today];
+        // Valitun päivän menu
+        const näytäMenu = (day) => {
+            kohde.innerHTML = "";
+            const valittuPäivä = ruokalista.find((item) => item.day === day); // Etitään päivä ruokalistasta
+            if (valittuPäivä) {
+                // Otsikko - viikonpäivä
+                kohde.innerHTML += `
+          <tr>
+            <th colspan="3">${valittuPäivä.day}</th>
+          </tr>
+        `;
+                // valitun päivän annokset
+                valittuPäivä.annokset.forEach((annos) => {
+                    const annoksetTaulukko = `
+            <tr>
+              <td class="annos-td">${annos.nimi}<br>${annos.allergeenit}</td>
+              <td>${annos.hinta}</td>
+              <td><button id="annos-${annos.annos_id}" class="add-btn">Tilaa</button></td>
+            </tr>
+          `;
+                    kohde.insertAdjacentHTML("beforeend", annoksetTaulukko);
+                });
             }
+            else {
+                kohde.innerHTML =
+                    "<tr><td colspan='3'>Tänään ei tarjolla lounasta.</td></tr>";
+            }
+        };
+        näytäMenu(tämäpäivä);
+        // Lisää tapahtumakäsittelijät päivä-napeille
+        const dayButtons = document.querySelectorAll(".day-btn");
+        dayButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+                const day = this.getAttribute("data-day");
+                console.log("Tänään on: " + day);
+                if (day) {
+                    näytäMenu(day);
+                }
+                if (day != tämäpäivä) {
+                    console.log("Eri päivät");
+                    const addostos = document.querySelectorAll(".add-btn");
+                    addostos.forEach((button) => {
+                        button.setAttribute("disabled", "");
+                    });
+                }
+            });
         });
-    });
+        // verrataan onko tämä päivä napin päivä -> jos ei lisätään nappeihin attribuutti diabled, ettei pysty klikkaa
+    }
+    catch (error) {
+        console.error("Virhe haettaessa dataa:", error);
+    }
 };
-showMenu();
+datatieto();
 export {};
+// // napit
+// const dayButtons: NodeListOf<HTMLButtonElement> =
+//   document.querySelectorAll(".day-btn");
+// dayButtons.forEach((button) => {
+//   button.addEventListener("click", function () {
+//     const day = this.getAttribute("data-day");
+//     console.log("Tänään on :" + day);
+//   });
+// });
+// const haetieto = async () => {
+//   try{
+//   let menu = await fetchData<Ruokalista>(apiUrl + `/menu`);
+//   console.log(menu.day);
+//   menu.annokset.forEach((annos) => {
+//     console.log(`${annos.nimi}`);
+//   });
+//   }catch(error){
+//     console.log("Ei onnistu!");
+//   }
+// };
+// haetieto();

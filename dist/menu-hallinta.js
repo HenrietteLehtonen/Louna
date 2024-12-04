@@ -61,7 +61,7 @@ delAll.addEventListener("click", function () {
 const deletebuttonlistener = (menu) => {
     const del = document.querySelector(`#del-${menu.id}`);
     if (!del) {
-        console.log("Poista napia ei löytynyt!");
+        console.log("Poisa napia ei löytynyt!");
     }
     del.addEventListener("click", function () {
         const annosIndex = lista.findIndex(function (deleteItem) {

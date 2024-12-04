@@ -1,6 +1,8 @@
 // index.js
 
 import express from "express";
+import cors from "cors";
+
 import { fetchMenuItems } from "./models/menu-model.js";
 import { menuRouter } from "./routes/menu-router.js";
 import { userRouter } from "./routes/user-routes.js";
@@ -17,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // To parse application/x-www-form-urlencoded
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
+app.use(cors());
 
 app.get("/api", async (req, res) => {
   res.render("index", {
@@ -25,6 +28,8 @@ app.get("/api", async (req, res) => {
     mediaData: await fetchMenuItems(),
   });
 });
+
+app.use("/api", express.static("doc"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
