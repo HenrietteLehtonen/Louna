@@ -1,6 +1,8 @@
 // index.js
 
 import express from "express";
+import cors from "cors";
+
 import { fetchMenuItems } from "./models/menu-model.js";
 import { menuRouter } from "./routes/menu-router.js";
 import { userRouter } from "./routes/user-routes.js";
@@ -27,6 +29,8 @@ app.get("/api", async (req, res) => {
     mediaData: await fetchMenuItems(),
   });
 });
+
+app.use("/api", express.static("doc"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);

@@ -1,8 +1,19 @@
+// Rajapinta ostoskorin tuotteelle
+interface OstoskoriItem {
+  nimi: string;
+  hinta: {
+    muu: number; //
+  };
+  maara: number;
+}
+
 // Alustus ja datan haku
-let ostoskori = JSON.parse(localStorage.getItem("ostoskori")) || [];
+let ostoskori: OstoskoriItem[] = JSON.parse(
+  localStorage.getItem("ostoskori") || "[]"
+);
 
 // Tuotteen lisääminen ostoskoriin
-function lisaaOstoskoriin(ruoka) {
+function lisaaOstoskoriin(ruoka: OstoskoriItem): void {
   const existingProduct = ostoskori.find((item) => item.nimi === ruoka.nimi);
 
   if (existingProduct) {
@@ -13,34 +24,39 @@ function lisaaOstoskoriin(ruoka) {
   paivitaOstoskori();
 }
 
-const inc = (index) => {
+// Funktiot tuotteen määrän muuttamiseen
+const inc = (index: number): void => {
   ostoskori[index].maara += 1;
 };
-const dec = (index) => {
+
+const dec = (index: number): void => {
   if (ostoskori[index].maara > 1) {
     ostoskori[index].maara -= 1;
   } else {
     ostoskori.splice(index, 1);
   }
 };
-const rem = (index) => {
+
+const rem = (index: number): void => {
   ostoskori.splice(index, 1);
 };
 
 // Ostoskorin päivitys ja tallennus
-function paivitaOstoskori() {
-  /* voi siirtäää funktion ulkopuolelle */
-  const cartItems = document.getElementById("cart-items");
-  const cartTotal = document.getElementById("cart-total");
-  /* voi siirtäää funktion ulkopuolelle */
+function paivitaOstoskori(): void {
+  const cartItems = document.getElementById("cart-items") as HTMLElement | null;
+  const cartTotal = document.getElementById("cart-total") as HTMLElement | null;
 
-  if (!cartItems || !cartTotal) return;
+  if (!cartItems || !cartTotal) {
+    console.error("Ostoskorielementtejä ei löytynyt!");
+    return;
+  }
 
   cartItems.innerHTML = "";
   let total = 0;
 
   ostoskori.forEach((item, index) => {
-    const hinta = parseFloat(item.hinta.muu);
+    const hinta = item.hinta.muu;
+
     if (isNaN(hinta)) {
       console.error(`Virheellinen hinta tuotteelle: ${item.nimi}`);
       return;
@@ -63,35 +79,6 @@ function paivitaOstoskori() {
   cartTotal.textContent = `Kokonaishinta: ${total.toFixed(2)} €`;
   localStorage.setItem("ostoskori", JSON.stringify(ostoskori));
 
-  // poista myöhemmin
-  /*   document.querySelectorAll(".increase-btn").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      const index = event.target.getAttribute("data-index");
-      ostoskori[index].maara += 1;
-      paivitaOstoskori();
-    });
-  });
-
-  document.querySelectorAll(".decrease-btn").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      const index = event.target.getAttribute("data-index");
-      if (ostoskori[index].maara > 1) {
-        ostoskori[index].maara -= 1;
-      } else {
-        ostoskori.splice(index, 1);
-      }
-      paivitaOstoskori();
-    });
-  });
-
-  document.querySelectorAll(".remove-btn").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      const index = event.target.getAttribute("data-index");
-      ostoskori.splice(index, 1);
-      paivitaOstoskori();
-    });
-  }); */
-
   napienToiminnallisuus(".increase-btn", inc);
   napienToiminnallisuus(".decrease-btn", dec);
   napienToiminnallisuus(".remove-btn", rem);
@@ -106,26 +93,39 @@ function paivitaOstoskori() {
       window.location.href = "tilaustiedot.html";
     });
 
-    cartItems.parentElement.appendChild(confirmButton);
+    cartItems.parentElement?.appendChild(confirmButton);
+
   }
 }
-// uusi Functio nappien toiminnalle
-function napienToiminnallisuus(query, keskiFunktio) {
+
+// Uusi Funktio nappien toiminnalle
+function napienToiminnallisuus(
+  query: string,
+  keskiFunktio: (index: number) => void
+): void {
   document.querySelectorAll(query).forEach((button) => {
     button.addEventListener("click", (event) => {
-      const index = event.target.getAttribute("data-index");
+      const index = parseInt(
+        (event.target as HTMLButtonElement).getAttribute("data-index") || "0",
+        10
+      );
       keskiFunktio(index);
       paivitaOstoskori();
     });
   });
 }
 
+// Dokumentin latautuessa
 document.addEventListener("DOMContentLoaded", () => {
   paivitaOstoskori();
 
-  const customModal = document.getElementById("custom-modal");
+  const customModal = document.getElementById(
+    "custom-modal"
+  ) as HTMLElement | null;
   if (customModal) {
-    const closeCartButton = document.getElementById("close-cart");
+    const closeCartButton = document.getElementById(
+      "close-cart"
+    ) as HTMLElement | null;
     if (closeCartButton) {
       closeCartButton.addEventListener("click", () => {
         customModal.classList.add("hidden");
@@ -140,50 +140,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Ostoskorin avaaminen
 document.addEventListener("DOMContentLoaded", () => {
-  const customModal = document.getElementById("custom-modal");
-  const openCartButton = document.getElementById("open-modal-btn");
 
-  // Ostoskorin avaaminen
+  const customModal = document.getElementById(
+    "custom-modal"
+  ) as HTMLElement | null;
+  const openCartButton = document.getElementById(
+    "open-modal-btn"
+  ) as HTMLElement | null;
+
+
   if (openCartButton) {
     openCartButton.addEventListener("click", () => {
-      customModal.classList.remove("hidden");
+      customModal?.classList.remove("hidden");
     });
   } else {
     console.error("Avauspainiketta ei löytynyt!");
   }
 });
 
+
 document.addEventListener("click", (event) => {
-  console.log(event.target.parentElement.parentElement);
+  if ((event.target as HTMLElement).classList.contains("add-btn")) {
+    const row = (event.target as HTMLElement).closest(
+      "tr"
+    ) as HTMLTableRowElement;
 
-  if (event.target.classList.contains("add-btn")) {
-    /**
-     *  LISÄTTY TOASTER
-     *
-     */
-    function naytaToastViesti(viesti) {
-      const toast = document.createElement("div");
-      toast.classList.add("toast");
-      toast.textContent = viesti;
+    const ruokaNimi =
+      row.querySelector("td")?.childNodes[0].textContent?.trim() || "";
 
-      // Lisää toast elementti ruudulle
-      document.body.appendChild(toast);
-
-      // Poista toast 3 sekunnin kuluttua
-      setTimeout(() => {
-        toast.remove();
-      }, 3200);
-    }
-    naytaToastViesti(`Tuote lisättiin ostoskoriin!`);
-
-    const row = event.target.closest("tr");
-
-    const ruokaNimi = row.querySelector("td").childNodes[0].textContent.trim();
-
-    const hintaText = row.querySelectorAll("td")[1].textContent;
-
-    console.log("Ruoka Nimi: ", ruokaNimi);
-    console.log("Hinta: ", hintaText);
+    const hintaText = row.querySelectorAll("td")[1]?.textContent || "";
 
     const parsedHintaText = hintaText.split("/")[0].trim();
     const hinta = parseFloat(
@@ -195,9 +180,10 @@ document.addEventListener("click", (event) => {
       return;
     }
 
-    const ruoka = {
-      nimi: ruokaNimi.trim(),
+    const ruoka: OstoskoriItem = {
+      nimi: ruokaNimi,
       hinta: { muu: hinta },
+      maara: 0,
     };
 
     lisaaOstoskoriin(ruoka);
