@@ -8,6 +8,7 @@ import {
   getItems,
   putItem,
   DeleteItem,
+  poistaKaikkiAnnokset,
 } from "../controllers/menu-controller.js";
 
 import { authenticateToken } from "../middlewares/authentication.js";
@@ -63,7 +64,8 @@ menuRouter
    *     }
    */
   .get(getItems)
-  .post(authenticateToken, postItem);
+  .post(authenticateToken, postItem)
+  .delete(poistaKaikkiAnnokset);
 
 menuRouter
   .route("/:id")

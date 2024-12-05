@@ -71,7 +71,7 @@ INSERT INTO Allergeenit (tunniste, allergeeni)
     ('L', 'laktoositon'),
     ('M', 'maidoton'),
     ('K', 'ei_sisällä_kananmunaa'),
-    ('SO', 'en_tiedä'),
+    ('SO', 'soijaton'),
     ('VEG', 'vegaaninen'),
     ('EI', 'ei_allergeeneja');
 

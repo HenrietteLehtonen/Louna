@@ -54,23 +54,33 @@ addAnnos.addEventListener("click", function () {
   document.querySelector("#hidden")!.removeAttribute("id");
 });
 
-// Poista kaikki annokset TOIMII!
+// Poista kaikki annokset
 const delAll = document.querySelector("#deleteAllBtn") as HTMLButtonElement;
 if (!delAll) {
   console.log("Poista kaikkia nappia ei löytynyt!");
 }
-delAll.addEventListener("click", function () {
-  // TODO: LISÄÄ POISTA KAIKKI BÄCKEND
-  console.log("Poista kaikki");
-  lista.splice(0, lista.length);
-  // Poista kaikki annosrivit
-  const annosRivit = document.querySelectorAll("tr.annos-rivi");
-  annosRivit.forEach((rivi) => rivi.remove());
-  console.log("Kaikki annoksett poistettu");
+delAll.addEventListener("click", async () => {
+  try {
+    const options: RequestInit = {
+      method: "DELETE",
+      // headers: {
+      //   Authorization: "Bearer " + token,
+      // },
+    };
+    // yhteys backendiin
+    const result = await fetchData<Annokset>(apiUrl + `/menu`, options);
+
+    // poistetaan kaikki annosrivit taulukosta
+    const annosRivit = document.querySelectorAll("tr.annos-rivi");
+    annosRivit.forEach((rivi) => rivi.remove());
+    console.log("Kaikki annoksett poistettu");
+  } catch (error) {
+    console.error("Annoksia ei pystytä poistamaan");
+  }
 });
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE3MzMzMzEzNTMsImV4cCI6MTczMzQxNzc1M30.hsIQqKWIecHp2ABjPnl_OzGl1TypIGXd2GQB7TTikgo";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE3MzMzOTQ4MjUsImV4cCI6MTczMzQ4MTIyNX0.QfAi8sXdT5-6GpkeirfMmIPJGnp_LYyYWIFpUX6bWTA";
 
 // Poista yksittäinen annos
 const deletebuttonlistener = (menu: Annokset) => {
@@ -88,6 +98,7 @@ const deletebuttonlistener = (menu: Annokset) => {
           Authorization: "Bearer " + token,
         },
       };
+      // yhteys backendiin
       const result = await fetchData<Annokset>(
         apiUrl + `/menu/${menu.annos_id}`,
         options
@@ -112,61 +123,97 @@ if (!save) {
   console.log("Lisää nappia ei löydetty!");
 }
 
-save.addEventListener("click", function () {
-  // Jos lista on tyhjä, aloita id 1, muuten jatka seuraavalla numerolla
-  let id: number;
-  if (lista.length > 0) {
-    id = lista[lista.length - 1].id + 1;
-  } else {
-    id = 1;
-  }
+/**
+ *
+ *  LISÄÄ ANNOS BACKEND
+ *
+ */
+save.addEventListener("click", async () => {
+  try {
+    console.log("Haetaan dataa...");
 
-  // allergeenit taulukoksi
-  const selectedAllergens: string[] = Array.from(
-    document.querySelectorAll<HTMLInputElement>(".checkbox:checked")
-  ).map((checkbox: HTMLInputElement) => checkbox.name);
-
-  // muutetaan hinta numeroksi
-  const hintaNumeroksi = Number(
-    (document.querySelector("#price") as HTMLInputElement).value
-  );
-
-  // alustetaan menu objektiksi
-  let menu = {
-    day: (document.querySelector("#päivä-valitsin") as HTMLSelectElement).value,
-    id: id,
-    annos: (document.querySelector("#annos") as HTMLInputElement).value,
-    allergeenit: selectedAllergens,
-    hinta: hintaNumeroksi,
-  };
-
-  // tsekataan onko valuet tyhjjiä annoksen lisäämisessä, jos on huomautetaan !
-  if (menu.annos === "" || menu.hinta < 1) {
-    alert("Täytä kentät");
-  } else {
-    let html = buildHTML(menu);
-    const päiväRivi = document.querySelector(
-      `.päivä-rivi[data-päivä="${menu.day}"]`
-    ) as HTMLElement;
-    päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
-
-    lista.push(menu);
-    // console.log(menu.day);
-    // console.log(menu.annos);
-    // console.log(typeof menu.hinta);
-    // console.log(annos.value);
-    // console.log(Object.values(menu));
-    deletebuttonlistener(menu);
-
-    // tyhjennetään formi annoksen lisäämisen jälkeen
-
-    (document.querySelector("#annos") as HTMLInputElement).value = "";
-    (document.querySelector("#price") as HTMLInputElement).value = "";
-    document
-      .querySelectorAll<HTMLInputElement>(".checkbox")
-      .forEach((checkbox) => (checkbox.checked = false));
+    // haetaan input kentät
+    let data = {
+      day_name: (document.querySelector("#päivä-valitsin") as HTMLSelectElement)
+        .value,
+      nimi: (document.querySelector("#annos") as HTMLInputElement).value,
+      allerg_id: (
+        document.querySelector(".checkbox:checked") as HTMLInputElement
+      ).value,
+      hinta: (document.querySelector("#price") as HTMLInputElement).value,
+    };
+    // muutetaan options, koska ei käyteta GET
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const result = await fetchData<Annokset>(apiUrl + "/menu", options);
+    console.log(result);
+    console.log("Annos lisätty onnistuneesti");
+  } catch (error) {
+    console.error("Ei onnistuttu lisäämään annosta");
   }
 });
+
+// save.addEventListener("click", function () {
+//   // Jos lista on tyhjä, aloita id 1, muuten jatka seuraavalla numerolla
+//   let id: number;
+//   if (lista.length > 0) {
+//     id = lista[lista.length - 1].id + 1;
+//   } else {
+//     id = 1;
+//   }
+
+//   // allergeenit taulukoksi
+//   const selectedAllergens: string[] = Array.from(
+//     document.querySelectorAll<HTMLInputElement>(".checkbox:checked")
+//   ).map((checkbox: HTMLInputElement) => checkbox.name);
+
+//   // muutetaan hinta numeroksi
+//   const hintaNumeroksi = Number(
+//     (document.querySelector("#price") as HTMLInputElement).value
+//   );
+
+//   // alustetaan menu objektiksi
+//   let menu = {
+//     day: (document.querySelector("#päivä-valitsin") as HTMLSelectElement).value,
+//     id: id,
+//     annos: (document.querySelector("#annos") as HTMLInputElement).value,
+//     allergeenit: selectedAllergens,
+//     hinta: hintaNumeroksi,
+//   };
+
+//   // tsekataan onko valuet tyhjjiä annoksen lisäämisessä, jos on huomautetaan !
+//   if (menu.annos === "" || menu.hinta < 1) {
+//     alert("Täytä kentät");
+//   } else {
+//     let html = buildHTML(menu);
+//     const päiväRivi = document.querySelector(
+//       `.päivä-rivi[data-päivä="${menu.day}"]`
+//     ) as HTMLElement;
+//     päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
+
+//     lista.push(menu);
+//     // console.log(menu.day);
+//     // console.log(menu.annos);
+//     // console.log(typeof menu.hinta);
+//     // console.log(annos.value);
+//     // console.log(Object.values(menu));
+//     deletebuttonlistener(menu);
+
+//     // tyhjennetään formi annoksen lisäämisen jälkeen
+
+//     (document.querySelector("#annos") as HTMLInputElement).value = "";
+//     (document.querySelector("#price") as HTMLInputElement).value = "";
+//     document
+//       .querySelectorAll<HTMLInputElement>(".checkbox")
+//       .forEach((checkbox) => (checkbox.checked = false));
+//   }
+// });
 
 // Peruuta
 
