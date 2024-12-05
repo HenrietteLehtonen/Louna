@@ -1,5 +1,6 @@
 // KÄÄNNETTY TYPESCRIPT
 
+import { table } from "console";
 import { validateLocaleAndSetLanguage } from "../node_modules/typescript/lib/typescript";
 import { Annokset, Menu, Ruokalista } from "./types/menu";
 import { fetchData, apiUrl } from "./utils/haeData.js";
@@ -260,11 +261,13 @@ const datatieto = async (): Promise<void> => {
       if (valittuPäivä) {
         // Otsikko - viikonpäivä
         kohde.innerHTML += `
-          <tr>
+          <thead>
             <th colspan="3">${valittuPäivä.day}</th>
-          </tr>
+          </thead>
         `;
-
+        const tablebody = document.createElement("tbody");
+        tablebody.setAttribute("id", "tablebody");
+        kohde.appendChild(tablebody);
         // valitun päivän annokset
         valittuPäivä.annokset.forEach((annos) => {
           const annoksetTaulukko = `
@@ -274,7 +277,7 @@ const datatieto = async (): Promise<void> => {
               <td><button id="annos-${annos.annos_id}" class="add-btn">Tilaa</button></td>
             </tr>
           `;
-          kohde.insertAdjacentHTML("beforeend", annoksetTaulukko);
+          tablebody.insertAdjacentHTML("beforeend", annoksetTaulukko);
         });
       } else {
         kohde.innerHTML =
