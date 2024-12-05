@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles/tilaustiedot.css" />
-    <script src="js/tilaustiedot.js" defer></script>
+    <script src="dist/tilaustiedot.js" defer></script>
     <title>Vahvistetut tilaukset/Maksutavat</title>
   </head>
   <body>
     <div class="container">
       <div class="row">
-        <!-- Vasemmanpuoleinen alue: Tilaukset ja osoite -->
+
+        <!--  Tilaukset ja osoite -->
         <div class="column left-column" id="order-summary-container">
           <h1>Vahvistetut tilaukset</h1>
           <div id="order-summary">
@@ -23,38 +24,38 @@
             <button id="back-button" class="btn">Takaisin Etusivulle</button>
           </div>
 
-          <!-- Osoitetiedot -->
-          <div id="payment-form-container">
-            <form action="#">
-              <h3 class="title">Address</h3>
-              <div class="input-box">
-                <span>Full Name :</span>
-                <input type="text" placeholder="Matti Meikäläinen" />
-              </div>
-              <div class="input-box">
-                <span>Address :</span>
-                <input type="text" placeholder="Room - Street - Locality" />
-              </div>
-              <div class="input-box">
-                <span>City :</span>
-                <input type="text" placeholder="Kaupunki" />
-              </div>
-              <div class="flex">
-                <div class="input-box">
-                  <span>Country :</span>
-                  <input type="text" placeholder="Maa" />
-                </div>
-                <div class="input-box">
-                  <span>Zip Code:</span>
-                  <input type="number" placeholder="123 456" />
-                </div>
-              </div>
-              <button type="submit" class="btn">Tallenna</button>
-            </form>
-          </div>
-        </div>
 
-        <!-- Oikeanpuoleinen alue: Kiitosviesti ja muut tiedot -->
+            <div id="payment-form-container">
+            <form id="address-form">
+           <h3 class="title"> Lisää tai muokkaa osoitetietojat</h3>
+                <div class="input-box">
+                  <span>Nimi ja Sukunimi:</span>
+                  <input id="full-name" type="text" placeholder="Matti Meikäläinen">
+                </div>
+                <div class="input-box">
+                  <span>Osoite:</span>
+                  <input id="address" type="text" placeholder="Katu-Numero">
+
+                </div>
+                <div class="input-box">
+                  <span>Paikkakunta:</span>
+                  <input id="region" type="text" placeholder="Alue">
+                </div>
+                <div class="flex">
+                  <div class="input-box">
+                    <span>Kaupunki:</span>
+                    <input id="city" type="text" placeholder="Kaupunki">
+                  </div>
+                  <div class="input-box">
+                    <span>Postinumero:</span>
+                    <input id="zip-code" type="number" placeholder="123 456">
+                  </div>
+                </div>
+                <button type="button" id="save-button" class="btn">Tallenna</button>
+              </form>
+            </div>
+
+        <!-- Kiitosviesti ja muut tiedot -->
         <div class="column right-column">
           <div class="thank-you-message">
             <h2>Kiitos tilauksestasi!</h2>
@@ -64,10 +65,9 @@
             </p>
 
             <h3>Tilaus käsittelyaika</h3>
-            <p>
-              Tilauksesi toimitetaan viimeistään
-              <strong>40 min tilausajasta</strong> tilauksesta.
-            </p>
+
+            <p>Tilauksesi toimitetaan viimeistään <strong>30 min tilausajasta</strong>.</p>
+
 
             <h3>Ota yhteyttä</h3>
             <p>
@@ -83,16 +83,9 @@
                 >
               </li>
             </ul>
-
-            <h3>Erikoistarjouksia</h3>
-            <p>
-              Muistathan tilata uutiskirjeemme saadaksesi ensimmäisenä tiedot
-              erikoistarjouksista ja kampanjoista!
-            </p>
           </div>
         </div>
       </div>
     </div>
-    <footer></footer>
   </body>
 </html>

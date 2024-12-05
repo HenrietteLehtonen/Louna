@@ -1,11 +1,10 @@
 // KÄÄNNETTY TYPESCRIPT
 
-import { table } from "console";
+import { login } from "./functions/loginFunc.js";
 import { validateLocaleAndSetLanguage } from "../node_modules/typescript/lib/typescript";
 import { Annokset, Menu, Ruokalista } from "./types/menu";
-import { fetchData, apiUrl } from "./utils/haeData.js";
-
-console.log("Tudfs");
+import { fetchData } from "./utils/haeData.js";
+import { apiUrl } from "./utils/variables.js";
 
 const ruokaLista: Menu[] = [
   {
@@ -206,6 +205,25 @@ if (kirjauduSisBtn) {
 
 // ADMIN KIRJAUTUMINEN HALLINTAAN
 const kirjauduBtn = document.querySelector("#kirjaudu-btn");
+
+const passwordInput = document.querySelector("#username") as HTMLInputElement;
+const usernameInput = document.querySelector("#salasana") as HTMLInputElement;
+const kirjautumisFormi = document.querySelector(
+  "#kirjautumis-formi"
+) as HTMLFormElement;
+
+if (kirjautumisFormi) {
+  kirjautumisFormi.addEventListener("submit", async (evt) => {
+    try {
+      evt.preventDefault();
+      const loginResult = await login(passwordInput, usernameInput);
+      console.log(loginResult);
+      localStorage.setItem("token", loginResult.token);
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  });
+}
 
 // });
 // modal.addEventListener("focusout", (evt) => {
