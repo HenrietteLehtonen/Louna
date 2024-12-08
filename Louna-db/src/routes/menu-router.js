@@ -4,7 +4,6 @@ import express from "express";
 import "dotenv/config";
 import {
   postItem,
-  getItemById,
   getItems,
   getTilaus,
   postTilaus,
@@ -68,8 +67,6 @@ menuRouter
   .post(authenticateToken, postItem)
   .delete(poistaKaikkiAnnokset);
 
-menuRouter.route("/day/:päivä").get(getPäivänRuokalista);
-
 menuRouter.route("/:id").delete(authenticateToken, DeleteItem);
 
 menuRouter.route("/tilaus").get(getTilaus).post(postTilaus);
@@ -79,6 +76,5 @@ menuRouter.route("/tilaus").get(getTilaus).post(postTilaus);
 //   .get(getItemById)
 //   .put(authenticateToken, putItem)
 //   .delete(authenticateToken, DeleteItem);
-
 
 export { menuRouter };

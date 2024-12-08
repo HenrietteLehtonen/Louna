@@ -7,6 +7,23 @@ interface OstoskoriItem {
   maara: number;
 }
 
+//** TOASTER*/
+
+function naytaToaster(viesti: string): void {
+  const toasterContainer = document.getElementById("toaster-container");
+  if (!toasterContainer) {
+    console.error("Toaster-kontaineria ei löytynyt!");
+    return;
+  }
+  const toast = document.createElement("div");
+  toast.classList.add("toast");
+  toast.textContent = viesti;
+  toasterContainer.appendChild(toast);
+  setTimeout(() => {
+    toast.remove();
+  }, 3500);
+}
+
 // Alustus ja datan haku
 let ostoskori: OstoskoriItem[] = JSON.parse(
   localStorage.getItem("ostoskori") || "[]"
@@ -18,9 +35,12 @@ function lisaaOstoskoriin(ruoka: OstoskoriItem): void {
 
   if (existingProduct) {
     existingProduct.maara += 1;
+    naytaToaster(`Tuote lisätty ostoskoriin: ${ruoka.nimi}`);
   } else {
     ostoskori.push({ ...ruoka, maara: 1 });
+    naytaToaster(`Tuote lisätty ostoskoriin: ${ruoka.nimi}`);
   }
+
   paivitaOstoskori();
 }
 
@@ -94,7 +114,6 @@ function paivitaOstoskori(): void {
     });
 
     cartItems.parentElement?.appendChild(confirmButton);
-
   }
 }
 
@@ -140,14 +159,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Ostoskorin avaaminen
 document.addEventListener("DOMContentLoaded", () => {
-
   const customModal = document.getElementById(
     "custom-modal"
   ) as HTMLElement | null;
   const openCartButton = document.getElementById(
     "open-modal-btn"
   ) as HTMLElement | null;
-
 
   if (openCartButton) {
     openCartButton.addEventListener("click", () => {
@@ -157,7 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("Avauspainiketta ei löytynyt!");
   }
 });
-
 
 document.addEventListener("click", (event) => {
   if ((event.target as HTMLElement).classList.contains("add-btn")) {

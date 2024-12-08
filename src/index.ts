@@ -326,35 +326,9 @@ const datatieto = async (): Promise<void> => {
         }
       });
     });
-
-    // verrataan onko tämä päivä napin päivä -> jos ei lisätään nappeihin attribuutti diabled, ettei pysty klikkaa
   } catch (error) {
     console.error("Virhe haettaessa dataa:", error);
   }
 };
 
 datatieto();
-
-// // napit
-// const dayButtons: NodeListOf<HTMLButtonElement> =
-//   document.querySelectorAll(".day-btn");
-// dayButtons.forEach((button) => {
-//   button.addEventListener("click", function () {
-//     const day = this.getAttribute("data-day");
-//     console.log("Tänään on :" + day);
-//   });
-// });
-
-// const haetieto = async () => {
-//   try{
-//   let menu = await fetchData<Ruokalista>(apiUrl + `/menu`);
-
-//   console.log(menu.day);
-//   menu.annokset.forEach((annos) => {
-//     console.log(`${annos.nimi}`);
-//   });
-//   }catch(error){
-//     console.log("Ei onnistu!");
-//   }
-// };
-// haetieto();
