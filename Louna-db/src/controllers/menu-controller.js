@@ -4,6 +4,7 @@ import {
   addMenuItem,
   // fetchMediaItemById,
   fetchTilaus,
+  addTilaus,
   removeItem,
   fetchPäivänRuokalista,
 } from "../models/menu-model.js";
@@ -89,4 +90,31 @@ const getTilaus = async (req, res) => {
   }
 };
 
-export { getItems, getTilaus, postItem, DeleteItem, getPäivänRuokalista };
+const postTilaus = async (req, res, next) => {
+  const errors = validationResult(req);
+  console.log("post req body", req.body);
+  if (!errors.isEmpty()) {
+    console.log("postTilaus errors", errors.array());
+    const error = new Error("Invalid or missing fields");
+    error.status = 400;
+    return next(error);
+  }
+
+  try {
+    const id = await addTilaus(req.body);
+    res.status(201).json({ message: "Item added", id: id });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: "Something went wrong: " + error.message });
+  }
+};
+
+export {
+  getItems,
+  getTilaus,
+  postTilaus,
+  postItem,
+  DeleteItem,
+  getPäivänRuokalista,
+};

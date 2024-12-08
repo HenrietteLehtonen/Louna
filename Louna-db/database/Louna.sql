@@ -34,7 +34,7 @@ CREATE TABLE Annokset (
 );
 
 CREATE TABLE Tilaukset (
-    tilas_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    tilaus_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     tila VARCHAR(255) NOT NUll,
     tilaus_aika TIMESTAMP NOT NULL DEFAULT current_timestamp(),
@@ -43,11 +43,10 @@ CREATE TABLE Tilaukset (
 );
 
 CREATE TABLE Tilausannos (
-    tilas_id INT NOT NULL,
+    tilaus_id INT NOT NULL,
     annos_id INT NOT NULL,
     määrä INT NOT NULL,
-    PRIMARY KEY (tilas_id, annos_id),
-    FOREIGN KEY (tilas_id) REFERENCES Tilaukset(tilas_id),
+    FOREIGN KEY (tilaus_id) REFERENCES Tilaukset(tilaus_id),
     FOREIGN KEY (annos_id) REFERENCES Annokset(annos_id)
 );
 
@@ -94,6 +93,6 @@ INSERT INTO Käyttäjät ( username, password, email, user_level_id)
 INSERT INTO Tilaukset (user_id, nouto_aika, tila)
     VALUES (2, 1000, "Työn alla");
 
-INSERT INTO Tilausannos (tilas_id, annos_id, määrä)
+INSERT INTO Tilausannos (tilaus_id, annos_id, määrä)
     VALUES(1,1,1),
     (1,2,2);

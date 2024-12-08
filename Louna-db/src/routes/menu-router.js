@@ -7,6 +7,7 @@ import {
   // getItemById,
   getItems,
   getTilaus,
+  postTilaus,
   DeleteItem,
   getPäivänRuokalista,
 } from "../controllers/menu-controller.js";
@@ -70,7 +71,7 @@ menuRouter.route("/day/:päivä").get(getPäivänRuokalista);
 
 menuRouter.route("/:id").delete(authenticateToken, DeleteItem);
 
-menuRouter.route("/tilaus").get(getTilaus).put();
+menuRouter.route("/tilaus").get(getTilaus).post(postTilaus);
 
 // menuRouter
 //   .route("/:id")

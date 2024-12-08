@@ -11,7 +11,7 @@
     "test-pw": "playwright test",
     "dev": "nodemon Louna-db/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "apidoc"
+    "docs": "apidoc Louna-db/src/**/*"
   },
   "author": "",
   "license": "ISC",

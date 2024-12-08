@@ -58,40 +58,16 @@ function unstringify(obj) {
 // USE THIS
 const addMenuItem = async (newItem) => {
   console.log(newItem);
-  console.log("what");
-
   const sql1 = `INSERT INTO Ruokalista (nimi, day_name) 
   VALUES (?, ?)`;
   const params1 = [newItem.nimi, newItem.day_name];
-  console.log("done");
   const sql2 = `
 INSERT INTO Annokset (nimi, allerg_id, hinta, lista_id)
 VALUES (?, ?, ?, (SELECT MAX(lista_id) FROM Ruokalista)) `;
   const params2 = [newItem.nimi, newItem.allerg_id, newItem.hinta];
-  console.log("done2");
-
   const result1 = await querryPool(sql1, params1);
-  console.log("done3");
   await querryPool(sql2, params2);
-  console.log("done4");
   return result1[0].lista_id;
-};
-
-// USE IF TIME
-const updateMediaItem = async (id, user_id, updatedItem) => {
-  const sql1 = "SELECT user_id FROM MediaItems WHERE media_id = ?";
-  const [item_owner] = await querryPool(sql1, [id]);
-
-  console.log("user_id:" + user_id, "owner_id:" + item_owner[0].user_id);
-  if (user_id != item_owner[0].user_id) {
-    console.log("user not item owner");
-    return 2;
-  }
-
-  const sql2 = `UPDATE MediaItems SET title = ?, description = ? WHERE media_id = ?`;
-  const params = [updatedItem.title, updatedItem.description, id];
-  const result = await querryPool(sql2, params);
-  return result[0].affectedRows;
 };
 
 // USE THIS
@@ -139,25 +115,44 @@ const fetchPäivänRuokalista = async (päivä) => {
 
 const fetchTilaus = async () => {
   const sql = `SELECT 
-  ti.tilas_id, 
+  ti.tilaus_id, 
   ti.tila, 
   ti.tilaus_aika, 
   ADDTIME(ti.tilaus_aika, ti.nouto_aika) AS nouto_aika, 
   json_arrayagg(an.nimi) AS nimet, 
   json_arrayagg(ta.määrä) AS määrä FROM tilaukset ti
-INNER JOIN tilausannos ta ON ta.tilas_id = ti.tilas_id
+INNER JOIN tilausannos ta ON ta.tilaus_id = ti.tilaus_id
 INNER JOIN annokset an ON ta.annos_id = an.annos_id
+GROUP BY ti.tilaus_id
 `;
   const [rows] = await querryPool(sql);
+  unstringify(rows);
   return rows;
+};
+
+const addTilaus = async (newItem) => {
+  console.log(newItem);
+  const sql1 = `INSERT INTO Tilaukset (user_id, nouto_aika, tila)
+    VALUES (?, 4000, "Työn alla");`;
+  const params1 = [newItem.user_id];
+  const result1 = await querryPool(sql1, params1);
+  console.log(newItem.tilaukset);
+  for (let i in newItem.tilaukset) {
+    console.log(i);
+    const sql2 = `
+  INSERT INTO Tilausannos (tilaus_id, annos_id, määrä)
+      VALUES((SELECT max(tilaus_id) FROM tilaukset),?,?);`;
+    let params2 = [newItem.tilaukset[i].annos_id, newItem.tilaukset[i].määrä];
+    await querryPool(sql2, params2);
+  }
+  return result1[0].tilaus_id;
 };
 
 export {
   fetchMenuItems,
-  // fetchMenuItemById as fetchMediaItemById,
   fetchTilaus,
+  addTilaus,
   addMenuItem,
-  updateMediaItem,
   removeMenuItem as removeItem,
   fetchPäivänRuokalista,
 };
