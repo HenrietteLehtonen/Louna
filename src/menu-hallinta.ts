@@ -1,6 +1,7 @@
 import { error } from "console";
 import { Menu, Ruokalista, Annokset } from "./types/menu";
-import { apiUrl, fetchData } from "./utils/haeData.js";
+import { fetchData } from "./utils/haeData.js";
+import { apiUrl } from "../utils/variables.js";
 
 // Mock data
 const lista: Menu[] = [
