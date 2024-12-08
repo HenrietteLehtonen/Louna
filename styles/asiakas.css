@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+}
+/* body:has(.kirjaudu[open]) {
+    overflow: hidden;
+  } */
+
+dialog::backdrop {
+  backdrop-filter: blur(10px);
+  background-color: #00000071;
+}
+.close-modal-btn,
+.btn {
+  padding: 10px 10px;
+  margin-right: 24px;
+  margin-top: 10px;
+  height: 30px;
+  width: 40px;
+  border: #9dce98 2px solid;
+  background-color: var(--white);
+  border-radius: 16px;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #707170;
+}
+.close-modal-btn:hover {
+  background-color: var(--green);
+  color: black;
+}
+
+.dialog-oma {
+  margin: 140px auto;
+  height: 500px;
+  width: 80vw;
+  border: none;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.621));
+  z-index: 3;
+}
+.dialog-oma h1 {
+  margin: 20px 0;
+}
+
+.dialog-oma h2 {
+  margin: 10px auto;
+}
+/* 
+    /* .dialog {
+      margin: 20px auto;
+      height: 600px;
+      width: 50vw;
+      border: none;
+      border-radius: 8px;
+      filter: drop-shadow(0 0 8px rgb(202, 202, 202));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    } */
+
+#dialog-container {
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.omat-tilaukset {
+  height: 200px;
+  width: 100%;
+  /* border: #bec0be 2px solid; */
+  border-radius: 10px;
+  text-align: center;
+}
+
+.omat-tilaukset-container table {
+  /* margin: 20px; */
+  margin: 0 auto;
+  padding: 0;
+  border-collapse: collapse;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+.omat-tilaukset-container thead {
+  background-color: #9dce98;
+  color: #fff;
+  text-align: left;
+  box-sizing: border-box;
+}
+.omat-tilaukset-container thead th {
+  font-size: 1.2em;
+}
+
+.omat-tilaukset-container tr {
+  padding: 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  transition: background-color 0.3s ease;
+}
+.omat-tilaukset-container tbody tr:hover {
+  background-color: #e8f5e9;
+}
+
+.omat-tilaukset-container th {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.omat-tilaukset-container td {
+  text-align: center;
+  font-size: 1em;
+}
+.omat-tilaukset-container tbody td:first-of-type {
+  font-weight: bold;
+}
+
+.kirjaudu-ulos {
+  margin: 10px 0;
+  width: 100px;
+  align-self: center;
+}

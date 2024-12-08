@@ -17,6 +17,7 @@ const tilaukset = [
 ];
 // KOHTEET
 const tilaustaulukko = document.querySelector("#tbody-kohde-tilaukset");
+const omat_tilaukset = document.querySelector("#tbody-kohde-omat-tilaukset");
 const etsiTilaus = document.querySelector("#etsi-tilaus-btn");
 const kohde = document.querySelector("#tilausnumero-p-kohde");
 // FUNKTIOT
@@ -53,6 +54,7 @@ const teeRivitTilauksille = () => {
         // lisätään joka riville oma tilaus
         let taulukkoHTML = buildTilaustaulukko(tilaus);
         tilaustaulukko.insertAdjacentHTML("beforeend", taulukkoHTML);
+        // omat_tilaukset.insertAdjacentHTML("beforeend", taulukkoHTML);
         // Lisätään riville tilauksen poisto
         poistaTilausFunktio(tilaus);
     }

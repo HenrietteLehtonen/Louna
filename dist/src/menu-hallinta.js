@@ -136,54 +136,6 @@ save.addEventListener("click", async () => {
         console.error("Ei onnistuttu lisäämään annosta");
     }
 });
-// save.addEventListener("click", function () {
-//   // Jos lista on tyhjä, aloita id 1, muuten jatka seuraavalla numerolla
-//   let id: number;
-//   if (lista.length > 0) {
-//     id = lista[lista.length - 1].id + 1;
-//   } else {
-//     id = 1;
-//   }
-//   // allergeenit taulukoksi
-//   const selectedAllergens: string[] = Array.from(
-//     document.querySelectorAll<HTMLInputElement>(".checkbox:checked")
-//   ).map((checkbox: HTMLInputElement) => checkbox.name);
-//   // muutetaan hinta numeroksi
-//   const hintaNumeroksi = Number(
-//     (document.querySelector("#price") as HTMLInputElement).value
-//   );
-//   // alustetaan menu objektiksi
-//   let menu = {
-//     day: (document.querySelector("#päivä-valitsin") as HTMLSelectElement).value,
-//     id: id,
-//     annos: (document.querySelector("#annos") as HTMLInputElement).value,
-//     allergeenit: selectedAllergens,
-//     hinta: hintaNumeroksi,
-//   };
-//   // tsekataan onko valuet tyhjjiä annoksen lisäämisessä, jos on huomautetaan !
-//   if (menu.annos === "" || menu.hinta < 1) {
-//     alert("Täytä kentät");
-//   } else {
-//     let html = buildHTML(menu);
-//     const päiväRivi = document.querySelector(
-//       `.päivä-rivi[data-päivä="${menu.day}"]`
-//     ) as HTMLElement;
-//     päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
-//     lista.push(menu);
-//     // console.log(menu.day);
-//     // console.log(menu.annos);
-//     // console.log(typeof menu.hinta);
-//     // console.log(annos.value);
-//     // console.log(Object.values(menu));
-//     deletebuttonlistener(menu);
-//     // tyhjennetään formi annoksen lisäämisen jälkeen
-//     (document.querySelector("#annos") as HTMLInputElement).value = "";
-//     (document.querySelector("#price") as HTMLInputElement).value = "";
-//     document
-//       .querySelectorAll<HTMLInputElement>(".checkbox")
-//       .forEach((checkbox) => (checkbox.checked = false));
-//   }
-// });
 // Peruuta
 const peruuta = document.querySelector("#peruuta");
 if (!peruuta) {
@@ -258,30 +210,3 @@ const haeData = async () => {
     }
 };
 haeData();
-// // Taulukon alustus
-// const buildHTML = (menu: Menu) => {
-//   console.log(menu);
-//   return `
-//           <tr id="tr-${menu.id}" class="annos-rivi" data-päivä="${menu.day}">
-//           <td></td>
-//             <td>${menu.annos}</td>
-//             <td>${menu.allergeenit.join(", ")}</td>
-//             <td>${menu.hinta}</td>
-//             <td><button id="del-${menu.id}" class="del-btn">x</button></td>
-//           </tr>
-//     `;
-// };
-// // Annosrivit taulukolle
-// const teeRivi = (): void => {
-//   for (const annos of lista) {
-//     console.log(annos.id);
-//     console.log(annos.annos);
-//     let html = buildHTML(annos); // kutsutaan taulukon luontia
-//     // haetaan oikea päivä rivi mihin lisätään
-//     const päiväRivi = document.querySelector(
-//       `.päivä-rivi[data-päivä="${annos.day}"]`
-//     ) as HTMLElement;
-//     päiväRivi.insertAdjacentHTML("afterend", html); // Lisää annos oikean päivän alle
-//     deletebuttonlistener(annos); // lisätään deletebutton listener riveille
-//   }
-// };

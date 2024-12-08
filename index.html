@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="./styles/ostoskori.css" />
     <link rel="stylesheet" href="./styles/toast.css" />
     <link rel="stylesheet" href="./styles/kirjautuminen.css" />
+    <link rel="stylesheet" href="./styles/asiakas.css" />
 
     <script src="./dist/src/index.js" defer type="module"></script>
+    <script src="./dist/src/tilausten-hallinta.js" defer type="module"></script>
     <script src="dist/ostoskori.js" defer></script>
 
     <script
@@ -25,10 +27,50 @@
     <!-- 
     *******************************
             
+             "ASIAKASSIVU"
+             Dialog / Modal
+             
+    *******************************  
+    -->
+
+    <dialog class="dialog-oma">
+      <div id="dialog-container">
+        <button class="btn close-modal-btn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h1>Tervetuloa <span class="nimi">X</span></h1>
+        <div class="omat-tilaukset">
+          <div class="container omat-tilaukset-container">
+            <h2>Tilaukset</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tilausnumero</th>
+                  <th>Tilauttu klo</th>
+                  <th>Tila</th>
+                  <th>Noutoaika</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-kohde-omat-tilaukset">
+                <!--tänne tilauksien taulukko-->
+                <td>Tilaus 4353</td>
+                <td>10</td>
+                <td>Odottaa noutoa</td>
+                <td>10:30</td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <button class="btn kirjaudu-ulos">Kirjaudu ulos</button>
+      </div>
+    </dialog>
+
+    <!-- 
+    *******************************
+            
              Kirjautuminen
              Dialog / Modal
-             Muuta div muotoon tai jokin muu ratkaisu
-
+             
     *******************************  
     -->
 
