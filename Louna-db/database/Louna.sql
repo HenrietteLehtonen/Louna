@@ -43,6 +43,7 @@ CREATE TABLE Tilaukset (
     FOREIGN KEY (user_id) REFERENCES Käyttäjät(user_id)
 );
 
+
 CREATE TABLE Tilausannos (
     tilas_id INT NOT NULL,
     annos_id INT NOT NULL,
@@ -51,6 +52,14 @@ CREATE TABLE Tilausannos (
     FOREIGN KEY (tilas_id) REFERENCES Tilaukset(tilas_id),
     FOREIGN KEY (annos_id) REFERENCES Annokset(annos_id)
 );
+
+-- CREATE TABLE AnnoksetAllergeenit (
+--     annos_id INT NOT NULL,
+--     allerg_id INT NOT NULL,
+--     PRIMARY KEY (annos_id, allerg_id),
+--     FOREIGN KEY (annos_id) REFERENCES Annokset(annos_id),
+--     FOREIGN KEY (allerg_id) REFERENCES Allergeenit(allerg_id)
+-- )
 
 
 INSERT INTO Ruokalista (nimi, day_name) 
