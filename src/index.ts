@@ -1,113 +1,111 @@
 // KÄÄNNETTY TYPESCRIPT
 
-
 import { login } from "./functions/loginFunc.js";
 import { validateLocaleAndSetLanguage } from "../node_modules/typescript/lib/typescript";
 import { Annokset, Menu, Ruokalista } from "./types/menu";
 import { fetchData } from "./utils/haeData.js";
 import { apiUrl } from "./utils/variables.js";
 
-
-const ruokaLista: Menu[] = [
-  {
-    day: "Maanantai",
-    id: 1,
-    annos: "Lihapullat ja muusi",
-    allergeenit: ["V", "L", "G"],
-    hinta: 5,
-  },
-  {
-    day: "Maanantai",
-    id: 2,
-    annos: "Lohisoppa",
-    allergeenit: ["G", "M"],
-    hinta: 3,
-  },
-  {
-    day: "Tiistai",
-    id: 3,
-    annos: "Fish & Chips",
-    allergeenit: ["VL", "M", "SO"],
-    hinta: 3,
-  },
-  {
-    day: "Tiistai",
-    id: 4,
-    annos: "Kasvislasagne",
-    allergeenit: ["VL"],
-    hinta: 4,
-  },
-  {
-    day: "Keskiviikko",
-    id: 5,
-    annos: "Kalakeitto",
-    allergeenit: ["M", "K"],
-    hinta: 5,
-  },
-  {
-    day: "Keskiviikko",
-    id: 6,
-    annos: "Pinaattiletut ja puolukkahillo",
-    allergeenit: ["V", "L"],
-    hinta: 4,
-  },
-  {
-    day: "Torstai",
-    id: 7,
-    annos: "Hernekeitto ja pannukakku",
-    allergeenit: ["V", "G"],
-    hinta: 3,
-  },
-  {
-    day: "Torstai",
-    id: 8,
-    annos: "Jauhelihapihvi ja perunat",
-    allergeenit: ["G", "M"],
-    hinta: 5,
-  },
-  {
-    day: "Perjantai",
-    id: 9,
-    annos: "Pizza",
-    allergeenit: ["VL", "G"],
-    hinta: 6,
-  },
-  {
-    day: "Perjantai",
-    id: 10,
-    annos: "Tacos",
-    allergeenit: ["M", "S"],
-    hinta: 5,
-  },
-  {
-    day: "Lauantai",
-    id: 11,
-    annos: "Nakkikastike ja perunamuusi",
-    allergeenit: ["G", "M"],
-    hinta: 4,
-  },
-  {
-    day: "Lauantai",
-    id: 12,
-    annos: "Kasviscurry",
-    allergeenit: ["V", "G"],
-    hinta: 3.5,
-  },
-  {
-    day: "Sunnuntai",
-    id: 13,
-    annos: "Paistettu lohi ja riisi",
-    allergeenit: ["G", "M"],
-    hinta: 6.5,
-  },
-  {
-    day: "Sunnuntai",
-    id: 14,
-    annos: "Makaronilaatikko",
-    allergeenit: ["M"],
-    hinta: 4.5,
-  },
-];
+// const ruokaLista: Menu[] = [
+//   {
+//     day: "Maanantai",
+//     id: 1,
+//     annos: "Lihapullat ja muusi",
+//     allergeenit: ["V", "L", "G"],
+//     hinta: 5,
+//   },
+//   {
+//     day: "Maanantai",
+//     id: 2,
+//     annos: "Lohisoppa",
+//     allergeenit: ["G", "M"],
+//     hinta: 3,
+//   },
+//   {
+//     day: "Tiistai",
+//     id: 3,
+//     annos: "Fish & Chips",
+//     allergeenit: ["VL", "M", "SO"],
+//     hinta: 3,
+//   },
+//   {
+//     day: "Tiistai",
+//     id: 4,
+//     annos: "Kasvislasagne",
+//     allergeenit: ["VL"],
+//     hinta: 4,
+//   },
+//   {
+//     day: "Keskiviikko",
+//     id: 5,
+//     annos: "Kalakeitto",
+//     allergeenit: ["M", "K"],
+//     hinta: 5,
+//   },
+//   {
+//     day: "Keskiviikko",
+//     id: 6,
+//     annos: "Pinaattiletut ja puolukkahillo",
+//     allergeenit: ["V", "L"],
+//     hinta: 4,
+//   },
+//   {
+//     day: "Torstai",
+//     id: 7,
+//     annos: "Hernekeitto ja pannukakku",
+//     allergeenit: ["V", "G"],
+//     hinta: 3,
+//   },
+//   {
+//     day: "Torstai",
+//     id: 8,
+//     annos: "Jauhelihapihvi ja perunat",
+//     allergeenit: ["G", "M"],
+//     hinta: 5,
+//   },
+//   {
+//     day: "Perjantai",
+//     id: 9,
+//     annos: "Pizza",
+//     allergeenit: ["VL", "G"],
+//     hinta: 6,
+//   },
+//   {
+//     day: "Perjantai",
+//     id: 10,
+//     annos: "Tacos",
+//     allergeenit: ["M", "S"],
+//     hinta: 5,
+//   },
+//   {
+//     day: "Lauantai",
+//     id: 11,
+//     annos: "Nakkikastike ja perunamuusi",
+//     allergeenit: ["G", "M"],
+//     hinta: 4,
+//   },
+//   {
+//     day: "Lauantai",
+//     id: 12,
+//     annos: "Kasviscurry",
+//     allergeenit: ["V", "G"],
+//     hinta: 3.5,
+//   },
+//   {
+//     day: "Sunnuntai",
+//     id: 13,
+//     annos: "Paistettu lohi ja riisi",
+//     allergeenit: ["G", "M"],
+//     hinta: 6.5,
+//   },
+//   {
+//     day: "Sunnuntai",
+//     id: 14,
+//     annos: "Makaronilaatikko",
+//     allergeenit: ["M"],
+//     hinta: 4.5,
+//   },
+// ];
 // DATE OBJEKTI
 const today: number = new Date().getDay();
 console.log(today);
@@ -177,8 +175,6 @@ eyeIcons.forEach((eyeIcon, index) => {
 
 // KIRJAUDU JA REKISTERÖIDY animaatio
 
-
-
 const registerBtn = document.querySelector("#register") as HTMLButtonElement;
 
 if (registerBtn) {
@@ -212,25 +208,22 @@ const kirjauduBtn = document.querySelector("#kirjaudu-btn");
 
 const passwordInput = document.querySelector("#username") as HTMLInputElement;
 const usernameInput = document.querySelector("#salasana") as HTMLInputElement;
-const kirjautumisFormi = document.querySelector('#kirjautumis-formi') as HTMLFormElement
-
+const kirjautumisFormi = document.querySelector(
+  "#kirjautumis-formi"
+) as HTMLFormElement;
 
 if (kirjautumisFormi) {
-  kirjautumisFormi.addEventListener('submit', async (evt) => {
+  kirjautumisFormi.addEventListener("submit", async (evt) => {
     try {
-    evt.preventDefault();
-    const loginResult = await login(passwordInput, usernameInput);
-    console.log(loginResult)
-    localStorage.setItem('token', loginResult.token)
-
+      evt.preventDefault();
+      const loginResult = await login(passwordInput, usernameInput);
+      console.log(loginResult);
+      localStorage.setItem("token", loginResult.token);
     } catch (error) {
       console.log((error as Error).message);
     }
   });
 }
-
-
-
 
 // });
 // modal.addEventListener("focusout", (evt) => {
@@ -239,9 +232,6 @@ if (kirjautumisFormi) {
 //     modal.close();
 //   }
 // });
-
-
-
 
 //Burgermenu display handling
 burgerMenu.addEventListener("click", () => {
@@ -289,11 +279,13 @@ const datatieto = async (): Promise<void> => {
       if (valittuPäivä) {
         // Otsikko - viikonpäivä
         kohde.innerHTML += `
-          <tr>
+          <thead>
             <th colspan="3">${valittuPäivä.day}</th>
-          </tr>
+          </thead>
         `;
-
+        const tablebody = document.createElement("tbody");
+        tablebody.setAttribute("id", "tablebody");
+        kohde.appendChild(tablebody);
         // valitun päivän annokset
         valittuPäivä.annokset.forEach((annos) => {
           const annoksetTaulukko = `
@@ -303,7 +295,7 @@ const datatieto = async (): Promise<void> => {
               <td><button id="annos-${annos.annos_id}" class="add-btn">Tilaa</button></td>
             </tr>
           `;
-          kohde.insertAdjacentHTML("beforeend", annoksetTaulukko);
+          tablebody.insertAdjacentHTML("beforeend", annoksetTaulukko);
         });
       } else {
         kohde.innerHTML =

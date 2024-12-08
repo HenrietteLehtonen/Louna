@@ -2,11 +2,11 @@ import { validationResult } from "express-validator";
 import {
   fetchMenuItems,
   addMenuItem,
-  // fetchMediaItemById,
   fetchTilaus,
   addTilaus,
   removeItem,
   fetchPäivänRuokalista,
+  removeAll,
 } from "../models/menu-model.js";
 
 const getItems = async (req, res) => {
@@ -54,6 +54,16 @@ const DeleteItem = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Something went wrong: " + error.message });
+  }
+};
+
+// POISTA KAIKKI
+const poistaKaikkiAnnokset = async (req, res) => {
+  try {
+    res.json(await removeAll());
+  } catch (e) {
+    console.error("Poista kaikki", e.message);
+    res.status(503).json({ error: 503, message: "DB error" });
   }
 };
 
@@ -117,4 +127,5 @@ export {
   postItem,
   DeleteItem,
   getPäivänRuokalista,
+  poistaKaikkiAnnokset,
 };

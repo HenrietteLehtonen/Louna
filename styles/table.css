@@ -12,12 +12,25 @@ table th {
   padding: 20px 0;
 }
 
-table td {
-  padding: 20px 20px;
-  text-align: center;
-  font-size: 1.5em;
+#tablebody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#tablebody tr {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  width: 100%;
 }
 
+table td {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 1.5em;
+  width: 50px;
+  /* flex: 1; */
+}
 .annos-td {
   text-align: left;
 }

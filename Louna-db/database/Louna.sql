@@ -42,6 +42,7 @@ CREATE TABLE Tilaukset (
     FOREIGN KEY (user_id) REFERENCES Käyttäjät(user_id)
 );
 
+
 CREATE TABLE Tilausannos (
     tilaus_id INT NOT NULL,
     annos_id INT NOT NULL,
@@ -50,18 +51,34 @@ CREATE TABLE Tilausannos (
     FOREIGN KEY (annos_id) REFERENCES Annokset(annos_id)
 );
 
+-- CREATE TABLE AnnoksetAllergeenit (
+--     annos_id INT NOT NULL,
+--     allerg_id INT NOT NULL,
+--     PRIMARY KEY (annos_id, allerg_id),
+--     FOREIGN KEY (annos_id) REFERENCES Annokset(annos_id),
+--     FOREIGN KEY (allerg_id) REFERENCES Allergeenit(allerg_id)
+-- )
+
+-- MUOKATTU  ateriaa, LIHA -
+
 
 INSERT INTO Ruokalista (nimi, day_name) 
-    VALUES ('peruna', 'Maanantai'),
-    ('makkara', 'Maanantai'),
-    ('pasta', 'Tiistai'),
-    ('kana', 'Tiistai'),
-    ('kalakeitto', 'Keskiviikko'),
-    ('leipä', 'Keskiviikko'),
-    ('lasagne', 'Torstai'),
-    ('salaatti', 'Torstai'),
-    ('pizza', 'Perjantai'),
-    ('tacos', 'Perjantai');
+    VALUES ('Karjalanpaisti', 'Maanantai'),
+    ('Kanttarellikeitto', 'Maanantai'),
+    ('Paahdettu kasvisrisotto', 'Maanantai'), 
+    ('Broileripasta', 'Tiistai'), 
+    ('Pinaattiletut', 'Tiistai'), 
+    ('Linssikeitto', 'Tiistai'), 
+    ('Jauhelihakeitto', 'Keskiviikko'), 
+    ('Lohikeitto', 'Keskiviikko'), 
+    ('Falafelit ja hummus', 'Keskiviikko'), 
+    ('Lihapullat ja perunamuusi', 'Torstai'), 
+    ('Kasvislasagne', 'Torstai'),
+    ('Thaimaalainen kasviscurry', 'Torstai'),
+    ('Pepperonipizza', 'Perjantai'), 
+    ('Margherita-pizza', 'Perjantai'),
+    ('Vegaanipizza', 'Perjantai'); 
+
 
 INSERT INTO Allergeenit (tunniste, allergeeni)
     VALUES ('G', 'gluteenoton'),
@@ -69,21 +86,27 @@ INSERT INTO Allergeenit (tunniste, allergeeni)
     ('L', 'laktoositon'),
     ('M', 'maidoton'),
     ('K', 'ei_sisällä_kananmunaa'),
-    ('SO', 'en_tiedä'),
+    ('SO', 'soijaton'),
     ('VEG', 'vegaaninen'),
     ('EI', 'ei_allergeeneja');
 
 INSERT INTO Annokset (nimi, allerg_id, hinta, lista_id) 
-  VALUES ('peruna', 1, 300, 1),
-  ('makkara',1, 400, 2),
-  ('pasta', 1, 500, 3),
-  ('kana', 1, 600, 4),
-  ('kalakeitto', 1, 750, 5),
-  ('leipä', 1, 200, 6),
-  ('lasagne', 1, 800, 7),
-  ('salaatti', 1, 400, 8),
-  ('pizza', 1, 800, 9),
-  ('tacos', 1, 600, 10);
+  VALUES ('Karjalanpaisti', 1, 300, 1),
+  ('Kanttarellikeitto',1, 400, 2),
+   ('Paahdettu kasvisrisotto', 7, 700, 3),
+  ('Broileripasta', 2, 900, 4), 
+  ('Pinaattiletut', 2, 750, 5), 
+  ('Linssikeitto', 7, 650, 6),
+  ('Jauhelihakeitto', 3, 850, 7), 
+  ('Lohikeitto', 2, 800, 8), 
+  ('Falafelit ja hummus', 7, 700, 9), 
+  ('Lihapullat ja perunamuusi',2, 900, 10), 
+  ('Kasvislasagne', 6, 850, 11), 
+  ('Thaimaalainen kasviscurry', 7, 800, 12),
+  ('Pepperonipizza', 2, 950, 13), 
+  ('Margherita-pizza', 4, 850, 14), 
+  ('Vegaanipizza', 7, 900, 15); 
+
 
 
 INSERT INTO Käyttäjät ( username, password, email, user_level_id)

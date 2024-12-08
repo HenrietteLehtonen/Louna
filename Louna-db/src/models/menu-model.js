@@ -1,3 +1,4 @@
+import { error } from "console";
 import { querryPool } from "../../../utils/functions.js";
 
 // USE THIS
@@ -86,6 +87,23 @@ const removeMenuItem = async (id) => {
   return;
 };
 
+// POISTA KAIKKI
+const removeAll = async () => {
+  try {
+    const sql1 = "SET FOREIGN_KEY_CHECKS = 0";
+    const sql2 = "TRUNCATE TABLE Annokset";
+    const sql3 = "SET FOREIGN_KEY_CHECKS = 1";
+
+    await querryPool(sql1);
+    await querryPool(sql2);
+    await querryPool(sql3);
+    return { message: "Annokset taulu tyhjennetty" };
+  } catch (error) {
+    console.error("removeAll", error.message);
+    throw new Error("Database error: " + error.message);
+  }
+};
+
 // HAE LISTA / PÄIVÄ
 const fetchPäivänRuokalista = async (päivä) => {
   try {
@@ -155,4 +173,5 @@ export {
   addMenuItem,
   removeMenuItem as removeItem,
   fetchPäivänRuokalista,
+  removeAll,
 };
