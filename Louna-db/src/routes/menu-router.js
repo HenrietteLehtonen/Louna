@@ -6,7 +6,8 @@ import {
   postItem,
   getItemById,
   getItems,
-  putItem,
+  getTilaus,
+  postTilaus,
   DeleteItem,
   poistaKaikkiAnnokset,
 } from "../controllers/menu-controller.js";
@@ -67,10 +68,17 @@ menuRouter
   .post(authenticateToken, postItem)
   .delete(poistaKaikkiAnnokset);
 
-menuRouter
-  .route("/:id")
-  .get(getItemById)
-  .put(authenticateToken, putItem)
-  .delete(authenticateToken, DeleteItem);
+menuRouter.route("/day/:päivä").get(getPäivänRuokalista);
+
+menuRouter.route("/:id").delete(authenticateToken, DeleteItem);
+
+menuRouter.route("/tilaus").get(getTilaus).post(postTilaus);
+
+// menuRouter
+//   .route("/:id")
+//   .get(getItemById)
+//   .put(authenticateToken, putItem)
+//   .delete(authenticateToken, DeleteItem);
+
 
 export { menuRouter };
