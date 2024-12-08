@@ -4,11 +4,11 @@ import express from "express";
 import "dotenv/config";
 import {
   postItem,
-  // getItemById,
+  getItemById,
   getItems,
   putItem,
   DeleteItem,
-  getPäivänRuokalista,
+  poistaKaikkiAnnokset,
 } from "../controllers/menu-controller.js";
 
 import { authenticateToken } from "../middlewares/authentication.js";
@@ -64,14 +64,13 @@ menuRouter
    *     }
    */
   .get(getItems)
-  .post(authenticateToken, postItem);
+  .post(authenticateToken, postItem)
+  .delete(poistaKaikkiAnnokset);
 
-menuRouter.route("/day/:päivä").get(getPäivänRuokalista);
-
-// menuRouter
-//   .route("/:id")
-//   .get(getItemById)
-//   .put(authenticateToken, putItem)
-//   .delete(authenticateToken, DeleteItem);
+menuRouter
+  .route("/:id")
+  .get(getItemById)
+  .put(authenticateToken, putItem)
+  .delete(authenticateToken, DeleteItem);
 
 export { menuRouter };

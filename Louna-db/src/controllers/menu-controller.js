@@ -2,10 +2,11 @@ import { validationResult } from "express-validator";
 import {
   fetchMenuItems,
   addMenuItem,
-  // fetchMediaItemById,
+  fetchMediaItemById,
   updateMediaItem,
   removeItem,
   fetchPäivänRuokalista,
+  removeAll,
 } from "../models/menu-model.js";
 
 const getItems = async (req, res) => {
@@ -16,22 +17,21 @@ const getItems = async (req, res) => {
     res.status(503).json({ error: 503, message: "DB error" });
   }
 };
-// KÄYTTÄÄ TÄTÄ
-// const getItemById = async (req, res) => {
-//   const id = parseInt(req.params.id);
-//   console.log("getItemById haloo", id);
-//   try {
-//     const item = await fetchMediaItemById(id);
-//     if (item) {
-//       res.json(item);
-//     } else {
-//       res.status(404).json({ message: "Item not found" });
-//     }
-//   } catch (error) {
-//     console.error("getItemById", error.message);
-//     res.status(503).json({ error: 503, message: error.message });
-//   }
-// };
+const getItemById = async (req, res) => {
+  const id = parseInt(req.params.id);
+  console.log("getItemById", id);
+  try {
+    const item = await fetchMediaItemById(id);
+    if (item) {
+      res.json(item);
+    } else {
+      res.status(404).json({ message: "Item not found" });
+    }
+  } catch (error) {
+    console.error("getItemById", error.message);
+    res.status(503).json({ error: 503, message: error.message });
+  }
+};
 
 const postItem = async (req, res, next) => {
   const errors = validationResult(req);
@@ -105,6 +105,16 @@ const DeleteItem = async (req, res) => {
   }
 };
 
+// POISTA KAIKKI
+const poistaKaikkiAnnokset = async (req, res) => {
+  try {
+    res.json(await removeAll());
+  } catch (e) {
+    console.error("Poista kaikki", e.message);
+    res.status(503).json({ error: 503, message: "DB error" });
+  }
+};
+
 // HAE PÄIVÄN RUOKALISTA
 const getPäivänRuokalista = async (req, res) => {
   try {
@@ -132,8 +142,9 @@ const getPäivänRuokalista = async (req, res) => {
 export {
   getItems,
   postItem,
-  // getItemById,
+  getItemById,
   putItem,
   DeleteItem,
   getPäivänRuokalista,
+  poistaKaikkiAnnokset,
 };
