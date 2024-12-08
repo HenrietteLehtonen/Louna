@@ -1,29 +1,29 @@
 import { fetchData } from "./utils/haeData.js";
 import { apiUrl } from "../utils/variables.js";
 // Mock data
-const lista = [
-    {
-        day: "Maanantai",
-        id: 1,
-        annos: "Lihapullat ja muusi",
-        allergeenit: ["V", "L", "G"],
-        hinta: 5,
-    },
-    {
-        day: "Maanantai",
-        id: 2,
-        annos: "Lohisoppa",
-        allergeenit: ["G", "M"],
-        hinta: 3,
-    },
-    {
-        day: "Tiistai",
-        id: 3,
-        annos: "Fish & Chips",
-        allergeenit: ["VL", "M", "SO"],
-        hinta: 3,
-    },
-];
+// const lista: Menu[] = [
+//   {
+//     day: "Maanantai",
+//     id: 1,
+//     annos: "Lihapullat ja muusi",
+//     allergeenit: ["V", "L", "G"],
+//     hinta: 5,
+//   },
+//   {
+//     day: "Maanantai",
+//     id: 2,
+//     annos: "Lohisoppa",
+//     allergeenit: ["G", "M"],
+//     hinta: 3,
+//   },
+//   {
+//     day: "Tiistai",
+//     id: 3,
+//     annos: "Fish & Chips",
+//     allergeenit: ["VL", "M", "SO"],
+//     hinta: 3,
+//   },
+// ];
 const viikonpäivät = [
     "Maanantai",
     "Tiistai",
