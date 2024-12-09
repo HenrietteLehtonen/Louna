@@ -2,19 +2,20 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: content-box;
+  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
 /* Säiliö ja rivit */
 .container {
+  flex-direction: row;
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 20px;
-  background-color: #f9f9f9; /* Vaalea taustaväri */
-  border-radius: 12px; /* Pyöristetyt kulmat */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Korostettu varjo */
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 /* Sarakkeet */
@@ -214,13 +215,18 @@ form .btn:hover {
 
 .input-box input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 15px;
+  font-size: 14px;
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease;
+}
+
+.btn {
+  font-size: 14px;
+  padding: 10px;
 }
 
 .input-box input:focus {
@@ -247,14 +253,12 @@ footer {
 }*/
 
 /* Media Queries */
-@media (min-width: 320px) {
+
+/* 1. Mobiililaitteet: max-width 600px */
+@media (max-width: 600px) {
   .container {
     flex-direction: column;
     padding: 10px;
-  }
-
-  .row {
-    flex-direction: column;
   }
 
   .column {
@@ -264,7 +268,6 @@ footer {
 
   .thank-you-message {
     padding: 20px;
-    margin-top: 10px;
     text-align: center;
   }
 
@@ -276,34 +279,24 @@ footer {
     font-size: 14px;
   }
 
-  #back-button {
+  #back-button,
+  .btn {
     font-size: 14px;
-    padding: 8px;
+    padding: 10px;
+  }
+
+  .input-box input {
+    font-size: 14px;
+    padding: 12px;
   }
 }
 
-@media (min-width: 480px) {
-  .container {
-    padding: 15px;
-  }
-
-  .column {
-    padding: 30px;
-  }
-
-  .thank-you-message {
-    padding: 25px;
-  }
-
-  #back-button {
-    font-size: 15px;
-  }
-}
-
-@media (min-width: 600px) {
+/* 2. Tabletti: max-width 1024px */
+@media (max-width: 1024px) {
   .container {
     flex-direction: row;
-    gap: 20px;
+    gap: 15px;
+    padding: 20px;
   }
 
   .column {
@@ -312,44 +305,79 @@ footer {
   }
 
   .thank-you-message {
-    margin-top: 15px;
     padding: 30px;
+    text-align: center;
   }
 
-  #back-button {
+  #back-button,
+  .btn {
     font-size: 16px;
+    padding: 12px;
+  }
+
+  .input-box input {
+    font-size: 15px;
+    padding: 14px;
   }
 }
 
-@media (min-width: 801px) {
+/* 3. Desktop: yli 1024px */
+@media (min-width: 1025px) {
   .container {
-    justify-content: center;
-    gap: 30px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 30px;
+    gap: 20px;
   }
 
   .column {
-    max-width: 600px;
     padding: 40px;
-  }
-}
-
-@media (min-width: 1025px) {
-  .container {
-    padding: 30px;
+    max-width: 600px;
+    margin: 15px;
   }
 
   .thank-you-message {
     padding: 50px;
   }
+
+  #back-button,
+  .btn {
+    font-size: 18px;
+    padding: 14px;
+  }
+
+  .input-box input {
+    font-size: 16px;
+    padding: 16px;
+  }
 }
 
-@media (min-width: 1281px) {
+/* 4. Isot näytöt: yli 1280px */
+@media (min-width: 1280px) {
   .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 30px;
+    gap: 30px;
   }
 
   .column {
     padding: 50px;
+    max-width: 600px;
+  }
+
+  .thank-you-message {
+    margin-top: 20px;
+    padding: 60px;
+  }
+
+  .btn {
+    font-size: 20px;
+    padding: 16px;
+  }
+
+  .input-box input {
+    font-size: 18px;
+    padding: 18px;
   }
 }

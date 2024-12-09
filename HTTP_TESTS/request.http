@@ -1,5 +1,5 @@
 ###
-GET http://localhost:3000/api/menu
+ö
 
 ###
 GET http://localhost:3000/api/menu/tilaus
@@ -57,3 +57,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c
 ### DELETE ALL
 DELETE http://localhost:3000/api/menu
 
+###
+DELETE http://localhost:3000/api/menu/tilaus/3
+
+
+###
+PUT http://localhost:3000/api/menu/tilaus/1
+Content-Type: application/json
+
+{ 
+  "tila": "noudettu",
+  "noutoaika": 3000
+ }

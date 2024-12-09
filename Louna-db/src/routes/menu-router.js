@@ -7,6 +7,8 @@ import {
   getItems,
   getTilaus,
   postTilaus,
+  putTilaus,
+  DeleteTilaus,
   DeleteItem,
   poistaKaikkiAnnokset,
 } from "../controllers/menu-controller.js";
@@ -70,6 +72,8 @@ menuRouter
 menuRouter.route("/:id").delete(authenticateToken, DeleteItem);
 
 menuRouter.route("/tilaus").get(getTilaus).post(postTilaus);
+
+menuRouter.route("/tilaus/:id").put(putTilaus).delete(DeleteTilaus);
 
 // menuRouter
 //   .route("/:id")
