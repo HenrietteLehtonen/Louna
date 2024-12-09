@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/hallinta.css" />
+    <script src="./dist/menu-hallinta.js" defer type="module"></script>
+    <script src="./dist/tilausten-hallinta.js" type="module" defer></script>
+    <title>Louna hallinta</title>
+  </head>
+  <body>
+    <!-- 
+    *******************************
+
+            NAV
+
+    *******************************  
+    -->
+    <nav class="nav-bar">
+      <div id="nav-container">
+        <img src="./kuvat/logo.png" class="logo" alt="" />
+        <ul>
+          <li id="index"><a href="index.html">ETUSIVU</a></li>
+          <li id="hallinta"><a href="hallinta.html">HALLINTA</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 
+    *******************************
+
+            MAIN
+
+    *******************************  
+    -->
+
+    <main class="main">
+      <div class="container">
+        <div class="container otsikko">
+          <h1>Ruokalista</h1>
+          <h2>Ruokalistan hallinta</h2>
+        </div>
+
+        <!-- 
+    *******************************
+
+           Ruokalistan hallinta
+
+    *******************************  
+    -->
+        <div class="container ruoka-hallinta">
+          <button class="btn" id="addBtn">Lisää annos</button>
+          <button class="btn" id="deleteAllBtn">Poista kaikki</button>
+
+          <!-- FORMI  -->
+          <!-- <div class="container-ruokavalinta"> -->
+          <div class="container-ruokavalinta" id="hidden">
+            <form>
+              <!-- Päivän valinta -->
+              <div class="chooseDay-container">
+                <label for="päivä-valitsin" class="label-otsikko"
+                  >Valitse päivä:</label
+                >
+                <select name="päivä-valitsin" id="päivä-valitsin">
+                  <option value="Maanantai">Maanantai</option>
+                  <option value="Tiistai">Tiistai</option>
+                  <option value="Keskiviikko">Keskiviikko</option>
+                  <option value="Torstai">Torstai</option>
+                  <option value="Perjantai">Perjantai</option>
+                </select>
+              </div>
+              <!-- Annoksen nimi -->
+
+              <div class="annos-container">
+                <label for="annos" class="label-otsikko">Annoksen nimi:</label
+                ><br />
+                <input type="text" id="annos" name="annos" required /><br />
+              </div>
+              <!-- Allergeenit -->
+              <h2>Allergeenit:</h2>
+              <div class="checkbox-container">
+                <div class="allerg">
+                  <label for="G">G</label>
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    name="G"
+                    id="G"
+                    value="1"
+                  />
+                </div>
+
+                <div class="allerg">
+                  <label for="VL">VL</label>
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    name="VL"
+                    id="VL"
+                    value="2"
+                  />
+                </div>
+
+                <div class="allerg">
+                  <label for="L">L</label>
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    name="L"
+                    id="L"
+                    value="3"
+                  />
+                </div>
+
+                <div class="allerg">
+                  <label for="M">M</label>
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    name="M"
+                    id="M"
+                    value="4"
+                  />
+                </div>
+
+                <div class="allerg">
+                  <label for="K">K</label>
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    name="K"
+                    id="K"
+                    value="5"
+                  />
+                </div>
+
+                <div class="allerg">
+                  <label for="SO">SO</label>
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    name="SO"
+                    id="SO"
+                    value="6"
+                  />
+                </div>
+
+                <div class="allerg">
+                  <label for="VEG">VEG</label>
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    name="VEG"
+                    id="VEG"
+                    value="7"
+                  />
+                </div>
+                <div class="allerg">
+                  <label for="EI">Ei Allergeeneja</label>
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    name="-"
+                    id="EI"
+                    value="8"
+                  />
+                </div>
+              </div>
+              <!-- Hinta -->
+              <div class="annos-container price-container">
+                <label for="price" class="label-otsikko">Hinta:</label><br />
+                <input
+                  class="price"
+                  type="text"
+                  name="price"
+                  id="price"
+                  required
+                />
+              </div>
+            </form>
+            <button class="form-btn" id="save-btn">Lisää</button>
+            <button class="form-btn" id="peruuta">Peruuta</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annoksien taulukko -->
+
+      <div class="container annokset-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Päivä</th>
+              <th>Annos</th>
+              <th>Allergeenit</th>
+              <th>Hinta</th>
+              <th>Poista</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-kohde">
+            <!-- Tänne rakentuu taulukko -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 
+    *******************************
+
+            Tilausten hallinta
+
+    *******************************  
+    -->
+      <div class="container tilaukset">
+        <div class="container otsikko">
+          <h1>Tilaukset</h1>
+          <h2>Tilausten hallinta</h2>
+        </div>
+
+        <!-- etsi tilaus -->
+        <div class="container tilaus-container">
+          <h2>Muokkaa tilausta</h2>
+          <div class="container etsi-tilaus">
+            <label for="etsi-tilaus">Etsi muokattava tilaus:</label>
+            <input
+              type="search"
+              name="etsi-tilaus"
+              id="etsi-tilaus"
+              placeholder="Etsi tilausnumerolla"
+            />
+            <button id="etsi-tilaus-btn">Etsi</button>
+          </div>
+          <p id="tilausnumero-p-kohde">Tilausnumero:</p>
+          <label for="tilauksen-tila">Tilauksen tila:</label>
+          <select name="tilauksen-tila" id="tilauksen-tila">
+            <option value=""></option>
+            <option value="Vastaanotettu">Vastaanotettu</option>
+            <option value="Työn alla">Työn alla</option>
+            <option value="Odottaa noutoa">Odottaa noutoa</option>
+            <option value="Noudettu">Noudettu</option>
+            <option value="Peruutettu">Peruutettu</option>
+          </select>
+          <label for="nouto-aika">Noutoaika:</label>
+          <input type="text" name="nouto-aika" id="nouto-aika" />
+          <button id="update">Päivitä</button>
+          <button id="peruuta-btn">Peruuta</button>
+        </div>
+        <!-- tilaukset taulukko -->
+        <div class="container annokset-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Tilausnumero</th>
+                <th>Tuotteet</th>
+                <th>Tilaus tehty klo</th>
+                <th>Tila</th>
+                <th>Noutoaika</th>
+                <th>Poista tilaus</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-kohde-tilaukset">
+              <!--tänne tilauksien taulukko-->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

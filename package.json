@@ -9,9 +9,9 @@
     "start": "node dist/index.js",
     "dev-ts": "tsc --watch",
     "test-pw": "playwright test",
-    "dev": "nodemon Louna-db/src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "apidoc Louna-db/src/**/*"
+    "docs": "apidoc"
   },
   "author": "",
   "license": "ISC",
