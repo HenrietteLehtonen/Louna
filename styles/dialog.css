@@ -1,9 +1,9 @@
 button {
   cursor: pointer;
 }
-body:has(.kirjaudu[open]) {
+/* body:has(.kirjaudu[open]) {
   overflow: hidden;
-}
+} */
 
 dialog::backdrop {
   backdrop-filter: blur(10px);
@@ -224,4 +224,10 @@ dialog a {
 
 .hidden {
   display: none;
+}
+@media (min-width: 320px) {
+  /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+  .dialog {
+    width: 80vw;
+  }
 }
