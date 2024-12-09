@@ -41,7 +41,7 @@
 #order-summary-container p {
   font-size: 20px;
   color: #333;
-  text-transform: uppercase;
+  /*   text-transform: uppercase; */
   margin-bottom: 15px;
 }
 
@@ -329,12 +329,12 @@ footer {
     padding: 30px;
     gap: 20px;
   }
-
+  /* 
   .column {
     padding: 40px;
     max-width: 600px;
     margin: 15px;
-  }
+  } */
 
   .thank-you-message {
     padding: 50px;
@@ -361,10 +361,10 @@ footer {
     gap: 30px;
   }
 
-  .column {
+  /*   .column {
     padding: 50px;
     max-width: 600px;
-  }
+  } */
 
   .thank-you-message {
     margin-top: 20px;
