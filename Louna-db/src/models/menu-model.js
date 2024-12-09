@@ -166,10 +166,28 @@ const addTilaus = async (newItem) => {
   return result1[0].tilaus_id;
 };
 
+const updateTilaus = async (id, newData) => {
+  const sql = `UPDATE tilaukset SET tila = ?, nouto_aika = ? WHERE tilaus_id = ?`;
+  const params = [newData.tila, newData.noutoaika, id];
+  const result = await querryPool(sql, params);
+  return result[0].affectedRows;
+};
+
+const removeTilaus = async (id) => {
+  const sql1 = `DELETE tilausannos FROM tilausannos WHERE tilaus_id = ${id};`;
+  const sql2 = `DELETE tilaukset FROM tilaukset WHERE tilaus_id = ${id};`;
+
+  await querryPool(sql1);
+  await querryPool(sql2);
+  return;
+};
+
 export {
   fetchMenuItems,
   fetchTilaus,
   addTilaus,
+  updateTilaus,
+  removeTilaus,
   addMenuItem,
   removeMenuItem as removeItem,
   fetchPäivänRuokalista,

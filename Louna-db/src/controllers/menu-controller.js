@@ -4,6 +4,8 @@ import {
   addMenuItem,
   fetchTilaus,
   addTilaus,
+  updateTilaus,
+  removeTilaus,
   removeItem,
   fetchPäivänRuokalista,
   removeAll,
@@ -120,10 +122,48 @@ const postTilaus = async (req, res, next) => {
   }
 };
 
+const putTilaus = async (req, res) => {
+  // destructure title and description property values from req.body
+  const { tila, noutoaika } = req.body;
+  const newDetails = {
+    tila,
+    noutoaika,
+  };
+  try {
+    const itemsEdited = await updateTilaus(req.params.id, newDetails);
+    // if no items were edited (id was not found in DB), return 404
+    if (itemsEdited === 0) {
+      return res.status(404).json({ message: "Item not found" });
+    } else if (itemsEdited === 1) {
+      return res
+        .status(200)
+        .json({ message: "Item updated", id: req.params.id });
+    }
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong: " + error.message });
+  }
+};
+
+const DeleteTilaus = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await removeTilaus(id);
+    return res.status(200).json({ message: "Item removed by" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong: " + error.message });
+  }
+};
+
 export {
   getItems,
   getTilaus,
   postTilaus,
+  putTilaus,
+  DeleteTilaus,
   postItem,
   DeleteItem,
   getPäivänRuokalista,
