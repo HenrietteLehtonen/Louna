@@ -1,5 +1,6 @@
 ###
-ö
+
+GET http://localhost:3000/api/menu
 
 ###
 GET http://localhost:3000/api/menu/tilaus
@@ -66,6 +67,6 @@ PUT http://localhost:3000/api/menu/tilaus/1
 Content-Type: application/json
 
 { 
-  "tila": "noudettu",
+  "tila": "Päivitetty",
   "noutoaika": 3000
  }

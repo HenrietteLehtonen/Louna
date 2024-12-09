@@ -114,8 +114,10 @@ INSERT INTO Käyttäjät ( username, password, email, user_level_id)
     ('test_user', 'testpassword', 'test@email.com', 2);
 
 INSERT INTO Tilaukset (user_id, nouto_aika, tila)
-    VALUES (2, 1000, "Työn alla");
+    VALUES (2, 1000, "Työn alla"),
+    (2, 1000, "Vastaanotettu");
 
 INSERT INTO Tilausannos (tilaus_id, annos_id, määrä)
     VALUES(1,1,1),
-    (1,2,2);
+    (1,2,2),
+    (2,5,1);
