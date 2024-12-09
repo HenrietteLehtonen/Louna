@@ -97,9 +97,6 @@ const poistaTilausFunktio = (tilaus: Tilaukset) => {
     //   (item) => item.tilaus_id === tilaus.tilaus_id
     // );
 
-    // // poista tilaus taulukosta
-    // tilaukset.splice(tilausIndex, 1);
-
     // poista rivi html taulukosta
     const rivi = document.querySelector(
       `#tilaus-${tilaus.tilaus_id}`

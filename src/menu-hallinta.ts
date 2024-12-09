@@ -1,5 +1,4 @@
-import { error } from "console";
-import { Menu, Ruokalista, Annokset } from "./types/menu";
+import { Menu, Ruokalista, Annokset, Tilaukset } from "./types/menu";
 import { fetchData } from "./utils/haeData.js";
 import { apiUrl } from "../utils/variables.js";
 
@@ -152,9 +151,40 @@ save.addEventListener("click", async () => {
       },
       body: JSON.stringify(data),
     };
+
     const result = await fetchData<Annokset>(apiUrl + "/menu", options);
     console.log(result);
+
+    /// LISÄTÄÄN HTML
+    const uusiAnnosHTML = luoAnnosRivi(data.day_name, {
+      annos_id: result.annos_id,
+      nimi: data.nimi,
+      allergeenit: (
+        document.querySelector(".checkbox:checked") as HTMLInputElement
+      ).name,
+      hinta: data.hinta,
+    });
+
+    const päiväRiv = document.querySelector(
+      `.päivä-rivi[data-päivä="${data.day_name}"]`
+    ) as HTMLElement;
+
+    if (päiväRiv) {
+      päiväRiv.insertAdjacentHTML("afterend", uusiAnnosHTML);
+    }
     console.log("Annos lisätty onnistuneesti");
+
+    // formin tyhjennys
+    (document.querySelector("#päivä-valitsin") as HTMLSelectElement).value = "";
+    (document.querySelector("#annos") as HTMLInputElement).value = "";
+    (document.querySelector(".checkbox:checked") as HTMLInputElement).value =
+      "";
+    (document.querySelector("#price") as HTMLInputElement).value = "";
+    // piilotetaan annoksen lisäämisen jälkeen
+    const add = document.querySelector(
+      ".container-ruokavalinta"
+    ) as HTMLElement;
+    add.setAttribute("id", "hidden");
   } catch (error) {
     console.error("Ei onnistuttu lisäämään annosta");
   }
@@ -214,33 +244,72 @@ console.log(":)");
  *
  */
 
+// const haeData = async () => {
+//   try {
+//     const ruokalista = await fetchData<Ruokalista[]>(apiUrl + `/menu`);
+
+//     for (const päivä of ruokalista) {
+//       // console.log(päivä.annokset);
+
+//       const päivänAnnokset = päivä.annokset;
+//       päivänAnnokset.forEach((annos) => {
+//         // console.log(annos);
+
+//         let html = `
+//           <tr id="tr-${annos.annos_id}" class="annos-rivi" data-päivä="${päivä.day}">
+//           <td></td>
+//             <td>${annos.nimi}</td>
+//             <td>${annos.allergeenit}</td>
+//             <td>${annos.hinta}</td>
+//             <td><button id="del-${annos.annos_id}" class="del-btn">x</button></td>
+//           </tr>
+//           `;
+
+//         // iskee jokaiselle päivälle kokolistan
+//         const päiväRiv = document.querySelector(
+//           `.päivä-rivi[data-päivä="${päivä.day}"]`
+//         ) as HTMLElement;
+
+//         päiväRiv.insertAdjacentHTML("afterend", html);
+//         deletebuttonlistener(annos);
+//       });
+//     }
+//     console.log(":)");
+//   } catch (error) {
+//     console.error("Ei löydy:", error);
+//   }
+// };
+const luoAnnosRivi = (päivä: string, annos: any): string => {
+  return `
+    <tr id="tr-${annos.annos_id}" class="annos-rivi" data-päivä="${päivä}">
+      <td></td>
+      <td>${annos.nimi}</td>
+      <td>${annos.allergeenit}</td>
+      <td>${annos.hinta}</td>
+      <td><button id="del-${annos.annos_id}" class="del-btn">x</button></td>
+    </tr>
+  `;
+};
+
 const haeData = async () => {
   try {
     const ruokalista = await fetchData<Ruokalista[]>(apiUrl + `/menu`);
 
     for (const päivä of ruokalista) {
-      // console.log(päivä.annokset);
-
       const päivänAnnokset = päivä.annokset;
+
       päivänAnnokset.forEach((annos) => {
-        // console.log(annos);
+        // jokaiselle annokselle oma rivi
+        const html = luoAnnosRivi(päivä.day, annos);
 
-        let html = `
-          <tr id="tr-${annos.annos_id}" class="annos-rivi" data-päivä="${päivä.day}">
-          <td></td>
-            <td>${annos.nimi}</td>
-            <td>${annos.allergeenit}</td>
-            <td>${annos.hinta}</td>
-            <td><button id="del-${annos.annos_id}" class="del-btn">x</button></td>
-          </tr>
-          `;
-
-        // iskee jokaiselle päivälle kokolistan
+        // lisää rivin oikean päivän kohdalle
         const päiväRiv = document.querySelector(
           `.päivä-rivi[data-päivä="${päivä.day}"]`
         ) as HTMLElement;
 
-        päiväRiv.insertAdjacentHTML("afterend", html);
+        if (päiväRiv) {
+          päiväRiv.insertAdjacentHTML("afterend", html);
+        }
         deletebuttonlistener(annos);
       });
     }
@@ -249,5 +318,4 @@ const haeData = async () => {
     console.error("Ei löydy:", error);
   }
 };
-
 haeData();
