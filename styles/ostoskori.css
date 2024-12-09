@@ -1,4 +1,10 @@
 /* Modaalin yleiset tyylit */
+.modal-text {
+  font-family: Arial, sans-serif;
+  color: #222;
+  margin: 0;
+}
+
 #custom-modal {
   position: fixed;
   top: 0;
@@ -21,7 +27,8 @@
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  width: 300px;
+  width: 600px;
+  max-width: 900px;
   position: relative;
   color: #333;
 }
@@ -34,6 +41,7 @@
 
 /* Ostoskorin lista */
 #cart-items {
+  font-size: 30px;
   list-style: none;
   padding: 0;
   margin-top: 10px;
@@ -41,18 +49,18 @@
 
 #cart-items li {
   margin-bottom: 8px;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 #cart-total {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 25px;
   margin-top: 15px;
 }
 
 /* Sulje-painike */
 .close-btn {
-  background-color: #f44336; /* Punainen väri */
+  background-color: #f44336;
   color: white;
   border: none;
   padding: 10px;
@@ -66,7 +74,7 @@
 }
 
 .close-btn:hover {
-  background-color: #d32f2f; /* Tummempi punainen hover-efekti */
+  background-color: #d32f2f;
 }
 
 /* Ostoskori-ikoni */
@@ -139,8 +147,25 @@
 }
 
 /* Media query pienille näytöille */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   #custom-modal .modal-content {
-    width: 90%;
+    width: 70%;
+    max-width: 800px;
+  }
+
+  .button {
+    font-size: 14px;
+  }
+
+  #custom-modal h3 {
+    font-size: 16px;
+  }
+
+  #cart-items li {
+    font-size: 20px;
+  }
+
+  #cart-total {
+    font-size: 16px;
   }
 }
