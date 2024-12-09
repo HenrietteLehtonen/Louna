@@ -167,10 +167,17 @@ const addTilaus = async (newItem) => {
 };
 
 const updateTilaus = async (id, newData) => {
-  const sql = `UPDATE tilaukset SET tila = ?, nouto_aika = ? WHERE tilaus_id = ?`;
-  const params = [newData.tila, newData.noutoaika, id];
-  const result = await querryPool(sql, params);
-  return result[0].affectedRows;
+  if (!newData.noutoaika) {
+    const sql = `UPDATE tilaukset SET tila = ? WHERE tilaus_id = ?`;
+    const params = [newData.tila, id];
+    const result = await querryPool(sql, params);
+    return result[0].affectedRows;
+  } else {
+    const sql = `UPDATE tilaukset SET tila = ?, nouto_aika = ? WHERE tilaus_id = ?`;
+    const params = [newData.tila, newData.noutoaika, id];
+    const result = await querryPool(sql, params);
+    return result[0].affectedRows;
+  }
 };
 
 const removeTilaus = async (id) => {

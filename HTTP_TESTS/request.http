@@ -67,5 +67,5 @@ Content-Type: application/json
 
 { 
   "tila": "noudettu",
-  "noutoaika": 3000
+  "noutoaika": null
  }
