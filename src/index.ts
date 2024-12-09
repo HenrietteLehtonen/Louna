@@ -9,6 +9,7 @@ import {
   Ruokalista,
   Tilaukset,
 } from "./types/menu";
+
 import { fetchData } from "./utils/haeData.js";
 import { apiUrl } from "./utils/variables.js";
 import { lisaaOstoskoriin } from "./ostoskori.js";
@@ -38,23 +39,28 @@ const logInNavBtn = document.querySelector("#log-in") as HTMLButtonElement;
 const dialogi1 = document.querySelector(".dialog") as HTMLDialogElement;
 const registerDialog = document.querySelector(".rek") as HTMLDialogElement;
 const closeDialogBtn = document.querySelector(
-  ".close-modal-btn"
-) as HTMLElement;
+  "#k-ulos-btn"
+) as HTMLButtonElement;
 const burgerMenu = document.querySelector("#burger-menu") as HTMLButtonElement;
 const burgerMenuContent = document.querySelector(
   "#burger-menu-content"
 ) as HTMLElement;
+
 // Asiakassivu dialogi
-const dialogOma = document.querySelector(".dialog-oma") as HTMLDialogElement;
-const closeOmaDialogBtn = document.querySelector(
-  ".close-modal-btn-oma"
-) as HTMLElement;
+const oma = document.querySelector(".dialog-oma") as HTMLDialogElement;
+const asiakas_btn = document.querySelector("#oma-btn") as HTMLButtonElement;
 
 // Modal display handling
 if (logInNavBtn) {
   logInNavBtn.addEventListener("click", () => {
     console.log("klik modal auki");
-    dialogi1.showModal();
+
+    if (dialogi1.classList.contains("hidden")) {
+      dialogi1.close();
+      oma.showModal();
+    } else {
+      dialogi1.showModal();
+    }
   });
 }
 
@@ -64,11 +70,13 @@ if (closeDialogBtn) {
     dialogi1.close();
   });
 }
-
-if (closeOmaDialogBtn) {
-  closeDialogBtn.addEventListener("click", () => {
+/// "OMAT SIVUT"
+if (asiakas_btn) {
+  asiakas_btn.addEventListener("click", () => {
     console.log("klik oma");
-    dialogOma.close();
+    oma.close();
+    dialogi1.close();
+    dialogi1.classList.add("hidden");
   });
 }
 

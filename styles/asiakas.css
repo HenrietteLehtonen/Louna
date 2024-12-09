@@ -88,7 +88,7 @@ dialog::backdrop {
   padding: 0;
   border-collapse: collapse;
   font-size: 16px;
-  width: 100%;
+  max-width: 90%;
   box-sizing: border-box;
   border-radius: 8px;
   overflow: hidden;
@@ -106,7 +106,7 @@ dialog::backdrop {
 
 .omat-tilaukset-container tr {
   padding: 10px;
-
+  height: 2em;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -134,4 +134,14 @@ dialog::backdrop {
   margin: 10px 0;
   width: 100px;
   align-self: center;
+}
+@media (min-width: 801px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  .omat-tilaukset-container table {
+    max-width: 90%;
+  }
+
+  .omat-tilaukset-container table td {
+    width: 50px;
+  }
 }

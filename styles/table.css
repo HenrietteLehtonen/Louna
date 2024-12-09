@@ -28,7 +28,7 @@ table td {
   padding: 20px 0;
   text-align: center;
   font-size: 1.5em;
-  width: 50px;
+  width: 80px;
   /* flex: 1; */
 }
 .annos-td {
@@ -56,5 +56,9 @@ table button:disabled {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
   table {
     max-width: 600px;
+  }
+
+  table td {
+    width: 200px;
   }
 }
