@@ -2,7 +2,7 @@
 
 import { login } from "./functions/loginFunc.js";
 import { validateLocaleAndSetLanguage } from "../node_modules/typescript/lib/typescript";
-import { Annokset, Menu, Ruokalista } from "./types/menu";
+import { Annokset, Menu, Ruokalista, Tilaukset } from "./types/menu";
 import { fetchData } from "./utils/haeData.js";
 import { apiUrl } from "./utils/variables.js";
 
@@ -137,6 +137,7 @@ const burgerMenu = document.querySelector("#burger-menu") as HTMLButtonElement;
 const burgerMenuContent = document.querySelector(
   "#burger-menu-content"
 ) as HTMLElement;
+const dialogOma = document.querySelector(".dialog-oma") as HTMLDialogElement;
 
 // Modal display handling
 if (logInNavBtn) {
@@ -150,6 +151,7 @@ if (closeDialogBtn) {
   closeDialogBtn.addEventListener("click", () => {
     console.log("klik modal kiinni");
     dialogi1.close();
+    dialogOma.close();
   });
 }
 
@@ -332,3 +334,33 @@ const datatieto = async (): Promise<void> => {
 };
 
 datatieto();
+
+// LISÄTÄÄN OMAAN SIVUUN TILAUKSET!
+const omat_tilaukset = document.querySelector(
+  "#tbody-kohde-omat-tilaukset"
+) as HTMLElement;
+const haeData = async () => {
+  try {
+    // Haetaan data backendistä
+    const tilaukset = await fetchData<Tilaukset[]>(apiUrl + `/menu/tilaus`);
+    console.log(tilaukset);
+
+    for (const tilaus of tilaukset) {
+      let html = `
+       <tr id="tilaus-${tilaus.tilaus_id}">
+        <td>${tilaus.tilaus_id}</td>
+        <td>${tilaus.nimet.map((nimi, index) => `${nimi} (${tilaus.määrä[index]})`).join(", ")}</td>
+        <td>${new Date(tilaus.tilaus_aika).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
+        <td id="tila-${tilaus.tilaus_id}" >${tilaus.tila}</td>
+        <td id="nouto-${tilaus.tilaus_id}">${new Date(tilaus.nouto_aika).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
+      </tr>
+      `;
+
+      // LISÄÄ user_id = tilaus_id
+      omat_tilaukset.insertAdjacentHTML("beforeend", html);
+    }
+  } catch (e) {
+    console.error("Tietojen hakeminen epäonnistui:", e);
+  }
+};
+haeData();

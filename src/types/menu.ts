@@ -22,10 +22,12 @@ type Menu = {
 
 type Tilaukset = {
   tilaus_id: number;
-  tilausnro: number;
-  tilattu_aika: number;
+  tila: string;
+  // tilausnro: number;
+  tilaus_aika: string;
   nouto_aika: string;
-  tilauksen_tila: string;
+  nimet: string[];
+  määrä: number[];
 };
 
 export type { Menu, Tilaukset, Ruokalista, Annokset };
