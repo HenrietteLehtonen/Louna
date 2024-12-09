@@ -2,9 +2,16 @@
 
 import { login } from "./functions/loginFunc.js";
 import { validateLocaleAndSetLanguage } from "../node_modules/typescript/lib/typescript";
-import { Annokset, Menu, Ruokalista, Tilaukset } from "./types/menu";
+import {
+  Annokset,
+  Menu,
+  OstoskoriItem,
+  Ruokalista,
+  Tilaukset,
+} from "./types/menu";
 import { fetchData } from "./utils/haeData.js";
 import { apiUrl } from "./utils/variables.js";
+import { lisaaOstoskoriin } from "./ostoskori.js";
 
 // DATE OBJEKTI
 const today: number = new Date().getDay();
@@ -175,8 +182,7 @@ const kohde: HTMLElement = document.querySelector("#kohde")!;
 
 const datatieto = async (): Promise<void> => {
   try {
-    const res = await fetch("http://localhost:3000/api/menu");
-    const ruokalista: Ruokalista[] = await res.json();
+    const ruokalista = await fetchData<Ruokalista[]>(apiUrl + "/menu");
     kohde.innerHTML = "";
     console.log(ruokalista);
 
@@ -199,6 +205,7 @@ const datatieto = async (): Promise<void> => {
         tablebody.setAttribute("id", "tablebody");
         kohde.appendChild(tablebody);
         // valitun päivän annokset
+
         valittuPäivä.annokset.forEach((annos) => {
           const annoksetTaulukko = `
             <tr>
@@ -208,6 +215,29 @@ const datatieto = async (): Promise<void> => {
             </tr>
           `;
           tablebody.insertAdjacentHTML("beforeend", annoksetTaulukko);
+
+          const annosButton = document.querySelector(
+            "#annos-" + annos.annos_id
+          ) as HTMLButtonElement;
+
+          if (annosButton) {
+            annosButton.addEventListener("click", async (event) => {
+              const ruokaNimi = annos.nimi;
+              const hinta = annos.hinta;
+              const annos_id = annos.annos_id;
+              if (isNaN(hinta)) {
+                console.error("Virheellinen hinta-arvo:", hinta);
+                return;
+              }
+              const ruoka: OstoskoriItem = {
+                nimi: ruokaNimi,
+                hinta: { muu: hinta },
+                maara: 0,
+                annos_id,
+              };
+              lisaaOstoskoriin(ruoka);
+            });
+          }
         });
       } else {
         kohde.innerHTML =
@@ -242,6 +272,38 @@ const datatieto = async (): Promise<void> => {
     console.error("Virhe haettaessa dataa:", error);
   }
 };
+
+/* 
+annosButton.addEventListener("click", async (event) => {
+  if ((event.target as HTMLElement).classList.contains("add-btn")) {
+    const row = (event.target as HTMLElement).closest(
+      "tr"
+    ) as HTMLTableRowElement;
+    const ruokaNimi =
+      row.querySelector("td")?.childNodes[0].textContent?.trim() ||
+      "";
+
+    const hintaText =
+      row.querySelectorAll("td")[1]?.textContent || "";
+
+    const parsedHintaText = hintaText.split("/")[0].trim();
+    const hinta = parseFloat(
+      parsedHintaText.replace(/[^0-9,.]/g, "").replace(",", ".")
+    );
+
+    if (isNaN(hinta)) {
+      console.error("Virheellinen hinta-arvo:", parsedHintaText);
+      return;
+    }
+
+    const ruoka: OstoskoriItem = {
+      nimi: ruokaNimi,
+      hinta: { muu: hinta },
+      maara: 0,
+    };
+
+    lisaaOstoskoriin(ruoka);
+ */
 
 datatieto();
 

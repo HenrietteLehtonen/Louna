@@ -30,4 +30,25 @@ type Tilaukset = {
   määrä: number[];
 };
 
-export type { Menu, Tilaukset, Ruokalista, Annokset };
+type TilausPacket = {
+  annos_id: number;
+  määrä: number;
+};
+
+type OstoskoriItem = {
+  nimi: string;
+  hinta: {
+    muu: number;
+  };
+  maara: number;
+  annos_id: number;
+};
+
+export type {
+  Menu,
+  Tilaukset,
+  Ruokalista,
+  Annokset,
+  OstoskoriItem,
+  TilausPacket,
+};
