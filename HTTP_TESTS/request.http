@@ -67,6 +67,6 @@ PUT http://localhost:3000/api/menu/tilaus/1
 Content-Type: application/json
 
 { 
-  "tila": "Päivitetty",
+  "tila": "Vastaanotettu",
   "noutoaika": 3000
  }

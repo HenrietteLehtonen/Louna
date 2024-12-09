@@ -206,81 +206,86 @@ const etsiTilausFunktio = async () => {
     }
 
     /// PÄIVITÄ TILAUS
-    päivitäTilausBTN.addEventListener("click", async () => {
-      console.log("päivitä nappia painettu");
-      try {
-        console.log("Päivitetään tilaustieoja...");
+    päivitäTilausBTN.addEventListener(
+      "click",
+      async () => {
+        console.log("päivitä nappia painettu");
+        try {
+          console.log("Päivitetään tilaustieoja...");
 
-        let data = {
-          tila: (document.querySelector("#tilauksen-tila") as HTMLInputElement)
-            .value,
-          noutoaika: (document.querySelector("#nouto-aika") as HTMLInputElement)
-            .value,
-        };
-        const options = {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        };
-        console.log(options);
-        const result = await fetchData<Tilaukset>(
-          apiUrl + `/menu/tilaus/${tilaus.tilaus_id}`,
-          options
-        );
-        console.log(data);
-        console.log(result);
-      } catch (error) {
-        console.error("Tilausta ei onnistuttu päivittämään", error);
-      }
+          let data = {
+            tila: (
+              document.querySelector("#tilauksen-tila") as HTMLInputElement
+            ).value,
+            noutoaika: (
+              document.querySelector("#nouto-aika") as HTMLInputElement
+            ).value,
+          };
+          const options = {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          };
+          console.log(options);
+          const result = await fetchData<Tilaukset>(
+            apiUrl + `/menu/tilaus/${tilaus.tilaus_id}`,
+            options
+          );
+          console.log(data);
+          console.log(result);
+        } catch (error) {
+          console.error("Tilausta ei onnistuttu päivittämään", error);
+        }
 
-      //---------- tilauksen tila
-      // haetaan tilauksen tila selectionin value
-      // const päivitettyTila = (
-      //   document.querySelector("#tilauksen-tila") as HTMLInputElement
-      // ).value;
+        //---------- tilauksen tila
+        const päivitettyTila = (
+          document.querySelector("#tilauksen-tila") as HTMLInputElement
+        ).value;
 
-      // if (päivitettyTila !== "") {
-      //   // päivitetään tilauksen tila taulukkoon
-      //   tilaus.tila = päivitettyTila;
+        if (päivitettyTila !== "") {
+          // päivitetään tilauksen tila taulukkoon
+          tilaus.tila = päivitettyTila;
 
-      //   // päivitetään tilauksen tila html
-      //   const päivitettäväTilaTD = document.querySelector(
-      //     `#tila-${tilaus.tilaus_id}`
-      //   ) as HTMLElement;
-      //   //
+          // päivitetään tilauksen tila html
+          const päivitettäväTilaTD = document.querySelector(
+            `#tila-${tilaus.tilaus_id}`
+          ) as HTMLElement;
+          //
 
-      //   päivitettäväTilaTD.innerText = päivitettyTila;
+          päivitettäväTilaTD.innerText = päivitettyTila;
 
-      //   console.log(`Tilauksen uusi tila: ${päivitettyTila}`);
-      //   console.log(tilaus);
-      // }
-      // //---------- noutoaika
-      // const päivitettyNoutoaika = (
-      //   document.querySelector("#nouto-aika") as HTMLInputElement
-      // ).value;
-      // // jos noutoaika ei oo tyhjä
-      // if (päivitettyNoutoaika !== "") {
-      //   // päivitetään taulukkoon
-      //   tilaus.nouto_aika = päivitettyNoutoaika;
-      //   // päivitetään html
-      //   const päivitettäväAika = document.querySelector(
-      //     `#nouto-${tilaus.tilaus_id}`
-      //   ) as HTMLElement;
+          console.log(`Tilauksen uusi tila: ${päivitettyTila}`);
+          console.log(tilaus);
+        }
+        //---------- noutoaika
+        const päivitettyNoutoaika = (
+          document.querySelector("#nouto-aika") as HTMLInputElement
+        ).value;
+        // jos noutoaika ei oo tyhjä
+        if (päivitettyNoutoaika !== "") {
+          // päivitetään taulukkoon
+          tilaus.nouto_aika = päivitettyNoutoaika;
+          // päivitetään html
+          const päivitettäväAika = document.querySelector(
+            `#nouto-${tilaus.tilaus_id}`
+          ) as HTMLElement;
 
-      //   päivitettäväAika.innerText = päivitettyNoutoaika;
-      //   console.log(`Tilauksen uusi noutoaika: ${päivitettyNoutoaika}`);
-      // }
+          päivitettäväAika.innerText = päivitettyNoutoaika;
+          console.log(`Tilauksen uusi noutoaika: ${päivitettyNoutoaika}`);
+        }
 
-      (document.querySelector("#etsi-tilaus") as HTMLInputElement).value = "";
-      kohde.innerText = "Tilausnumero:";
-      (document.querySelector("#tilauksen-tila") as HTMLInputElement).value =
-        "";
-      (document.querySelector("#nouto-aika") as HTMLInputElement).value = "";
-      console.log(tilaus);
-      console.log(`Päivitetty tilausta ${tilausnumero}`);
-    });
+        (document.querySelector("#etsi-tilaus") as HTMLInputElement).value = "";
+        kohde.innerText = "Tilausnumero:";
+        (document.querySelector("#tilauksen-tila") as HTMLInputElement).value =
+          "";
+        (document.querySelector("#nouto-aika") as HTMLInputElement).value = "";
+        console.log(tilaus);
+        console.log(`Päivitetty tilausta ${tilausnumero}`);
+      },
+      { once: true }
+    );
   });
 };
 
