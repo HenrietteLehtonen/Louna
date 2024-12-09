@@ -221,3 +221,7 @@ dialog a {
   color: #688765;
   text-underline-offset: 5px;
 }
+
+.hidden {
+  display: none;
+}

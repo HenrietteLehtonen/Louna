@@ -184,6 +184,9 @@ footer {
 .empty {
   height: 200px;
 }
+.nimi {
+  color: #9dce98;
+}
 
 @media (min-width: 320px) {
   /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
