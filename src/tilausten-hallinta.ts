@@ -1,6 +1,6 @@
 import { Tilaukset } from "./types/menu";
 import { fetchData } from "./utils/haeData.js";
-import { apiUrl } from "../utils/variables.js";
+import { apiUrl } from "./utils/variables.js";
 import { clearScreenDown } from "readline";
 
 // TILAUS MOCKDATA
