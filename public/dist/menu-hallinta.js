@@ -25,11 +25,11 @@ import { apiUrl } from "./utils/variables.js";
 //   },
 // ];
 const viikonpäivät = [
-    "Maanantai",
-    "Tiistai",
-    "Keskiviikko",
-    "Torstai",
-    "Perjantai",
+  "Maanantai",
+  "Tiistai",
+  "Keskiviikko",
+  "Torstai",
+  "Perjantai",
 ];
 const kohde = document.querySelector("#tbody-kohde");
 //
@@ -41,67 +41,68 @@ const kohde = document.querySelector("#tbody-kohde");
 // Aavaa annoksen lisäys laatikko
 const addAnnos = document.querySelector("#addBtn");
 if (!addAnnos) {
-    console.log("Lisää annos nappia ei löytynyt!");
+  console.log("Lisää annos nappia ei löytynyt!");
 }
 addAnnos.addEventListener("click", function () {
-    console.log("Lisää annos nappia painettu");
-    document.querySelector("#hidden").removeAttribute("id");
+  console.log("Lisää annos nappia painettu");
+  document.querySelector("#hidden").removeAttribute("id");
 });
 // Poista kaikki annokset
 const delAll = document.querySelector("#deleteAllBtn");
 if (!delAll) {
-    console.log("Poista kaikkia nappia ei löytynyt!");
+  console.log("Poista kaikkia nappia ei löytynyt!");
 }
 delAll.addEventListener("click", async () => {
-    try {
-        const options = {
-            method: "DELETE",
-            // headers: {
-            //   Authorization: "Bearer " + token,
-            // },
-        };
-        // yhteys backendiin
-        const result = await fetchData(apiUrl + `/menu`, options);
-        // poistetaan kaikki annosrivit taulukosta
-        const annosRivit = document.querySelectorAll("tr.annos-rivi");
-        annosRivit.forEach((rivi) => rivi.remove());
-        console.log("Kaikki annoksett poistettu");
-    }
-    catch (error) {
-        console.error("Annoksia ei pystytä poistamaan");
-    }
+  try {
+    const options = {
+      method: "DELETE",
+      // headers: {
+      //   Authorization: "Bearer " + token,
+      // },
+    };
+    // yhteys backendiin
+    const result = await fetchData(apiUrl + `/menu`, options);
+    // poistetaan kaikki annosrivit taulukosta
+    const annosRivit = document.querySelectorAll("tr.annos-rivi");
+    annosRivit.forEach((rivi) => rivi.remove());
+    console.log("Kaikki annoksett poistettu");
+  } catch (error) {
+    console.error("Annoksia ei pystytä poistamaan");
+  }
 });
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2xldmVsX2lkIjoxLCJpYXQiOjE3MzM2ODczNDIsImV4cCI6MTczMzc3Mzc0Mn0.8bYgnmTClI7Or2y4MwmuxjayzH6lYvVG2PENzU6VFrA";
+const token = localStorage.getItem("token");
 // Poista yksittäinen annos
 const deletebuttonlistener = (menu) => {
-    const del = document.querySelector(`#del-${menu.annos_id}`);
-    if (!del) {
-        console.log("Poista napia ei löytynyt!");
+  const del = document.querySelector(`#del-${menu.annos_id}`);
+  if (!del) {
+    console.log("Poista napia ei löytynyt!");
+  }
+  del.addEventListener("click", async () => {
+    try {
+      const options = {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      };
+      // yhteys backendiin
+      const result = await fetchData(
+        apiUrl + `/menu/${menu.annos_id}`,
+        options
+      );
+      console.log(result);
+      // poista taulukosta
+      kohde.removeChild(document.querySelector(`#tr-${menu.annos_id}`));
+      console.log(`Poistettu: ${menu.annos_id}`);
+    } catch (error) {
+      console.error("Ei onnistuttu poistamaan.");
     }
-    del.addEventListener("click", async () => {
-        try {
-            const options = {
-                method: "DELETE",
-                headers: {
-                    Authorization: "Bearer " + token,
-                },
-            };
-            // yhteys backendiin
-            const result = await fetchData(apiUrl + `/menu/${menu.annos_id}`, options);
-            console.log(result);
-            // poista taulukosta
-            kohde.removeChild(document.querySelector(`#tr-${menu.annos_id}`));
-            console.log(`Poistettu: ${menu.annos_id}`);
-        }
-        catch (error) {
-            console.error("Ei onnistuttu poistamaan.");
-        }
-    });
+  });
 };
 // Lisää annos
 const save = document.querySelector("#save-btn");
 if (!save) {
-    console.log("Lisää nappia ei löydetty!");
+  console.log("Lisää nappia ei löydetty!");
 }
 /**
  *
@@ -109,67 +110,68 @@ if (!save) {
  *
  */
 save.addEventListener("click", async () => {
-    try {
-        console.log("Haetaan dataa...");
-        // haetaan input kentät
-        let data = {
-            day_name: document.querySelector("#päivä-valitsin")
-                .value,
-            nimi: document.querySelector("#annos").value,
-            allerg_id: document.querySelector(".checkbox:checked").value,
-            hinta: document.querySelector("#price").value,
-        };
-        // muutetaan options, koska ei käyteta GET
-        const options = {
-            method: "POST",
-            headers: {
-                Authorization: "Bearer " + token,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        };
-        const result = await fetchData(apiUrl + "/menu", options);
-        console.log(result);
-        /// LISÄTÄÄN HTML
-        const uusiAnnosHTML = luoAnnosRivi(data.day_name, {
-            annos_id: result.annos_id,
-            nimi: data.nimi,
-            allergeenit: document.querySelector(".checkbox:checked").name,
-            hinta: data.hinta,
-        });
-        const päiväRiv = document.querySelector(`.päivä-rivi[data-päivä="${data.day_name}"]`);
-        if (päiväRiv) {
-            päiväRiv.insertAdjacentHTML("afterend", uusiAnnosHTML);
-        }
-        console.log("Annos lisätty onnistuneesti");
-        // formin tyhjennys
-        document.querySelector("#päivä-valitsin").value = "";
-        document.querySelector("#annos").value = "";
-        document.querySelector(".checkbox:checked").value =
-            "";
-        document.querySelector("#price").value = "";
-        // piilotetaan annoksen lisäämisen jälkeen
-        const add = document.querySelector(".container-ruokavalinta");
-        add.setAttribute("id", "hidden");
+  try {
+    console.log("Haetaan dataa...");
+    // haetaan input kentät
+    let data = {
+      day_name: document.querySelector("#päivä-valitsin").value,
+      nimi: document.querySelector("#annos").value,
+      allerg_id: document.querySelector(".checkbox:checked").value,
+      hinta: document.querySelector("#price").value,
+    };
+    // muutetaan options, koska ei käyteta GET
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const result = await fetchData(apiUrl + "/menu", options);
+    console.log(result);
+    /// LISÄTÄÄN HTML
+    const uusiAnnosHTML = luoAnnosRivi(data.day_name, {
+      annos_id: result.annos_id,
+      nimi: data.nimi,
+      allergeenit: document.querySelector(".checkbox:checked").name,
+      hinta: data.hinta,
+    });
+    const päiväRiv = document.querySelector(
+      `.päivä-rivi[data-päivä="${data.day_name}"]`
+    );
+    if (päiväRiv) {
+      päiväRiv.insertAdjacentHTML("afterend", uusiAnnosHTML);
     }
-    catch (error) {
-        console.error("Ei onnistuttu lisäämään annosta");
-    }
+    console.log("Annos lisätty onnistuneesti");
+    // formin tyhjennys
+    document.querySelector("#päivä-valitsin").value = "";
+    document.querySelector("#annos").value = "";
+    document.querySelector(".checkbox:checked").value = "";
+    document.querySelector("#price").value = "";
+    // piilotetaan annoksen lisäämisen jälkeen
+    const add = document.querySelector(".container-ruokavalinta");
+    add.setAttribute("id", "hidden");
+  } catch (error) {
+    console.error("Ei onnistuttu lisäämään annosta");
+  }
 });
 // Peruuta
 const peruuta = document.querySelector("#peruuta");
 if (!peruuta) {
-    console.log("Peruuta nappia ei löytynyt!");
+  console.log("Peruuta nappia ei löytynyt!");
 }
 peruuta.addEventListener("click", function () {
-    console.log("Peruuta nappia painettu");
-    document.querySelector(".container-ruokavalinta").setAttribute("id", "hidden");
-    // tyhjennetään formi
-    document.querySelector("#annos").value = "";
-    document.querySelector("#price").value = "";
-    document
-        .querySelectorAll(".checkbox")
-        .forEach((checkbox) => (checkbox.checked = false));
+  console.log("Peruuta nappia painettu");
+  document
+    .querySelector(".container-ruokavalinta")
+    .setAttribute("id", "hidden");
+  // tyhjennetään formi
+  document.querySelector("#annos").value = "";
+  document.querySelector("#price").value = "";
+  document
+    .querySelectorAll(".checkbox")
+    .forEach((checkbox) => (checkbox.checked = false));
 });
 /***************************
  *
@@ -177,15 +179,15 @@ peruuta.addEventListener("click", function () {
  *
  **********************************/
 const teeViikonpäivät = () => {
-    for (const päivä of viikonpäivät) {
-        const päiväRivi = document.createElement("tr");
-        päiväRivi.classList.add("päivä-rivi");
-        päiväRivi.setAttribute("data-päivä", päivä);
-        päiväRivi.innerHTML = `
+  for (const päivä of viikonpäivät) {
+    const päiväRivi = document.createElement("tr");
+    päiväRivi.classList.add("päivä-rivi");
+    päiväRivi.setAttribute("data-päivä", päivä);
+    päiväRivi.innerHTML = `
         <td colspan="1">${päivä}</td>
       `;
-        kohde.appendChild(päiväRivi);
-    }
+    kohde.appendChild(päiväRivi);
+  }
 };
 teeViikonpäivät();
 /***************************
@@ -231,7 +233,7 @@ console.log(":)");
 //   }
 // };
 const luoAnnosRivi = (päivä, annos) => {
-    return `
+  return `
     <tr id="tr-${annos.annos_id}" class="annos-rivi" data-päivä="${päivä}">
       <td></td>
       <td>${annos.nimi}</td>
@@ -242,25 +244,26 @@ const luoAnnosRivi = (päivä, annos) => {
   `;
 };
 const haeData = async () => {
-    try {
-        const ruokalista = await fetchData(apiUrl + `/menu`);
-        for (const päivä of ruokalista) {
-            const päivänAnnokset = päivä.annokset;
-            päivänAnnokset.forEach((annos) => {
-                // jokaiselle annokselle oma rivi
-                const html = luoAnnosRivi(päivä.day, annos);
-                // lisää rivin oikean päivän kohdalle
-                const päiväRiv = document.querySelector(`.päivä-rivi[data-päivä="${päivä.day}"]`);
-                if (päiväRiv) {
-                    päiväRiv.insertAdjacentHTML("afterend", html);
-                }
-                deletebuttonlistener(annos);
-            });
+  try {
+    const ruokalista = await fetchData(apiUrl + `/menu`);
+    for (const päivä of ruokalista) {
+      const päivänAnnokset = päivä.annokset;
+      päivänAnnokset.forEach((annos) => {
+        // jokaiselle annokselle oma rivi
+        const html = luoAnnosRivi(päivä.day, annos);
+        // lisää rivin oikean päivän kohdalle
+        const päiväRiv = document.querySelector(
+          `.päivä-rivi[data-päivä="${päivä.day}"]`
+        );
+        if (päiväRiv) {
+          päiväRiv.insertAdjacentHTML("afterend", html);
         }
-        console.log(":)");
+        deletebuttonlistener(annos);
+      });
     }
-    catch (error) {
-        console.error("Ei löydy:", error);
-    }
+    console.log(":)");
+  } catch (error) {
+    console.error("Ei löydy:", error);
+  }
 };
 haeData();
