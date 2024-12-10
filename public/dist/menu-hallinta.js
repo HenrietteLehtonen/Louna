@@ -1,29 +1,6 @@
 import { fetchData } from "./utils/haeData.js";
 import { apiUrl } from "./utils/variables.js";
-// Mock data
-// const lista: Menu[] = [
-//   {
-//     day: "Maanantai",
-//     id: 1,
-//     annos: "Lihapullat ja muusi",
-//     allergeenit: ["V", "L", "G"],
-//     hinta: 5,
-//   },
-//   {
-//     day: "Maanantai",
-//     id: 2,
-//     annos: "Lohisoppa",
-//     allergeenit: ["G", "M"],
-//     hinta: 3,
-//   },
-//   {
-//     day: "Tiistai",
-//     id: 3,
-//     annos: "Fish & Chips",
-//     allergeenit: ["VL", "M", "SO"],
-//     hinta: 3,
-//   },
-// ];
+
 const viikonpäivät = [
   "Maanantai",
   "Tiistai",
@@ -41,16 +18,15 @@ const kohde = document.querySelector("#tbody-kohde");
 // Aavaa annoksen lisäys laatikko
 const addAnnos = document.querySelector("#addBtn");
 if (!addAnnos) {
-  console.log("Lisää annos nappia ei löytynyt!");
+  console.error("Lisää annos nappia ei löytynyt!");
 }
 addAnnos.addEventListener("click", function () {
-  console.log("Lisää annos nappia painettu");
   document.querySelector("#hidden").removeAttribute("id");
 });
 // Poista kaikki annokset
 const delAll = document.querySelector("#deleteAllBtn");
 if (!delAll) {
-  console.log("Poista kaikkia nappia ei löytynyt!");
+  console.error("Poista kaikkia nappia ei löytynyt!");
 }
 delAll.addEventListener("click", async () => {
   try {
@@ -65,7 +41,6 @@ delAll.addEventListener("click", async () => {
     // poistetaan kaikki annosrivit taulukosta
     const annosRivit = document.querySelectorAll("tr.annos-rivi");
     annosRivit.forEach((rivi) => rivi.remove());
-    console.log("Kaikki annoksett poistettu");
   } catch (error) {
     console.error("Annoksia ei pystytä poistamaan");
   }
@@ -75,7 +50,7 @@ const token = localStorage.getItem("token");
 const deletebuttonlistener = (menu) => {
   const del = document.querySelector(`#del-${menu.annos_id}`);
   if (!del) {
-    console.log("Poista napia ei löytynyt!");
+    console.error("Poista napia ei löytynyt!");
   }
   del.addEventListener("click", async () => {
     try {
@@ -90,10 +65,8 @@ const deletebuttonlistener = (menu) => {
         apiUrl + `/menu/${menu.annos_id}`,
         options
       );
-      console.log(result);
       // poista taulukosta
       kohde.removeChild(document.querySelector(`#tr-${menu.annos_id}`));
-      console.log(`Poistettu: ${menu.annos_id}`);
     } catch (error) {
       console.error("Ei onnistuttu poistamaan.");
     }
@@ -102,7 +75,7 @@ const deletebuttonlistener = (menu) => {
 // Lisää annos
 const save = document.querySelector("#save-btn");
 if (!save) {
-  console.log("Lisää nappia ei löydetty!");
+  console.error("Lisää nappia ei löydetty!");
 }
 /**
  *
@@ -111,7 +84,6 @@ if (!save) {
  */
 save.addEventListener("click", async () => {
   try {
-    console.log("Haetaan dataa...");
     // haetaan input kentät
     let data = {
       day_name: document.querySelector("#päivä-valitsin").value,
@@ -129,7 +101,6 @@ save.addEventListener("click", async () => {
       body: JSON.stringify(data),
     };
     const result = await fetchData(apiUrl + "/menu", options);
-    console.log(result);
     /// LISÄTÄÄN HTML
     const uusiAnnosHTML = luoAnnosRivi(data.day_name, {
       annos_id: result.annos_id,
@@ -143,7 +114,6 @@ save.addEventListener("click", async () => {
     if (päiväRiv) {
       päiväRiv.insertAdjacentHTML("afterend", uusiAnnosHTML);
     }
-    console.log("Annos lisätty onnistuneesti");
     // formin tyhjennys
     document.querySelector("#päivä-valitsin").value = "";
     document.querySelector("#annos").value = "";
@@ -159,10 +129,9 @@ save.addEventListener("click", async () => {
 // Peruuta
 const peruuta = document.querySelector("#peruuta");
 if (!peruuta) {
-  console.log("Peruuta nappia ei löytynyt!");
+  console.error("Peruuta nappia ei löytynyt!");
 }
 peruuta.addEventListener("click", function () {
-  console.log("Peruuta nappia painettu");
   document
     .querySelector(".container-ruokavalinta")
     .setAttribute("id", "hidden");
@@ -195,50 +164,14 @@ teeViikonpäivät();
  * TAULUKONLUONTI
  *
  ***************************/
-console.log(":)");
-/**
- *
- *
- *  UUS TESTI BACKEND YHTEYS
- *
- */
-// const haeData = async () => {
-//   try {
-//     const ruokalista = await fetchData<Ruokalista[]>(apiUrl + `/menu`);
-//     for (const päivä of ruokalista) {
-//       // console.log(päivä.annokset);
-//       const päivänAnnokset = päivä.annokset;
-//       päivänAnnokset.forEach((annos) => {
-//         // console.log(annos);
-//         let html = `
-//           <tr id="tr-${annos.annos_id}" class="annos-rivi" data-päivä="${päivä.day}">
-//           <td></td>
-//             <td>${annos.nimi}</td>
-//             <td>${annos.allergeenit}</td>
-//             <td>${annos.hinta}</td>
-//             <td><button id="del-${annos.annos_id}" class="del-btn">x</button></td>
-//           </tr>
-//           `;
-//         // iskee jokaiselle päivälle kokolistan
-//         const päiväRiv = document.querySelector(
-//           `.päivä-rivi[data-päivä="${päivä.day}"]`
-//         ) as HTMLElement;
-//         päiväRiv.insertAdjacentHTML("afterend", html);
-//         deletebuttonlistener(annos);
-//       });
-//     }
-//     console.log(":)");
-//   } catch (error) {
-//     console.error("Ei löydy:", error);
-//   }
-// };
+
 const luoAnnosRivi = (päivä, annos) => {
   return `
     <tr id="tr-${annos.annos_id}" class="annos-rivi" data-päivä="${päivä}">
       <td></td>
       <td>${annos.nimi}</td>
       <td>${annos.allergeenit}</td>
-      <td>${annos.hinta}</td>
+      <td>${annos.hinta / 100}</td>
       <td><button id="del-${annos.annos_id}" class="del-btn">x</button></td>
     </tr>
   `;
@@ -261,7 +194,6 @@ const haeData = async () => {
         deletebuttonlistener(annos);
       });
     }
-    console.log(":)");
   } catch (error) {
     console.error("Ei löydy:", error);
   }
