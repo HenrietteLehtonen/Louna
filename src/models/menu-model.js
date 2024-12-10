@@ -64,7 +64,7 @@ const addMenuItem = async (newItem) => {
   const params1 = [newItem.nimi, newItem.day_name];
   const sql2 = `
 INSERT INTO annokset (nimi, allerg_id, hinta, lista_id)
-VALUES (?, ?, ?, (SELECT MAX(lista_id) FROM Ruokalista)) `;
+VALUES (?, ?, ?, (SELECT MAX(lista_id) FROM ruokalista)) `;
   const params2 = [newItem.nimi, newItem.allerg_id, newItem.hinta];
   const result1 = await querryPool(sql1, params1);
   await querryPool(sql2, params2);
