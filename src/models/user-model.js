@@ -2,14 +2,14 @@ import { querryPool } from "../../utils/functions.js";
 
 // käytä ehkä
 const fetchUsers = async () => {
-  const sql = "SELECT * FROM Käyttäjät";
+  const sql = "SELECT * FROM käyttäjät";
   const [rows] = await querryPool(sql);
   return rows;
 };
 
 // ehkä
 const fetchUserById = async (id) => {
-  const sql = "SELECT * FROM Käyttäjät WHERE user_id = ?";
+  const sql = "SELECT * FROM käyttäjät WHERE user_id = ?";
   const [rows] = await querryPool(sql, [id]);
   return rows;
 };
@@ -17,7 +17,7 @@ const fetchUserById = async (id) => {
 // ehkä
 const fetchUserByUsernameAndPassword = async (username, password) => {
   const sql =
-    "SELECT user_id, username, email, user_level_id, created_at FROM Käyttäjät WHERE username = ? AND password = ?";
+    "SELECT user_id, username, email, user_level_id, created_at FROM käyttäjät WHERE username = ? AND password = ?";
   const [rows] = await querryPool(sql, [username, password]);
   return rows[0];
 };

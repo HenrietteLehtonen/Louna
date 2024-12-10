@@ -59,11 +59,11 @@ function unstringify(obj) {
 // USE THIS
 const addMenuItem = async (newItem) => {
   console.log(newItem);
-  const sql1 = `INSERT INTO Ruokalista (nimi, day_name) 
+  const sql1 = `INSERT INTO ruokalista (nimi, day_name) 
   VALUES (?, ?)`;
   const params1 = [newItem.nimi, newItem.day_name];
   const sql2 = `
-INSERT INTO Annokset (nimi, allerg_id, hinta, lista_id)
+INSERT INTO annokset (nimi, allerg_id, hinta, lista_id)
 VALUES (?, ?, ?, (SELECT MAX(lista_id) FROM Ruokalista)) `;
   const params2 = [newItem.nimi, newItem.allerg_id, newItem.hinta];
   const result1 = await querryPool(sql1, params1);
@@ -115,9 +115,9 @@ const fetchPäivänRuokalista = async (päivä) => {
         an.nimi AS nimi, 
         al.tunniste AS allergeenit, 
         an.hinta AS hinta
-      FROM Ruokalista ru
-      INNER JOIN Annokset an ON ru.lista_id = an.lista_id
-      INNER JOIN Allergeenit al ON an.allerg_id = al.allerg_id
+      FROM ruokalista ru
+      INNER JOIN annokset an ON ru.lista_id = an.lista_id
+      INNER JOIN allergeenit al ON an.allerg_id = al.allerg_id
       WHERE ru.day_name = ?
       ORDER BY an.annos_id;`;
 
@@ -150,7 +150,7 @@ GROUP BY ti.tilaus_id
 
 const addTilaus = async (newItem) => {
   console.log(newItem);
-  const sql1 = `INSERT INTO Tilaukset (user_id, nouto_aika, tila)
+  const sql1 = `INSERT INTO tilaukset (user_id, nouto_aika, tila)
     VALUES (?, 4000, "Työn alla");`;
   const params1 = [newItem.user_id];
   const result1 = await querryPool(sql1, params1);
@@ -158,7 +158,7 @@ const addTilaus = async (newItem) => {
   for (let i in newItem.tilaukset) {
     console.log(i);
     const sql2 = `
-  INSERT INTO Tilausannos (tilaus_id, annos_id, määrä)
+  INSERT INTO tilausannos (tilaus_id, annos_id, määrä)
       VALUES((SELECT max(tilaus_id) FROM tilaukset),?,?);`;
     let params2 = [newItem.tilaukset[i].annos_id, newItem.tilaukset[i].määrä];
     await querryPool(sql2, params2);
