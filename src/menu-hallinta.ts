@@ -1,6 +1,6 @@
 import { Menu, Ruokalista, Annokset, Tilaukset } from "./types/menu";
 import { fetchData } from "./utils/haeData.js";
-import { apiUrl } from "../utils/variables.js";
+import { apiUrl } from "./utils/variables.js";
 
 // Mock data
 // const lista: Menu[] = [

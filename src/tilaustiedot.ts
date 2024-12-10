@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Näytä tallennetut osoitetiedot sivun latautuessa
+  /*   // Näytä tallennetut osoitetiedot sivun latautuessa
   const savedAddress = localStorage.getItem("userAddress");
   if (savedAddress) {
     const addressData = JSON.parse(savedAddress) as AddressData;
@@ -119,5 +119,5 @@ document.addEventListener("DOMContentLoaded", function () {
       addressData.city;
     (document.getElementById("zip-code") as HTMLInputElement).value =
       addressData.zipCode;
-  }
+  } */
 });
