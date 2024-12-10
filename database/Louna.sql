@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS Louna;
 CREATE DATABASE Louna;
 USE Louna;
 
-CREATE TABLE Käyttäjät (
+CREATE TABLE käyttäjät (
   user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
@@ -11,19 +11,19 @@ CREATE TABLE Käyttäjät (
   created_at TIMESTAMP NOT NULL DEFAULT current_timestamp()
 );
 
-CREATE TABLE Allergeenit (
+CREATE TABLE allergeenit (
     allerg_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     tunniste VARCHAR(255) NOT NULL,
     allergeeni VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Ruokalista (
+CREATE TABLE ruokalista (
     lista_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nimi VARCHAR(255) NOT NULL,
     day_name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Annokset (
+CREATE TABLE annokset (
     annos_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nimi VARCHAR(255) NOT NULL,
     allerg_id INT NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE Annokset (
     FOREIGN KEY (lista_id) REFERENCES Ruokalista(lista_id)
 );
 
-CREATE TABLE Tilaukset (
+CREATE TABLE tilaukset (
     tilaus_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     tila VARCHAR(255) NOT NUll,
@@ -43,7 +43,7 @@ CREATE TABLE Tilaukset (
 );
 
 
-CREATE TABLE Tilausannos (
+CREATE TABLE tilausannos (
     tilaus_id INT NOT NULL,
     annos_id INT NOT NULL,
     määrä INT NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE Tilausannos (
 -- MUOKATTU  ateriaa, LIHA -
 
 
-INSERT INTO Ruokalista (nimi, day_name) 
+INSERT INTO ruokalista (nimi, day_name) 
     VALUES ('Karjalanpaisti', 'Maanantai'),
     ('Kanttarellikeitto', 'Maanantai'),
     ('Paahdettu kasvisrisotto', 'Maanantai'), 
@@ -80,7 +80,7 @@ INSERT INTO Ruokalista (nimi, day_name)
     ('Vegaanipizza', 'Perjantai'); 
 
 
-INSERT INTO Allergeenit (tunniste, allergeeni)
+INSERT INTO allergeenit (tunniste, allergeeni)
     VALUES ('G', 'gluteenoton'),
     ('VL', 'vähälaktoosinen'),
     ('L', 'laktoositon'),
@@ -90,7 +90,7 @@ INSERT INTO Allergeenit (tunniste, allergeeni)
     ('VEG', 'vegaaninen'),
     ('EI', 'ei_allergeeneja');
 
-INSERT INTO Annokset (nimi, allerg_id, hinta, lista_id) 
+INSERT INTO annokset (nimi, allerg_id, hinta, lista_id) 
   VALUES ('Karjalanpaisti', 1, 300, 1),
   ('Kanttarellikeitto',1, 400, 2),
    ('Paahdettu kasvisrisotto', 7, 700, 3),
@@ -109,15 +109,15 @@ INSERT INTO Annokset (nimi, allerg_id, hinta, lista_id)
 
 
 
-INSERT INTO Käyttäjät ( username, password, email, user_level_id)
+INSERT INTO käyttäjät ( username, password, email, user_level_id)
     VALUES ('admin', 'adminpassword', 'admin@email.com', 1),
     ('test_user', 'testpassword', 'test@email.com', 2);
 
-INSERT INTO Tilaukset (user_id, nouto_aika, tila)
+INSERT INTO tilaukset (user_id, nouto_aika, tila)
     VALUES (2, 1000, "Työn alla"),
     (2, 1000, "Vastaanotettu");
 
-INSERT INTO Tilausannos (tilaus_id, annos_id, määrä)
+INSERT INTO tilausannos (tilaus_id, annos_id, määrä)
     VALUES(1,1,1),
     (1,2,2),
     (2,5,1);
