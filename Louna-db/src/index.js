@@ -12,12 +12,13 @@ const hostname = "127.0.0.1";
 const app = express();
 const port = 3000;
 
-app.set("view engine", "pug");
-app.set("views", "src/views");
+// app.set("view engine", "pug");
+// app.set("views", "src/views");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // To parse application/x-www-form-urlencoded
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
+app.use("/api", express.static("doc"));
 app.use(cors());
 
 app.get("/api", async (req, res) => {
@@ -27,8 +28,6 @@ app.get("/api", async (req, res) => {
     mediaData: await fetchMenuItems(),
   });
 });
-
-app.use("/api", express.static("doc"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);

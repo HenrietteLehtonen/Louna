@@ -6,18 +6,18 @@
   "main": "main.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node src/index.js",
     "dev-ts": "tsc --watch",
     "test-pw": "playwright test",
     "dev": "nodemon Louna-db/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "apidoc Louna-db/src/**/*"
+    "docs": "apidoc"
   },
   "author": "",
   "license": "ISC",
   "apidoc": {
     "title": "My API docs",
-    "url": "https://example.com/api/v1",
+    "url": "https://example.com/api",
     "order": [
       "Authentication",
       "User"
