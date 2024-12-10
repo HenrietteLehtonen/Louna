@@ -29,8 +29,8 @@ CREATE TABLE annokset (
     allerg_id INT NOT NULL,
     hinta INT NOT NULL,
     lista_id INT NOT NULL,
-    FOREIGN KEY (allerg_id) REFERENCES Allergeenit(allerg_id),
-    FOREIGN KEY (lista_id) REFERENCES Ruokalista(lista_id)
+    FOREIGN KEY (allerg_id) REFERENCES allergeenit(allerg_id),
+    FOREIGN KEY (lista_id) REFERENCES ruokalista(lista_id)
 );
 
 CREATE TABLE tilaukset (
@@ -39,7 +39,7 @@ CREATE TABLE tilaukset (
     tila VARCHAR(255) NOT NUll,
     tilaus_aika TIMESTAMP NOT NULL DEFAULT current_timestamp(),
     nouto_aika INT,
-    FOREIGN KEY (user_id) REFERENCES Käyttäjät(user_id)
+    FOREIGN KEY (user_id) REFERENCES käyttäjät(user_id)
 );
 
 
@@ -47,8 +47,8 @@ CREATE TABLE tilausannos (
     tilaus_id INT NOT NULL,
     annos_id INT NOT NULL,
     määrä INT NOT NULL,
-    FOREIGN KEY (tilaus_id) REFERENCES Tilaukset(tilaus_id),
-    FOREIGN KEY (annos_id) REFERENCES Annokset(annos_id)
+    FOREIGN KEY (tilaus_id) REFERENCES tilaukset(tilaus_id),
+    FOREIGN KEY (annos_id) REFERENCES annokset(annos_id)
 );
 
 -- CREATE TABLE AnnoksetAllergeenit (
